@@ -1,43 +1,36 @@
-﻿using System;
-using King;
-
-// bachka, ne butaj!
-
-namespace KingSurvivalGame
+﻿namespace KingSurvivalGame
 {
-    class KingSurvivalGame : BaseGame
+    using System;
+    using King;
+
+    public class KingSurvivalGame : BaseGame
     {
-        static bool check(int[] positionCoodinates)
+        static bool Check(int[] positionCoodinates)
         {
             int a = positionCoodinates[0];
-            bool flag = (a >= ygliNaDyskata[0, 0]) && (a <= ygliNaDyskata[3, 0]);
+            bool flag = (a >= UgliNaDyskata[0, 0]) && (a <= UgliNaDyskata[3, 0]);
             int b = positionCoodinates[1];
-            bool flag2 = (b >= ygliNaDyskata[0, 1]) && (b <= ygliNaDyskata[3, 1]);
+            bool flag2 = (b >= UgliNaDyskata[0, 1]) && (b <= UgliNaDyskata[3, 1]);
             return flag && flag2;
         }
 
         static void PokajiDyskata()
         {
-            //tova printira prazen red na konzolata
             Console.WriteLine();
-            //tuka kato cqlo si pravq nekvi shareniiki
             for (int row = 0; row < field.GetLength(0); row++)
             {
                 for (int col = 0; col < field.GetLength(1); col++)
                 {
                     int[] coordinates = { row, col };
-                    bool isCellIn = check(coordinates);
+                    bool isCellIn = Check(coordinates);
                     if (isCellIn)
                     {
-                        if (row  % 2 == 0)
+                        if (row % 2 == 0)
                         {
-                            if (col % 4 == 0 )
+                            if (col % 4 == 0)
                             {
-                                //i neka byde zelenina
                                 Console.BackgroundColor = ConsoleColor.Green;
-                                //tva go prai cherno
                                 Console.ForegroundColor = ConsoleColor.Black;
-                                //i stignaxme nai posle do printiraneto na elementa
                                 Console.Write(field[row, col]);
                                 Console.ResetColor();
                             }
@@ -61,13 +54,13 @@ namespace KingSurvivalGame
                             Console.ResetColor();
                         }
                         else if (col % 2 == 0)
-	                    {
+                        {
                             Console.BackgroundColor = ConsoleColor.Green;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write(field[row, col]);
                             Console.ResetColor();
-	                    }
-                                
+                        }
+
                         else if (col % 2 != 0)
                         {
                             Console.Write(field[row, col]);
@@ -75,20 +68,22 @@ namespace KingSurvivalGame
                     }
                     else
                     {
-                        Console.Write(field[row, col]);  
+                        Console.Write(field[row, col]);
                     }
-                    
+
                 }
+
                 Console.WriteLine();
                 Console.ResetColor();
             }
+
             Console.WriteLine();
         }
 
-        static void START(int moveCounter)
+        static void Start(int moveCounter)
         {
-            if (flag3)
-            {//igrata svyrshi
+            if (Flag3)
+            {
                 Console.WriteLine("Game is finished!");
                 return;
             }
@@ -105,17 +100,17 @@ namespace KingSurvivalGame
                     ProcessPawnSide();
                 }
             }
-            
+
         }
 
-        static bool proverka2(string checkedString)
+        static bool Proverka2(string checkedString)
         {
-            if (counter % 2 == 0)
+            if (Counter % 2 == 0)
             {
                 int[] flag = new int[4];
-                for (int i = 0; i < validKingInputs.Length; i++)
+                for (int i = 0; i < ValidKingInputs.Length; i++)
                 {
-                    string reference = validKingInputs[i];
+                    string reference = ValidKingInputs[i];
                     int result = checkedString.CompareTo(reference);
                     if (result != 0)
                     {
@@ -125,21 +120,25 @@ namespace KingSurvivalGame
                     {
                         flag[i] = 1;
                     }
+
                 }
                 bool hasAnEqual = false;
                 for (int i = 0; i < 4; i++)
-			    {
-			        if (flag[i]==1)
-	                {
-		                hasAnEqual = true;
-	                }
-			    }
-                if(!hasAnEqual)
+                {
+                    if (flag[i] == 1)
+                    {
+                        hasAnEqual = true;
+                    }
+
+                }
+
+                if (!hasAnEqual)
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid command name!");
                     Console.ResetColor();
                 }
+
                 return hasAnEqual;
             }
             else
@@ -150,9 +149,9 @@ namespace KingSurvivalGame
                 switch (startLetter)
                 {
                     case 'A':
-                        for (int i = 0; i < a.Length; i++)
+                        for (int i = 0; i < A.Length; i++)
                         {
-                            string reference = a[i];
+                            string reference = A[i];
                             int result = checkedString.CompareTo(reference);
                             if (result != 0)
                             {
@@ -164,24 +163,24 @@ namespace KingSurvivalGame
                             }
                         }
                         for (int i = 0; i < 2; i++)
-			            {
-			                if (checker[i]==1)
-	                        {
-		                        hasAnEqual = true;
-	                        }
-			            }
-                        if(!hasAnEqual)
+                        {
+                            if (checker[i] == 1)
+                            {
+                                hasAnEqual = true;
+                            }
+                        }
+                        if (!hasAnEqual)
                         {
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid command name!");
                             Console.ResetColor();
                         }
                         return hasAnEqual;
-                        
+
                     case 'B':
-                        for (int i = 0; i < b.Length; i++)
+                        for (int i = 0; i < B.Length; i++)
                         {
-                            string reference = b[i];
+                            string reference = B[i];
                             int result = checkedString.CompareTo(reference);
                             if (result != 0)
                             {
@@ -193,13 +192,13 @@ namespace KingSurvivalGame
                             }
                         }
                         for (int i = 0; i < 2; i++)
-			            {
-			                if (checker[i]==1)
-	                        {
-		                        hasAnEqual = true;
-	                        }
-			            }
-                        if(!hasAnEqual)
+                        {
+                            if (checker[i] == 1)
+                            {
+                                hasAnEqual = true;
+                            }
+                        }
+                        if (!hasAnEqual)
                         {
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid command name!");
@@ -207,9 +206,9 @@ namespace KingSurvivalGame
                         }
                         return hasAnEqual;
                     case 'C':
-                        for (int i = 0; i < c.Length; i++)
+                        for (int i = 0; i < C.Length; i++)
                         {
-                            string reference = c[i];
+                            string reference = C[i];
                             int result = checkedString.CompareTo(reference);
                             if (result != 0)
                             {
@@ -221,13 +220,13 @@ namespace KingSurvivalGame
                             }
                         }
                         for (int i = 0; i < 2; i++)
-			            {
-			                if (checker[i]==1)
-	                        {
-		                        hasAnEqual = true;
-	                        }
-			            }
-                        if(!hasAnEqual)
+                        {
+                            if (checker[i] == 1)
+                            {
+                                hasAnEqual = true;
+                            }
+                        }
+                        if (!hasAnEqual)
                         {
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid command name!");
@@ -236,9 +235,9 @@ namespace KingSurvivalGame
                         return hasAnEqual;
 
                     case 'D':
-                        for (int i = 0; i < d.Length; i++)
+                        for (int i = 0; i < D.Length; i++)
                         {
-                            string reference = d[i];
+                            string reference = D[i];
                             int result = checkedString.CompareTo(reference);
                             if (result != 0)
                             {
@@ -250,183 +249,154 @@ namespace KingSurvivalGame
                             }
                         }
                         for (int i = 0; i < 2; i++)
-			            {
-			                if (checker[i]==1)
-	                        {
-		                        hasAnEqual = true;
-	                        }
-			            }
-                        if(!hasAnEqual)
+                        {
+                            if (checker[i] == 1)
+                            {
+                                hasAnEqual = true;
+                            }
+                        }
+                        if (!hasAnEqual)
                         {
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.WriteLine("Invalid command name!");
                             Console.ResetColor();
                         }
                         return hasAnEqual;
-                    
+
                     default:
                         Console.BackgroundColor = ConsoleColor.Red;
                         Console.WriteLine("Invalid command name!");
                         Console.ResetColor();
                         return false;
-                    //    break;
                 }
             }
-            return true;
         }
 
-        static bool proverkaIProcess(string checkedInput)
+        static bool ProverkaIProcess(string checkedInput)
         {
-            bool commandNameIsOK = proverka2(checkedInput);
+            bool commandNameIsOK = Proverka2(checkedInput);
             if (commandNameIsOK)
             {
                 char startLetter = checkedInput[0];
                 switch (startLetter)
                 {
                     case 'A':
-
-
                         if (checkedInput[2] == 'L')
                         {
-
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = poziciqPeshki[0,0];
+                            oldCoordinates[0] = PoziciqPeshki[0, 0];
 
-
-                            oldCoordinates[1] = poziciqPeshki[0, 1];
-
+                            oldCoordinates[1] = PoziciqPeshki[0, 1];
 
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'A');
                             if (coords != null)
                             {
-
-                                poziciqPeshki[0,0]= coords[0];
-                                poziciqPeshki[0, 1] = coords[1];
+                                PoziciqPeshki[0, 0] = coords[0];
+                                PoziciqPeshki[0, 1] = coords[1];
                             }
                         }
-                        else 
+                        else
                         {
-                            //=='D'
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = poziciqPeshki[0, 0];
+                            oldCoordinates[0] = PoziciqPeshki[0, 0];
 
-                            oldCoordinates[1] = poziciqPeshki[0, 1];
+                            oldCoordinates[1] = PoziciqPeshki[0, 1];
                             int[] coords = new int[2];
 
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'A');
                             if (coords != null)
                             {
-                                poziciqPeshki[0, 0] = coords[0];
+                                PoziciqPeshki[0, 0] = coords[0];
 
-                                poziciqPeshki[0, 1] = coords[1];
+                                PoziciqPeshki[0, 1] = coords[1];
                             }
                         }
                         return true;
-                    
+
                     case 'B':
                         if (checkedInput[2] == 'L')
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = poziciqPeshki[1,0];
-                            oldCoordinates[1] = poziciqPeshki[1, 1];
+                            oldCoordinates[0] = PoziciqPeshki[1, 0];
+                            oldCoordinates[1] = PoziciqPeshki[1, 1];
 
                             int[] coords = new int[2];
 
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'B');
                             if (coords != null)
                             {
-
-
-                                poziciqPeshki[1, 0] = coords[0];
-
-
-
-                                poziciqPeshki[1, 1] = coords[1];
-
+                                PoziciqPeshki[1, 0] = coords[0];
+                                PoziciqPeshki[1, 1] = coords[1];
                             }
                         }
-                        else 
+                        else
                         {
-                            //=='D'
                             int[] oldCoordinates = new int[2];
-
-                            oldCoordinates[0] = poziciqPeshki[1, 0];
-
-
-
-                            oldCoordinates[1] = poziciqPeshki[1, 1];
-
+                            oldCoordinates[0] = PoziciqPeshki[1, 0];
+                            oldCoordinates[1] = PoziciqPeshki[1, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'B');
                             if (coords != null)
                             {
-                                poziciqPeshki[1, 0] = coords[0];
-
-
-                                poziciqPeshki[1, 1] = coords[1];
+                                PoziciqPeshki[1, 0] = coords[0];
+                                PoziciqPeshki[1, 1] = coords[1];
                             }
                         }
                         return true;
-
                     case 'C':
                         if (checkedInput[2] == 'L')
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = poziciqPeshki[2,0];
-
-
-                            oldCoordinates[1] = poziciqPeshki[2, 1];
+                            oldCoordinates[0] = PoziciqPeshki[2, 0];
+                            oldCoordinates[1] = PoziciqPeshki[2, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'C');
                             if (coords != null)
                             {
-                                poziciqPeshki[2, 0] = coords[0];
-                                poziciqPeshki[2, 1] = coords[1];
+                                PoziciqPeshki[2, 0] = coords[0];
+                                PoziciqPeshki[2, 1] = coords[1];
                             }
                         }
-                        else 
+                        else
                         {
-                            //=='D'
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = poziciqPeshki[2, 0];
-                            oldCoordinates[1] = poziciqPeshki[2, 1];
+                            oldCoordinates[0] = PoziciqPeshki[2, 0];
+                            oldCoordinates[1] = PoziciqPeshki[2, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'C');
                             if (coords != null)
                             {
-                                poziciqPeshki[1, 0] = coords[0];
-                                poziciqPeshki[1, 1] = coords[1];
+                                PoziciqPeshki[1, 0] = coords[0];
+                                PoziciqPeshki[1, 1] = coords[1];
                             }
                         }
                         return true;
-                        
                     case 'D':
                         if (checkedInput[2] == 'L')
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = poziciqPeshki[3,0];
-                            oldCoordinates[1] = poziciqPeshki[3, 1];
+                            oldCoordinates[0] = PoziciqPeshki[3, 0];
+                            oldCoordinates[1] = PoziciqPeshki[3, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'D');
                             if (coords != null)
                             {
-                                poziciqPeshki[3, 0] = coords[0];
-                                poziciqPeshki[3, 1] = coords[1];
+                                PoziciqPeshki[3, 0] = coords[0];
+                                PoziciqPeshki[3, 1] = coords[1];
                             }
                         }
-                        else 
+                        else
                         {
-                            //=='D'
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = poziciqPeshki[3, 0];
-                            oldCoordinates[1] = poziciqPeshki[3, 1];
+                            oldCoordinates[0] = PoziciqPeshki[3, 0];
+                            oldCoordinates[1] = PoziciqPeshki[3, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'D');
                             if (coords != null)
                             {
-                                poziciqPeshki[3, 0] = coords[0];
-                                poziciqPeshki[3, 1] = coords[1];
+                                PoziciqPeshki[3, 0] = coords[0];
+                                PoziciqPeshki[3, 1] = coords[1];
                             }
                         }
                         return true;
@@ -437,59 +407,57 @@ namespace KingSurvivalGame
                             if (checkedInput[2] == 'L')
                             {
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = poziciqCar[0];
-                                oldCoordinates[1] = poziciqCar[1];
+                                oldCoordinates[0] = PoziciqCar[0];
+                                oldCoordinates[1] = PoziciqCar[1];
                                 int[] coords = new int[2];
-                                coords = checkNextKingPosition(oldCoordinates, 'U', 'L');
+                                coords = CheckNextKingPosition(oldCoordinates, 'U', 'L');
                                 if (coords != null)
                                 {
-                                    poziciqCar[0] = coords[0];
-                                    poziciqCar[1] = coords[1];
+                                    PoziciqCar[0] = coords[0];
+                                    PoziciqCar[1] = coords[1];
                                 }
                             }
                             else
                             {
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = poziciqCar[0];
-                                oldCoordinates[1] = poziciqCar[1];
+                                oldCoordinates[0] = PoziciqCar[0];
+                                oldCoordinates[1] = PoziciqCar[1];
                                 int[] coords = new int[2];
-                                coords = checkNextKingPosition(oldCoordinates, 'U', 'R');
+                                coords = CheckNextKingPosition(oldCoordinates, 'U', 'R');
                                 if (coords != null)
                                 {
-                                    poziciqCar[0] = coords[0];
-                                    poziciqCar[1] = coords[1];
+                                    PoziciqCar[0] = coords[0];
+                                    PoziciqCar[1] = coords[1];
                                 }
                             }
                             return true;
                         }
                         else
                         {
-                            //=KD_
                             if (checkedInput[2] == 'L')
                             {
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = poziciqCar[0];
-                                oldCoordinates[1] = poziciqCar[1];
+                                oldCoordinates[0] = PoziciqCar[0];
+                                oldCoordinates[1] = PoziciqCar[1];
                                 int[] coords = new int[2];
-                                coords = checkNextKingPosition(oldCoordinates, 'D', 'L');
+                                coords = CheckNextKingPosition(oldCoordinates, 'D', 'L');
                                 if (coords != null)
                                 {
-                                    poziciqCar[0] = coords[0];
-                                    poziciqCar[1] = coords[1];
+                                    PoziciqCar[0] = coords[0];
+                                    PoziciqCar[1] = coords[1];
                                 }
                             }
                             else
                             {
-                                //==KDD
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = poziciqCar[0];
-                                oldCoordinates[1] = poziciqCar[1];
+                                oldCoordinates[0] = PoziciqCar[0];
+                                oldCoordinates[1] = PoziciqCar[1];
                                 int[] coords = new int[2];
-                                coords = checkNextKingPosition(oldCoordinates, 'D', 'R');
+                                coords = CheckNextKingPosition(oldCoordinates, 'D', 'R');
                                 if (coords != null)
                                 {
-                                    poziciqCar[0] = coords[0];
-                                    poziciqCar[1] = coords[1];
+                                    PoziciqCar[0] = coords[0];
+                                    PoziciqCar[1] = coords[1];
                                 }
                             }
                             return true;
@@ -500,10 +468,10 @@ namespace KingSurvivalGame
             }
             else
             {
-                return false;//message is from other
+                return false;
             }
         }
-        
+
         static void ProcessKingSide()
         {
             bool isExecuted = false;
@@ -515,8 +483,8 @@ namespace KingSurvivalGame
                 string input = Console.ReadLine();
                 if (input != null)
                 {
-                    input = input.ToUpper();//! input =
-                    isExecuted = proverkaIProcess(input);
+                    input = input.ToUpper();
+                    isExecuted = ProverkaIProcess(input);
                 }
                 else
                 {
@@ -526,10 +494,10 @@ namespace KingSurvivalGame
                     Console.ResetColor();
                 }
             }
-            START(counter);
+            Start(Counter);
         }
-   
-        static void ProcessPawnSide() 
+
+        static void ProcessPawnSide()
         {
             bool isExecuted = false;
             while (!isExecuted)
@@ -541,10 +509,9 @@ namespace KingSurvivalGame
                 //input = input.Trim();
                 if (input != null)//"/n")
                 {
-                   // Console.WriteLine(input);
-                    //Console.WriteLine("hahah");
-                    input = input.ToUpper();//! input =
-                    isExecuted = proverkaIProcess(input);
+                    // Console.WriteLine(input);
+                    input = input.ToUpper();
+                    isExecuted = ProverkaIProcess(input);
                 }
                 else
                 {
@@ -552,56 +519,55 @@ namespace KingSurvivalGame
                     Console.BackgroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("Please enter something!");
                     Console.ResetColor();
-
                 }
             }
-            START(counter);
+            Start(Counter);
         }
 
-        static void checkForKingExit(int currentKingXAxe)
+        static void CheckForKingExit(int currentKingXAxe)
         {
             if (currentKingXAxe == 2)
             {
                 Console.WriteLine("End!");
-                Console.WriteLine("King wins in {0} moves!", counter / 2);
-                flag3 = true;
+                Console.WriteLine("King wins in {0} moves!", Counter / 2);
+                Flag3 = true;
             }
         }
 
-        static int[] CheckNextPownPosition(int[] currentCoordinates ,char checkDirection, char currentPawn)
+        static int[] CheckNextPownPosition(int[] currentCoordinates, char checkDirection, char currentPawn)
         {
             int[] displasmentDownLeft = { 1, -2 };
             int[] displasmentDownRight = { 1, 2 };
             int[] newCoords = new int[2];
-            if (checkDirection=='L')
+            if (checkDirection == 'L')
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                if (check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                 {
                     char sign = field[currentCoordinates[0], currentCoordinates[1]];
-                    field [currentCoordinates[0] , currentCoordinates[1]] = ' ';
+                    field[currentCoordinates[0], currentCoordinates[1]] = ' ';
                     field[newCoords[0], newCoords[1]] = sign;
-                    counter++;
+                    Counter++;
                     switch (currentPawn)
                     {
                         case 'A':
-                            pawnExistingMoves[0, 0] = true;
-                            pawnExistingMoves[0, 1] = true;
+                            PawnExistingMoves[0, 0] = true;
+                            PawnExistingMoves[0, 1] = true;
                             break;
 
                         case 'B':
-                            pawnExistingMoves[1, 0] = true;
-                            pawnExistingMoves[1, 1] = true;
+                            PawnExistingMoves[1, 0] = true;
+                            PawnExistingMoves[1, 1] = true;
                             break;
                         case 'C':
-                            pawnExistingMoves[2, 0] = true;
-                            pawnExistingMoves[2, 1] = true;
+                            PawnExistingMoves[2, 0] = true;
+                            PawnExistingMoves[2, 1] = true;
                             break;
 
                         case 'D':
-                            pawnExistingMoves[3, 0] = true;
-                            pawnExistingMoves[3, 1] = true;
+                            PawnExistingMoves[3, 0] = true;
+                            PawnExistingMoves[3, 1] = true;
                             break;
 
                         default:
@@ -613,32 +579,32 @@ namespace KingSurvivalGame
                 }
                 else
                 {
-                   /* switch (currentPawn)
-                    {
-                        case 'A':
-                            pawnExistingMoves[0, 0] = false;
-                            break;
+                    /* switch (currentPawn)
+                     {
+                         case 'A':
+                             pawnExistingMoves[0, 0] = false;
+                             break;
 
-                        case 'B':
-                            pawnExistingMoves[1, 0] = false;
-                            break;
-                        case 'C':
-                            pawnExistingMoves[2, 0] = false;
-                            break;
+                         case 'B':
+                             pawnExistingMoves[1, 0] = false;
+                             break;
+                         case 'C':
+                             pawnExistingMoves[2, 0] = false;
+                             break;
 
-                        case 'D':
-                            pawnExistingMoves[3, 0] = false;
-                            break;
+                         case 'D':
+                             pawnExistingMoves[3, 0] = false;
+                             break;
 
-                        default:
-                            Console.WriteLine("ERROR!");
-                            break;
-                    }*/
+                         default:
+                             Console.WriteLine("ERROR!");
+                             break;
+                     }*/
                     bool allAreFalse = true;
                     switch (currentPawn)
                     {
                         case 'A':
-                            pawnExistingMoves[0, 0] = false;
+                            PawnExistingMoves[0, 0] = false;
                             /*for (int i = 0; i < 2; i++)
                             {
                                 if (pawnExistingMoves[0,i] == true)
@@ -649,7 +615,7 @@ namespace KingSurvivalGame
                             break;
 
                         case 'B':
-                            pawnExistingMoves[1, 0] = false;
+                            PawnExistingMoves[1, 0] = false;
                             /*for (int i = 0; i < 2; i++)
                             {
                                 if (pawnExistingMoves[1, i] == true)
@@ -659,7 +625,7 @@ namespace KingSurvivalGame
                             }*/
                             break;
                         case 'C':
-                            pawnExistingMoves[2, 0] = false;
+                            PawnExistingMoves[2, 0] = false;
                             /*for (int i = 0; i < 2; i++)
                             {
                                 if (pawnExistingMoves[2, i] == true)
@@ -670,7 +636,7 @@ namespace KingSurvivalGame
                             break;
 
                         case 'D':
-                            pawnExistingMoves[3, 0] = false;
+                            PawnExistingMoves[3, 0] = false;
                             /*for (int i = 0; i < 2; i++)
                             {
                                 if (pawnExistingMoves[3, i] == true)
@@ -688,7 +654,7 @@ namespace KingSurvivalGame
                     {
                         for (int j = 0; j < 2; j++)
                         {
-                            if (pawnExistingMoves[i, j] == true)
+                            if (PawnExistingMoves[i, j] == true)
                             {
                                 allAreFalse = false;
                             }
@@ -696,9 +662,9 @@ namespace KingSurvivalGame
                     }
                     if (allAreFalse)
                     {
-                        flag3 = true;
+                        Flag3 = true;
                         Console.WriteLine("King wins!");
-                        flag3 = true;
+                        Flag3 = true;
                         return null;
                     }
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -708,34 +674,34 @@ namespace KingSurvivalGame
                 }
             }
             else
-        	{
+            {
                 newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                if (check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                 {
                     char sign = field[currentCoordinates[0], currentCoordinates[1]];
                     field[currentCoordinates[0], currentCoordinates[1]] = ' ';
                     field[newCoords[0], newCoords[1]] = sign;
-                    counter++;
+                    Counter++;
                     switch (currentPawn)
                     {
                         case 'A':
-                            pawnExistingMoves[0, 0] = true;
-                            pawnExistingMoves[0, 1] = true;
+                            PawnExistingMoves[0, 0] = true;
+                            PawnExistingMoves[0, 1] = true;
                             break;
 
                         case 'B':
-                            pawnExistingMoves[1, 0] = true;
-                            pawnExistingMoves[1, 1] = true;
+                            PawnExistingMoves[1, 0] = true;
+                            PawnExistingMoves[1, 1] = true;
                             break;
                         case 'C':
-                            pawnExistingMoves[2, 0] = true;
-                            pawnExistingMoves[2, 1] = true;
+                            PawnExistingMoves[2, 0] = true;
+                            PawnExistingMoves[2, 1] = true;
                             break;
 
                         case 'D':
-                            pawnExistingMoves[3, 0] = true;
-                            pawnExistingMoves[3, 1] = true;
+                            PawnExistingMoves[3, 0] = true;
+                            PawnExistingMoves[3, 1] = true;
                             break;
 
                         default:
@@ -746,32 +712,32 @@ namespace KingSurvivalGame
                 }
                 else
                 {
-                 /*   switch (currentPawn)
-                    {
-                        case 'A':
-                            pawnExistingMoves[0, 1] = false;
-                            break;
+                    /*   switch (currentPawn)
+                       {
+                           case 'A':
+                               pawnExistingMoves[0, 1] = false;
+                               break;
 
-                        case 'B':
-                            pawnExistingMoves[1, 1] = false;
-                            break;
-                        case 'C':
-                            pawnExistingMoves[2, 1] = false;
-                            break;
+                           case 'B':
+                               pawnExistingMoves[1, 1] = false;
+                               break;
+                           case 'C':
+                               pawnExistingMoves[2, 1] = false;
+                               break;
 
-                        case 'D':
-                            pawnExistingMoves[3, 1] = false;
-                            break;
+                           case 'D':
+                               pawnExistingMoves[3, 1] = false;
+                               break;
 
-                        default:
-                            Console.WriteLine("ERROR!");
-                            break;
-                    }*/
+                           default:
+                               Console.WriteLine("ERROR!");
+                               break;
+                       }*/
                     bool allAreFalse = true;
                     switch (currentPawn)
                     {
                         case 'A':
-                            pawnExistingMoves[0, 1] = false;
+                            PawnExistingMoves[0, 1] = false;
                             /*for (int i = 0; i < 2; i++)
                             {
                                 if (pawnExistingMoves[0, i] == true)
@@ -782,7 +748,7 @@ namespace KingSurvivalGame
                             break;
 
                         case 'B':
-                            pawnExistingMoves[1, 1] = false;
+                            PawnExistingMoves[1, 1] = false;
                             /*for (int i = 0; i < 2; i++)
                             {
                                 if (pawnExistingMoves[1, i] == true)
@@ -792,7 +758,7 @@ namespace KingSurvivalGame
                             }*/
                             break;
                         case 'C':
-                            pawnExistingMoves[2, 1] = false;
+                            PawnExistingMoves[2, 1] = false;
                             /*for (int i = 0; i < 2; i++)
                             {
                                 if (pawnExistingMoves[2, i] == true)
@@ -803,7 +769,7 @@ namespace KingSurvivalGame
                             break;
 
                         case 'D':
-                            pawnExistingMoves[3, 1] = false;
+                            PawnExistingMoves[3, 1] = false;
                             /*for (int i = 0; i < 2; i++)
                             {
                                 if (pawnExistingMoves[3, i] == true)
@@ -817,12 +783,12 @@ namespace KingSurvivalGame
                             Console.WriteLine("ERROR!");
                             break;
                     }
-                    
+
                     for (int i = 0; i < 4; i++)
                     {
-                        for (int j = 0; j < 2 ; j++)
+                        for (int j = 0; j < 2; j++)
                         {
-                            if (pawnExistingMoves[i, j] == true)
+                            if (PawnExistingMoves[i, j] == true)
                             {
                                 allAreFalse = false;
                             }
@@ -831,9 +797,9 @@ namespace KingSurvivalGame
 
                     if (allAreFalse)
                     {
-                        flag3 = true;
+                        Flag3 = true;
                         Console.WriteLine("King wins!");
-                        flag3 = true;
+                        Flag3 = true;
                         return null;
                     }
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -841,11 +807,11 @@ namespace KingSurvivalGame
                     Console.ResetColor();
                     return null;
                 }
-        	}
+            }
 
         }
 
-        static int[] checkNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
+        static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
         {
             int[] displasmentDownLeft = { 1, -2 };
             int[] displasmentDownRight = { 1, 2 };
@@ -859,33 +825,33 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpLeft[1];
-                    if (check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                    if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = field[currentCoordinates[0], currentCoordinates[1]];
                         field[currentCoordinates[0], currentCoordinates[1]] = ' ';
                         field[newCoords[0], newCoords[1]] = sign;
-                        counter++;
+                        Counter++;
                         for (int i = 0; i < 4; i++)
                         {
-                            kingExistingMoves[i] = true;
+                            KingExistingMoves[i] = true;
                         }
-                        checkForKingExit(newCoords[0]);
+                        CheckForKingExit(newCoords[0]);
                         return newCoords;
                     }
                     else
                     {
-                        kingExistingMoves[0] = false;
+                        KingExistingMoves[0] = false;
                         bool allAreFalse = true;
                         for (int i = 0; i < 4; i++)
                         {
-                            if (kingExistingMoves[i] == true)
+                            if (KingExistingMoves[i] == true)
                             {
-                                allAreFalse = false; 
-                            }   
+                                allAreFalse = false;
+                            }
                         }
                         if (allAreFalse)
                         {
-                            flag3 = true;
+                            Flag3 = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
@@ -899,33 +865,33 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpRight[1];
-                    if (check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                    if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = field[currentCoordinates[0], currentCoordinates[1]];
                         field[currentCoordinates[0], currentCoordinates[1]] = ' ';
                         field[newCoords[0], newCoords[1]] = sign;
-                        counter++;
+                        Counter++;
                         for (int i = 0; i < 4; i++)
                         {
-                            kingExistingMoves[i] = true;
+                            KingExistingMoves[i] = true;
                         }
-                        checkForKingExit(newCoords[0]);
+                        CheckForKingExit(newCoords[0]);
                         return newCoords;
                     }
                     else
                     {
-                        kingExistingMoves[1] = false;
+                        KingExistingMoves[1] = false;
                         bool allAreFalse = true;
                         for (int i = 0; i < 4; i++)
                         {
-                            if (kingExistingMoves[i] == true)
+                            if (KingExistingMoves[i] == true)
                             {
                                 allAreFalse = false;
                             }
                         }
                         if (allAreFalse)
                         {
-                            flag3 = true;
+                            Flag3 = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
@@ -942,33 +908,33 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                    if (check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                    if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = field[currentCoordinates[0], currentCoordinates[1]];
                         field[currentCoordinates[0], currentCoordinates[1]] = ' ';
                         field[newCoords[0], newCoords[1]] = sign;
-                        counter++;
+                        Counter++;
                         for (int i = 0; i < 4; i++)
                         {
-                            kingExistingMoves[i] = true;
+                            KingExistingMoves[i] = true;
                         }
-                        checkForKingExit(newCoords[0]);
+                        CheckForKingExit(newCoords[0]);
                         return newCoords;
                     }
                     else
                     {
-                        kingExistingMoves[2] = false;
+                        KingExistingMoves[2] = false;
                         bool allAreFalse = true;
                         for (int i = 0; i < 4; i++)
                         {
-                            if (kingExistingMoves[i] == true)
+                            if (KingExistingMoves[i] == true)
                             {
                                 allAreFalse = false;
                             }
                         }
                         if (allAreFalse)
                         {
-                            flag3 = true;
+                            Flag3 = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
@@ -982,33 +948,33 @@ namespace KingSurvivalGame
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                    if (check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                    if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = field[currentCoordinates[0], currentCoordinates[1]];
                         field[currentCoordinates[0], currentCoordinates[1]] = ' ';
                         field[newCoords[0], newCoords[1]] = sign;
-                        counter++;
+                        Counter++;
                         for (int i = 0; i < 4; i++)
                         {
-                            kingExistingMoves[i] = true;
+                            KingExistingMoves[i] = true;
                         }
-                        checkForKingExit(newCoords[0]);
+                        CheckForKingExit(newCoords[0]);
                         return newCoords;
                     }
                     else
                     {
-                        kingExistingMoves[3] = false;
+                        KingExistingMoves[3] = false;
                         bool allAreFalse = true;
                         for (int i = 0; i < 4; i++)
                         {
-                            if (kingExistingMoves[i] == true)
+                            if (KingExistingMoves[i] == true)
                             {
                                 allAreFalse = false;
                             }
                         }
                         if (allAreFalse)
                         {
-                            flag3 = true;
+                            Flag3 = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
@@ -1018,14 +984,15 @@ namespace KingSurvivalGame
                         return null;
                     }
                 }
-               // checkForKingExit();
+
+                // checkForKingExit();
             }
         }
-        
+
         static void Main()
         {
-            START(counter);
+            Start(Counter);
             Console.WriteLine("\nThank you for using this game!\n\n");
-        }             
+        }
     }
 }
