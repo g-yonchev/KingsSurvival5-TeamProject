@@ -5,16 +5,18 @@
 
     public class KingSurvivalGame : BaseGame
     {
-        static bool Check(int[] positionCoodinates)
+        static bool IsPositionOnTheBoard(int[] positionCoodinates)
         {
-            int a = positionCoodinates[0];
-            bool flag = (a >= UgliNaDyskata[0, 0]) && (a <= UgliNaDyskata[3, 0]);
-            int b = positionCoodinates[1];
-            bool flag2 = (b >= UgliNaDyskata[0, 1]) && (b <= UgliNaDyskata[3, 1]);
-            return flag && flag2;
+            int row = positionCoodinates[0];
+            bool isRowOnTheBoard = (row >= boardEdges[0, 0]) && (row <= boardEdges[3, 0]);
+
+            int col = positionCoodinates[1];
+            bool isColOnTheBoard = (col >= boardEdges[0, 1]) && (col <= boardEdges[3, 1]);
+
+            return isRowOnTheBoard && isColOnTheBoard;
         }
 
-        static void PokajiDyskata()
+        static void PrintBoard()
         {
             Console.WriteLine();
             for (int row = 0; row < field.GetLength(0); row++)
@@ -22,7 +24,7 @@
                 for (int col = 0; col < field.GetLength(1); col++)
                 {
                     int[] coordinates = { row, col };
-                    bool isCellIn = Check(coordinates);
+                    bool isCellIn = IsPositionOnTheBoard(coordinates);
                     if (isCellIn)
                     {
                         if (row % 2 == 0)
@@ -82,21 +84,20 @@
 
         static void Start(int moveCounter)
         {
-            if (Flag3)
+            if (gameOver)
             {
                 Console.WriteLine("Game is finished!");
                 return;
             }
             else
             {
+                PrintBoard();
                 if (moveCounter % 2 == 0)
                 {
-                    PokajiDyskata();
                     ProcessKingSide();
                 }
                 else
                 {
-                    PokajiDyskata();
                     ProcessPawnSide();
                 }
             }
@@ -284,32 +285,32 @@
                         if (checkedInput[2] == 'L')
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[0, 0];
+                            oldCoordinates[0] = pawnPositions[0, 0];
 
-                            oldCoordinates[1] = PoziciqPeshki[0, 1];
+                            oldCoordinates[1] = pawnPositions[0, 1];
 
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'A');
                             if (coords != null)
                             {
-                                PoziciqPeshki[0, 0] = coords[0];
-                                PoziciqPeshki[0, 1] = coords[1];
+                                pawnPositions[0, 0] = coords[0];
+                                pawnPositions[0, 1] = coords[1];
                             }
                         }
                         else
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[0, 0];
+                            oldCoordinates[0] = pawnPositions[0, 0];
 
-                            oldCoordinates[1] = PoziciqPeshki[0, 1];
+                            oldCoordinates[1] = pawnPositions[0, 1];
                             int[] coords = new int[2];
 
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'A');
                             if (coords != null)
                             {
-                                PoziciqPeshki[0, 0] = coords[0];
+                                pawnPositions[0, 0] = coords[0];
 
-                                PoziciqPeshki[0, 1] = coords[1];
+                                pawnPositions[0, 1] = coords[1];
                             }
                         }
                         return true;
@@ -318,29 +319,29 @@
                         if (checkedInput[2] == 'L')
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[1, 0];
-                            oldCoordinates[1] = PoziciqPeshki[1, 1];
+                            oldCoordinates[0] = pawnPositions[1, 0];
+                            oldCoordinates[1] = pawnPositions[1, 1];
 
                             int[] coords = new int[2];
 
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'B');
                             if (coords != null)
                             {
-                                PoziciqPeshki[1, 0] = coords[0];
-                                PoziciqPeshki[1, 1] = coords[1];
+                                pawnPositions[1, 0] = coords[0];
+                                pawnPositions[1, 1] = coords[1];
                             }
                         }
                         else
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[1, 0];
-                            oldCoordinates[1] = PoziciqPeshki[1, 1];
+                            oldCoordinates[0] = pawnPositions[1, 0];
+                            oldCoordinates[1] = pawnPositions[1, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'B');
                             if (coords != null)
                             {
-                                PoziciqPeshki[1, 0] = coords[0];
-                                PoziciqPeshki[1, 1] = coords[1];
+                                pawnPositions[1, 0] = coords[0];
+                                pawnPositions[1, 1] = coords[1];
                             }
                         }
                         return true;
@@ -348,27 +349,27 @@
                         if (checkedInput[2] == 'L')
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[2, 0];
-                            oldCoordinates[1] = PoziciqPeshki[2, 1];
+                            oldCoordinates[0] = pawnPositions[2, 0];
+                            oldCoordinates[1] = pawnPositions[2, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'C');
                             if (coords != null)
                             {
-                                PoziciqPeshki[2, 0] = coords[0];
-                                PoziciqPeshki[2, 1] = coords[1];
+                                pawnPositions[2, 0] = coords[0];
+                                pawnPositions[2, 1] = coords[1];
                             }
                         }
                         else
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[2, 0];
-                            oldCoordinates[1] = PoziciqPeshki[2, 1];
+                            oldCoordinates[0] = pawnPositions[2, 0];
+                            oldCoordinates[1] = pawnPositions[2, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'C');
                             if (coords != null)
                             {
-                                PoziciqPeshki[1, 0] = coords[0];
-                                PoziciqPeshki[1, 1] = coords[1];
+                                pawnPositions[1, 0] = coords[0];
+                                pawnPositions[1, 1] = coords[1];
                             }
                         }
                         return true;
@@ -376,27 +377,27 @@
                         if (checkedInput[2] == 'L')
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[3, 0];
-                            oldCoordinates[1] = PoziciqPeshki[3, 1];
+                            oldCoordinates[0] = pawnPositions[3, 0];
+                            oldCoordinates[1] = pawnPositions[3, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'L', 'D');
                             if (coords != null)
                             {
-                                PoziciqPeshki[3, 0] = coords[0];
-                                PoziciqPeshki[3, 1] = coords[1];
+                                pawnPositions[3, 0] = coords[0];
+                                pawnPositions[3, 1] = coords[1];
                             }
                         }
                         else
                         {
                             int[] oldCoordinates = new int[2];
-                            oldCoordinates[0] = PoziciqPeshki[3, 0];
-                            oldCoordinates[1] = PoziciqPeshki[3, 1];
+                            oldCoordinates[0] = pawnPositions[3, 0];
+                            oldCoordinates[1] = pawnPositions[3, 1];
                             int[] coords = new int[2];
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'D');
                             if (coords != null)
                             {
-                                PoziciqPeshki[3, 0] = coords[0];
-                                PoziciqPeshki[3, 1] = coords[1];
+                                pawnPositions[3, 0] = coords[0];
+                                pawnPositions[3, 1] = coords[1];
                             }
                         }
                         return true;
@@ -407,27 +408,27 @@
                             if (checkedInput[2] == 'L')
                             {
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = PoziciqCar[0];
-                                oldCoordinates[1] = PoziciqCar[1];
+                                oldCoordinates[0] = kingPosition[0];
+                                oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
                                 coords = CheckNextKingPosition(oldCoordinates, 'U', 'L');
                                 if (coords != null)
                                 {
-                                    PoziciqCar[0] = coords[0];
-                                    PoziciqCar[1] = coords[1];
+                                    kingPosition[0] = coords[0];
+                                    kingPosition[1] = coords[1];
                                 }
                             }
                             else
                             {
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = PoziciqCar[0];
-                                oldCoordinates[1] = PoziciqCar[1];
+                                oldCoordinates[0] = kingPosition[0];
+                                oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
                                 coords = CheckNextKingPosition(oldCoordinates, 'U', 'R');
                                 if (coords != null)
                                 {
-                                    PoziciqCar[0] = coords[0];
-                                    PoziciqCar[1] = coords[1];
+                                    kingPosition[0] = coords[0];
+                                    kingPosition[1] = coords[1];
                                 }
                             }
                             return true;
@@ -437,27 +438,27 @@
                             if (checkedInput[2] == 'L')
                             {
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = PoziciqCar[0];
-                                oldCoordinates[1] = PoziciqCar[1];
+                                oldCoordinates[0] = kingPosition[0];
+                                oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
                                 coords = CheckNextKingPosition(oldCoordinates, 'D', 'L');
                                 if (coords != null)
                                 {
-                                    PoziciqCar[0] = coords[0];
-                                    PoziciqCar[1] = coords[1];
+                                    kingPosition[0] = coords[0];
+                                    kingPosition[1] = coords[1];
                                 }
                             }
                             else
                             {
                                 int[] oldCoordinates = new int[2];
-                                oldCoordinates[0] = PoziciqCar[0];
-                                oldCoordinates[1] = PoziciqCar[1];
+                                oldCoordinates[0] = kingPosition[0];
+                                oldCoordinates[1] = kingPosition[1];
                                 int[] coords = new int[2];
                                 coords = CheckNextKingPosition(oldCoordinates, 'D', 'R');
                                 if (coords != null)
                                 {
-                                    PoziciqCar[0] = coords[0];
-                                    PoziciqCar[1] = coords[1];
+                                    kingPosition[0] = coords[0];
+                                    kingPosition[1] = coords[1];
                                 }
                             }
                             return true;
@@ -530,7 +531,7 @@
             {
                 Console.WriteLine("End!");
                 Console.WriteLine("King wins in {0} moves!", Counter / 2);
-                Flag3 = true;
+                gameOver = true;
             }
         }
 
@@ -543,7 +544,7 @@
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                 {
                     char sign = field[currentCoordinates[0], currentCoordinates[1]];
                     field[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -662,9 +663,9 @@
                     }
                     if (allAreFalse)
                     {
-                        Flag3 = true;
+                        gameOver = true;
                         Console.WriteLine("King wins!");
-                        Flag3 = true;
+                        gameOver = true;
                         return null;
                     }
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -677,7 +678,7 @@
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                 {
                     char sign = field[currentCoordinates[0], currentCoordinates[1]];
                     field[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -797,9 +798,9 @@
 
                     if (allAreFalse)
                     {
-                        Flag3 = true;
+                        gameOver = true;
                         Console.WriteLine("King wins!");
-                        Flag3 = true;
+                        gameOver = true;
                         return null;
                     }
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -825,7 +826,7 @@
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpLeft[1];
-                    if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                    if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = field[currentCoordinates[0], currentCoordinates[1]];
                         field[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -851,7 +852,7 @@
                         }
                         if (allAreFalse)
                         {
-                            Flag3 = true;
+                            gameOver = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
@@ -865,7 +866,7 @@
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpRight[1];
-                    if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                    if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = field[currentCoordinates[0], currentCoordinates[1]];
                         field[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -891,7 +892,7 @@
                         }
                         if (allAreFalse)
                         {
-                            Flag3 = true;
+                            gameOver = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
@@ -908,7 +909,7 @@
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                    if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                    if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = field[currentCoordinates[0], currentCoordinates[1]];
                         field[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -934,7 +935,7 @@
                         }
                         if (allAreFalse)
                         {
-                            Flag3 = true;
+                            gameOver = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }
@@ -948,7 +949,7 @@
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                    if (Check(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+                    if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
                         char sign = field[currentCoordinates[0], currentCoordinates[1]];
                         field[currentCoordinates[0], currentCoordinates[1]] = ' ';
@@ -974,7 +975,7 @@
                         }
                         if (allAreFalse)
                         {
-                            Flag3 = true;
+                            gameOver = true;
                             Console.WriteLine("King loses!");
                             return null;
                         }

@@ -18,12 +18,12 @@
             { 'D', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'D', 'R' },
         };
 
-        protected static int[,] UgliNaDyskata = 
+        protected static int[,] boardEdges = 
         {
             { 2, 4 }, { 2, 18 }, { 9, 4 }, { 9, 18 }
         };
 
-        protected static int[] PoziciqCar = { 9, 10 };
+        protected static int[] kingPosition = { 9, 10 };
 
         protected static bool[,] PawnExistingMoves = 
         {
@@ -43,8 +43,8 @@
 
         protected static int Counter = 0;
 
-        protected static bool Flag3 = false;
-        protected static int[,] PoziciqPeshki = 
+        protected static bool gameOver = false;
+        protected static int[,] pawnPositions = 
         {
             { 2, 4 }, { 2, 8 }, { 2, 12 }, { 2, 16 }
         };
