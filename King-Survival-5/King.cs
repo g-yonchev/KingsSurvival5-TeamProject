@@ -104,178 +104,71 @@
 
         }
 
-        static bool Proverka2(string checkedString)
+        static bool IsValidCommand(string checkedString)
         {
             if (Counter % 2 == 0)
             {
-                int[] flag = new int[4];
-                for (int i = 0; i < ValidKingInputs.Length; i++)
+                bool isValidCommand = false;
+                foreach (var validKingMove in ValidKingInputs)
                 {
-                    string reference = ValidKingInputs[i];
-                    int result = checkedString.CompareTo(reference);
-                    if (result != 0)
+                    if (checkedString == validKingMove)
                     {
-                        flag[i] = 0;
+                        isValidCommand = true;
+                        break;
                     }
-                    else
-                    {
-                        flag[i] = 1;
-                    }
-
-                }
-                bool hasAnEqual = false;
-                for (int i = 0; i < 4; i++)
-                {
-                    if (flag[i] == 1)
-                    {
-                        hasAnEqual = true;
-                    }
-
                 }
 
-                if (!hasAnEqual)
+                if (!isValidCommand)
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("Invalid command name!");
                     Console.ResetColor();
                 }
 
-                return hasAnEqual;
+                return isValidCommand;
             }
             else
             {
                 char startLetter = checkedString[0];
-                int[] checker = new int[2];
-                bool hasAnEqual = false;
-                switch (startLetter)
+                if ((int)startLetter >= (int)'A' && (int)startLetter <= (int)'D')
                 {
-                    case 'A':
-                        for (int i = 0; i < A.Length; i++)
-                        {
-                            string reference = A[i];
-                            int result = checkedString.CompareTo(reference);
-                            if (result != 0)
-                            {
-                                checker[i] = 0;
-                            }
-                            else
-                            {
-                                checker[i] = 1;
-                            }
-                        }
-                        for (int i = 0; i < 2; i++)
-                        {
-                            if (checker[i] == 1)
-                            {
-                                hasAnEqual = true;
-                            }
-                        }
-                        if (!hasAnEqual)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Invalid command name!");
-                            Console.ResetColor();
-                        }
-                        return hasAnEqual;
-
-                    case 'B':
-                        for (int i = 0; i < B.Length; i++)
-                        {
-                            string reference = B[i];
-                            int result = checkedString.CompareTo(reference);
-                            if (result != 0)
-                            {
-                                checker[i] = 0;
-                            }
-                            else
-                            {
-                                checker[i] = 1;
-                            }
-                        }
-                        for (int i = 0; i < 2; i++)
-                        {
-                            if (checker[i] == 1)
-                            {
-                                hasAnEqual = true;
-                            }
-                        }
-                        if (!hasAnEqual)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Invalid command name!");
-                            Console.ResetColor();
-                        }
-                        return hasAnEqual;
-                    case 'C':
-                        for (int i = 0; i < C.Length; i++)
-                        {
-                            string reference = C[i];
-                            int result = checkedString.CompareTo(reference);
-                            if (result != 0)
-                            {
-                                checker[i] = 0;
-                            }
-                            else
-                            {
-                                checker[i] = 1;
-                            }
-                        }
-                        for (int i = 0; i < 2; i++)
-                        {
-                            if (checker[i] == 1)
-                            {
-                                hasAnEqual = true;
-                            }
-                        }
-                        if (!hasAnEqual)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Invalid command name!");
-                            Console.ResetColor();
-                        }
-                        return hasAnEqual;
-
-                    case 'D':
-                        for (int i = 0; i < D.Length; i++)
-                        {
-                            string reference = D[i];
-                            int result = checkedString.CompareTo(reference);
-                            if (result != 0)
-                            {
-                                checker[i] = 0;
-                            }
-                            else
-                            {
-                                checker[i] = 1;
-                            }
-                        }
-                        for (int i = 0; i < 2; i++)
-                        {
-                            if (checker[i] == 1)
-                            {
-                                hasAnEqual = true;
-                            }
-                        }
-                        if (!hasAnEqual)
-                        {
-                            Console.BackgroundColor = ConsoleColor.Red;
-                            Console.WriteLine("Invalid command name!");
-                            Console.ResetColor();
-                        }
-                        return hasAnEqual;
-
-                    default:
-                        Console.BackgroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Invalid command name!");
-                        Console.ResetColor();
-                        return false;
+                    return IsValidPawnMove(checkedString);
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Invalid command name!");
+                    Console.ResetColor();
+                    return false;
                 }
             }
         }
 
+        private static bool IsValidPawnMove(string move)
+        {
+            bool isValidCommand = false;
+            foreach (var validPawnMove in A)
+            {
+                if (move.Substring(1) == validPawnMove.Substring(1))
+                {
+                    isValidCommand = true;
+                    break;
+                }
+            }
+
+            if (!isValidCommand)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("Invalid command name!");
+                Console.ResetColor();
+            }
+
+            return isValidCommand;
+        }
+
         static bool ProverkaIProcess(string checkedInput)
         {
-            bool commandNameIsOK = Proverka2(checkedInput);
+            bool commandNameIsOK = IsValidCommand(checkedInput);
             if (commandNameIsOK)
             {
                 char startLetter = checkedInput[0];
