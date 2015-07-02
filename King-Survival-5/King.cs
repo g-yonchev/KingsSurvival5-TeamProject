@@ -261,8 +261,8 @@
                             coords = CheckNextPownPosition(oldCoordinates, 'R', 'C');
                             if (coords != null)
                             {
-                                pawnPositions[1, 0] = coords[0];
-                                pawnPositions[1, 1] = coords[1];
+                                pawnPositions[2, 0] = coords[0];
+                                pawnPositions[2, 1] = coords[1];
                             }
                         }
                         return true;
