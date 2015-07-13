@@ -345,6 +345,48 @@
             }
         }
 
+        static void SwitchCurrentPawnExistingMoves(char currentPawn)
+        {
+            switch (currentPawn)
+            {
+                case 'A':
+                    PawnExistingMoves[0, 0] = true;
+                    PawnExistingMoves[0, 1] = true;
+                    break;
+                case 'B':
+                    PawnExistingMoves[1, 0] = true;
+                    PawnExistingMoves[1, 1] = true;
+                    break;
+                case 'C':
+                    PawnExistingMoves[2, 0] = true;
+                    PawnExistingMoves[2, 1] = true;
+                    break;
+                case 'D':
+                    PawnExistingMoves[3, 0] = true;
+                    PawnExistingMoves[3, 1] = true;
+                    break;
+                default:
+                    Console.WriteLine("ERROR!");
+                    break;
+            }
+        }
+
+        static bool CheckingAllPawnMoves()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    if (PawnExistingMoves[i, j])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
         static int[] CheckNextPownPosition(int[] currentCoordinates, char checkDirection, char currentPawn)
         {
             int[] displasmentDownLeft = { 1, -2 };
@@ -356,35 +398,11 @@
                 newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
                 if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                 {
-                    char sign = field[currentCoordinates[0], currentCoordinates[1]];
-                    field[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                    field[newCoords[0], newCoords[1]] = sign;
+                    SetMovedFigure(currentCoordinates, newCoords);
+
                     Counter++;
-                    switch (currentPawn)
-                    {
-                        case 'A':
-                            PawnExistingMoves[0, 0] = true;
-                            PawnExistingMoves[0, 1] = true;
-                            break;
 
-                        case 'B':
-                            PawnExistingMoves[1, 0] = true;
-                            PawnExistingMoves[1, 1] = true;
-                            break;
-                        case 'C':
-                            PawnExistingMoves[2, 0] = true;
-                            PawnExistingMoves[2, 1] = true;
-                            break;
-
-                        case 'D':
-                            PawnExistingMoves[3, 0] = true;
-                            PawnExistingMoves[3, 1] = true;
-                            break;
-
-                        default:
-                            Console.WriteLine("ERROR!");
-                            break;
-                    }
+                    SwitchCurrentPawnExistingMoves(currentPawn);
 
                     return newCoords;
                 }
@@ -416,61 +434,23 @@
                     {
                         case 'A':
                             PawnExistingMoves[0, 0] = false;
-                            /*for (int i = 0; i < 2; i++)
-                            {
-                                if (pawnExistingMoves[0,i] == true)
-                                {
-                                    allAreFalse = false;
-                                }
-                            }*/
                             break;
-
                         case 'B':
                             PawnExistingMoves[1, 0] = false;
-                            /*for (int i = 0; i < 2; i++)
-                            {
-                                if (pawnExistingMoves[1, i] == true)
-                                {
-                                    allAreFalse = false;
-                                }
-                            }*/
                             break;
                         case 'C':
                             PawnExistingMoves[2, 0] = false;
-                            /*for (int i = 0; i < 2; i++)
-                            {
-                                if (pawnExistingMoves[2, i] == true)
-                                {
-                                    allAreFalse = false;
-                                }
-                            }*/
                             break;
-
                         case 'D':
                             PawnExistingMoves[3, 0] = false;
-                            /*for (int i = 0; i < 2; i++)
-                            {
-                                if (pawnExistingMoves[3, i] == true)
-                                {
-                                    allAreFalse = false;
-                                }
-                            }*/
                             break;
-
                         default:
                             Console.WriteLine("ERROR!");
                             break;
                     }
-                    for (int i = 0; i < 4; i++)
-                    {
-                        for (int j = 0; j < 2; j++)
-                        {
-                            if (PawnExistingMoves[i, j] == true)
-                            {
-                                allAreFalse = false;
-                            }
-                        }
-                    }
+
+                    allAreFalse = CheckingAllPawnMoves();
+
                     if (allAreFalse)
                     {
                         gameOver = true;
@@ -478,9 +458,9 @@
                         gameOver = true;
                         return null;
                     }
-                    Console.BackgroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("You can't go in this direction! ");
-                    Console.ResetColor();
+
+                    CommandPrintWrongDirection();
+                    
                     return null;
                 }
             }
@@ -490,35 +470,13 @@
                 newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
                 if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                 {
-                    char sign = field[currentCoordinates[0], currentCoordinates[1]];
-                    field[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                    field[newCoords[0], newCoords[1]] = sign;
+                    SetMovedFigure(currentCoordinates, newCoords);
+
                     Counter++;
-                    switch (currentPawn)
-                    {
-                        case 'A':
-                            PawnExistingMoves[0, 0] = true;
-                            PawnExistingMoves[0, 1] = true;
-                            break;
 
-                        case 'B':
-                            PawnExistingMoves[1, 0] = true;
-                            PawnExistingMoves[1, 1] = true;
-                            break;
-                        case 'C':
-                            PawnExistingMoves[2, 0] = true;
-                            PawnExistingMoves[2, 1] = true;
-                            break;
 
-                        case 'D':
-                            PawnExistingMoves[3, 0] = true;
-                            PawnExistingMoves[3, 1] = true;
-                            break;
+                    SwitchCurrentPawnExistingMoves(currentPawn);
 
-                        default:
-                            Console.WriteLine("ERROR!");
-                            break;
-                    }
                     return newCoords;
                 }
                 else
@@ -549,62 +507,22 @@
                     {
                         case 'A':
                             PawnExistingMoves[0, 1] = false;
-                            /*for (int i = 0; i < 2; i++)
-                            {
-                                if (pawnExistingMoves[0, i] == true)
-                                {
-                                    allAreFalse = false;
-                                }
-                            }*/
                             break;
-
                         case 'B':
                             PawnExistingMoves[1, 1] = false;
-                            /*for (int i = 0; i < 2; i++)
-                            {
-                                if (pawnExistingMoves[1, i] == true)
-                                {
-                                    allAreFalse = false;
-                                }
-                            }*/
                             break;
                         case 'C':
                             PawnExistingMoves[2, 1] = false;
-                            /*for (int i = 0; i < 2; i++)
-                            {
-                                if (pawnExistingMoves[2, i] == true)
-                                {
-                                    allAreFalse = false;
-                                }
-                            }*/
                             break;
-
                         case 'D':
                             PawnExistingMoves[3, 1] = false;
-                            /*for (int i = 0; i < 2; i++)
-                            {
-                                if (pawnExistingMoves[3, i] == true)
-                                {
-                                    allAreFalse = false;
-                                }
-                            }*/
                             break;
-
                         default:
                             Console.WriteLine("ERROR!");
                             break;
                     }
 
-                    for (int i = 0; i < 4; i++)
-                    {
-                        for (int j = 0; j < 2; j++)
-                        {
-                            if (PawnExistingMoves[i, j] == true)
-                            {
-                                allAreFalse = false;
-                            }
-                        }
-                    }
+                    allAreFalse = CheckingAllPawnMoves();
 
                     if (allAreFalse)
                     {
@@ -613,13 +531,20 @@
                         gameOver = true;
                         return null;
                     }
-                    Console.BackgroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine("You can't go in this direction! ");
-                    Console.ResetColor();
+
+                    CommandPrintWrongDirection();
+
                     return null;
                 }
             }
 
+        }
+
+        static void SetMovedFigure(int[] currentCoordinates, int[] newCoords)
+        {
+            char sign = field[currentCoordinates[0], currentCoordinates[1]];
+            field[currentCoordinates[0], currentCoordinates[1]] = ' ';
+            field[newCoords[0], newCoords[1]] = sign;
         }
 
         static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
@@ -638,9 +563,8 @@
                     newCoords[1] = currentCoordinates[1] + displasmentUpLeft[1];
                     if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
-                        char sign = field[currentCoordinates[0], currentCoordinates[1]];
-                        field[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                        field[newCoords[0], newCoords[1]] = sign;
+                        SetMovedFigure(currentCoordinates, newCoords);
+
                         Counter++;
                         for (int i = 0; i < 4; i++)
                         {
@@ -655,7 +579,7 @@
                         bool allAreFalse = true;
                         for (int i = 0; i < 4; i++)
                         {
-                            if (KingExistingMoves[i] == true)
+                            if (KingExistingMoves[i])
                             {
                                 allAreFalse = false;
                             }
@@ -663,12 +587,12 @@
                         if (allAreFalse)
                         {
                             gameOver = true;
-                            Console.WriteLine("King loses!");
+                            CommandPrintKingLosing();
                             return null;
                         }
-                        Console.BackgroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine("You can't go in this direction! ");
-                        Console.ResetColor();
+
+                        CommandPrintWrongDirection();
+
                         return null;
                     }
                 }
@@ -678,9 +602,8 @@
                     newCoords[1] = currentCoordinates[1] + displasmentUpRight[1];
                     if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
-                        char sign = field[currentCoordinates[0], currentCoordinates[1]];
-                        field[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                        field[newCoords[0], newCoords[1]] = sign;
+                        SetMovedFigure(currentCoordinates, newCoords);
+
                         Counter++;
                         for (int i = 0; i < 4; i++)
                         {
@@ -695,7 +618,7 @@
                         bool allAreFalse = true;
                         for (int i = 0; i < 4; i++)
                         {
-                            if (KingExistingMoves[i] == true)
+                            if (KingExistingMoves[i])
                             {
                                 allAreFalse = false;
                             }
@@ -703,12 +626,12 @@
                         if (allAreFalse)
                         {
                             gameOver = true;
-                            Console.WriteLine("King loses!");
+                            CommandPrintKingLosing();
                             return null;
                         }
-                        Console.BackgroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine("You can't go in this direction! ");
-                        Console.ResetColor();
+
+                        CommandPrintWrongDirection();
+                        
                         return null;
                     }
                 }
@@ -721,9 +644,8 @@
                     newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
                     if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
-                        char sign = field[currentCoordinates[0], currentCoordinates[1]];
-                        field[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                        field[newCoords[0], newCoords[1]] = sign;
+                        SetMovedFigure(currentCoordinates, newCoords);
+
                         Counter++;
                         for (int i = 0; i < 4; i++)
                         {
@@ -738,7 +660,7 @@
                         bool allAreFalse = true;
                         for (int i = 0; i < 4; i++)
                         {
-                            if (KingExistingMoves[i] == true)
+                            if (KingExistingMoves[i])
                             {
                                 allAreFalse = false;
                             }
@@ -746,12 +668,12 @@
                         if (allAreFalse)
                         {
                             gameOver = true;
-                            Console.WriteLine("King loses!");
+                            CommandPrintKingLosing();
                             return null;
                         }
-                        Console.BackgroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine("You can't go in this direction! ");
-                        Console.ResetColor();
+
+                        CommandPrintWrongDirection();
+
                         return null;
                     }
                 }
@@ -761,9 +683,8 @@
                     newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
                     if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
                     {
-                        char sign = field[currentCoordinates[0], currentCoordinates[1]];
-                        field[currentCoordinates[0], currentCoordinates[1]] = ' ';
-                        field[newCoords[0], newCoords[1]] = sign;
+                        SetMovedFigure(currentCoordinates, newCoords);
+
                         Counter++;
                         for (int i = 0; i < 4; i++)
                         {
@@ -778,7 +699,7 @@
                         bool allAreFalse = true;
                         for (int i = 0; i < 4; i++)
                         {
-                            if (KingExistingMoves[i] == true)
+                            if (KingExistingMoves[i])
                             {
                                 allAreFalse = false;
                             }
@@ -786,18 +707,27 @@
                         if (allAreFalse)
                         {
                             gameOver = true;
-                            Console.WriteLine("King loses!");
+                            CommandPrintKingLosing();
                             return null;
                         }
-                        Console.BackgroundColor = ConsoleColor.DarkYellow;
-                        Console.WriteLine("You can't go in this direction! ");
-                        Console.ResetColor();
+
+                        CommandPrintWrongDirection();
+
                         return null;
                     }
                 }
-
-                // checkForKingExit();
             }
+        }
+
+        static void CommandPrintWrongDirection(){
+            Console.BackgroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("You can't go in this direction! ");
+            Console.ResetColor();
+        }
+
+        static void CommandPrintKingLosing()
+        {
+            Console.WriteLine("King loses!");
         }
 
         static void Main()
