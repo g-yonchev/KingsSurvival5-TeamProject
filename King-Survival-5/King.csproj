@@ -42,7 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseGame.cs" />
+    <Compile Include="Figure.cs" />
+    <Compile Include="IFigure.cs" />
     <Compile Include="King.cs" />
+    <Compile Include="KingFigure.cs" />
+    <Compile Include="PawnFigure.cs" />
+    <Compile Include="Position.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
