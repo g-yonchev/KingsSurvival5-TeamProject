@@ -2,6 +2,7 @@
 {
     using System;
     using King;
+    using King.Commons;
 
     public class KingSurvivalGame : BaseGame
     {
@@ -14,14 +15,6 @@
             bool isColOnTheBoard = (col >= boardEdges[0, 1]) && (col <= boardEdges[3, 1]);
 
             return isRowOnTheBoard && isColOnTheBoard;
-        }
-
-        static void PrintBoardColors(ConsoleColor color, int row, int col)
-        {
-            Console.BackgroundColor = color;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write(field[row, col]);
-            Console.ResetColor();
         }
 
         static void PrintBoard()
@@ -39,11 +32,17 @@
                         {
                             if (col % 4 == 0)
                             {
-                                PrintBoardColors(ConsoleColor.Green, row, col);
+                                Console.BackgroundColor = ConsoleColor.Green;
+                                Console.ForegroundColor = ConsoleColor.Black;
+                                Console.Write(field[row, col]);
+                                Console.ResetColor();
                             }
                             else if (col % 2 == 0)
                             {
-                                PrintBoardColors(ConsoleColor.Blue, row, col);
+                                Console.BackgroundColor = ConsoleColor.Blue;
+                                Console.ForegroundColor = ConsoleColor.Black;
+                                Console.Write(field[row, col]);
+                                Console.ResetColor();
                             }
                             else if (col % 2 != 0)
                             {
@@ -52,11 +51,17 @@
                         }
                         else if (col % 4 == 0)
                         {
-                            PrintBoardColors(ConsoleColor.Blue, row, col);
+                            Console.BackgroundColor = ConsoleColor.Blue;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.Write(field[row, col]);
+                            Console.ResetColor();
                         }
                         else if (col % 2 == 0)
                         {
-                            PrintBoardColors(ConsoleColor.Green, row, col);
+                            Console.BackgroundColor = ConsoleColor.Green;
+                            Console.ForegroundColor = ConsoleColor.Black;
+                            Console.Write(field[row, col]);
+                            Console.ResetColor();
                         }
 
                         else if (col % 2 != 0)
@@ -82,7 +87,7 @@
         {
             if (gameOver)
             {
-                Console.WriteLine("Game is finished!");
+                Console.WriteLine(Constants.FINISH_GAME_MESSAGE);
                 return;
             }
             else
@@ -117,7 +122,7 @@
                 if (!isValidCommand)
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid command name!");
+                    Console.WriteLine(Constants.INVALID_COMMAND_MESSAGE);
                     Console.ResetColor();
                 }
 
@@ -133,7 +138,7 @@
                 else
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Invalid command name!");
+                    Console.WriteLine(Constants.INVALID_COMMAND_MESSAGE);
                     Console.ResetColor();
                     return false;
                 }
@@ -155,7 +160,7 @@
             if (!isValidCommand)
             {
                 Console.BackgroundColor = ConsoleColor.Red;
-                Console.WriteLine("Invalid command name!");
+                Console.WriteLine(Constants.INVALID_COMMAND_MESSAGE);
                 Console.ResetColor();
             }
 
@@ -269,7 +274,7 @@
                         }
                         return true;
                     default:
-                        Console.WriteLine("Sorry, there are some errors, but I can't tell you anything! You broked my program!");
+                        Console.WriteLine(Constants.ERROR_MESSAGE);
                         return false;
                 }
             }
@@ -285,10 +290,10 @@
             while (!isExecuted)
             {
                 Console.BackgroundColor = ConsoleColor.DarkGreen;
-                Console.Write("Please enter king's turn: ");
+                Console.Write(Constants.KING_TURN_MESSAGE);
                 Console.ResetColor();
                 string input = Console.ReadLine();
-                if (input != null)
+                if (input != string.Empty)
                 {
                     input = input.ToUpper();
                     isExecuted = ProverkaIProcess(input);
@@ -297,7 +302,7 @@
                 {
                     isExecuted = false;
                     Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Please enter something!");
+                    Console.WriteLine(Constants.EMPTY_STRING_MESSAGE);
                     Console.ResetColor();
                 }
             }
@@ -310,11 +315,11 @@
             while (!isExecuted)
             {
                 Console.BackgroundColor = ConsoleColor.Blue;
-                Console.Write("Please enter pawn's turn: ");
+                Console.Write(Constants.PAWN_TURN_MASSAGE);
                 Console.ResetColor();
                 string input = Console.ReadLine();
                 //input = input.Trim();
-                if (input != null)//"/n")
+                if (input != string.Empty)//"/n")
                 {
                     // Console.WriteLine(input);
                     input = input.ToUpper();
@@ -324,7 +329,7 @@
                 {
                     isExecuted = false;
                     Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("Please enter something!");
+                    Console.WriteLine(Constants.EMPTY_STRING_MESSAGE);
                     Console.ResetColor();
                 }
             }
@@ -336,7 +341,7 @@
             if (currentKingXAxe == 2)
             {
                 Console.WriteLine("End!");
-                Console.WriteLine("King wins in {0} moves!", Counter / 2);
+                Console.WriteLine(Constants.KING_VICTORY_MESSAGE, Counter / 2);
                 gameOver = true;
             }
         }
@@ -362,7 +367,7 @@
                     PawnExistingMoves[3, 1] = true;
                     break;
                 default:
-                    Console.WriteLine("ERROR!");
+                    Console.WriteLine(Constants.ERROR_MESSAGE);
                     break;
             }
         }
@@ -441,7 +446,7 @@
                             PawnExistingMoves[3, 0] = false;
                             break;
                         default:
-                            Console.WriteLine("ERROR!");
+                            Console.WriteLine(Constants.ERROR_MESSAGE);
                             break;
                     }
 
@@ -450,7 +455,7 @@
                     if (allAreFalse)
                     {
                         gameOver = true;
-                        Console.WriteLine("King wins!");
+                        Console.WriteLine(Constants.KING_VICTORY_MESSAGE, Counter / 2);
                         gameOver = true;
                         return null;
                     }
@@ -469,6 +474,7 @@
                     SetMovedFigure(currentCoordinates, newCoords);
 
                     Counter++;
+
 
                     SwitchCurrentPawnExistingMoves(currentPawn);
 
@@ -513,7 +519,7 @@
                             PawnExistingMoves[3, 1] = false;
                             break;
                         default:
-                            Console.WriteLine("ERROR!");
+                            Console.WriteLine(Constants.ERROR_MESSAGE);
                             break;
                     }
 
@@ -522,7 +528,7 @@
                     if (allAreFalse)
                     {
                         gameOver = true;
-                        Console.WriteLine("King wins!");
+                        Console.WriteLine(Constants.KING_VICTORY_MESSAGE, Counter / 2);
                         gameOver = true;
                         return null;
                     }
@@ -717,19 +723,20 @@
         static void CommandPrintWrongDirection()
         {
             Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine("You can't go in this direction! ");
+            Console.WriteLine(Constants.WRONG_DIRECTION_MESSAGE);
             Console.ResetColor();
         }
 
         static void CommandPrintKingLosing()
         {
-            Console.WriteLine("King loses!");
+            Console.WriteLine(Constants.KING_LOST_MESSAGE, Counter / 2);
         }
 
         static void Main()
         {
             Start(Counter);
-            Console.WriteLine("\nThank you for using this game!\n\n");
+            Console.WriteLine(Constants.GOODBYE_MESSAGE);
+            Console.ReadLine();
         }
     }
 }
