@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace King
+﻿namespace King
 {
     public class PawnFigure : Figure, IFigure
     {
@@ -13,9 +7,9 @@ namespace King
         {
         }
 
-        public override void Move()
+        public override void Move(Position position)
         {
-            throw new NotImplementedException();
+            this.Position = position;
         }
     }
 }

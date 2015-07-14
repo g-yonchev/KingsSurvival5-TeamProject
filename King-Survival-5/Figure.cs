@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace King
+﻿namespace King
 {
     public abstract class Figure : IFigure
     {
@@ -13,8 +7,8 @@ namespace King
             this.Position = position;
         }
 
-        public Position Position { get; private set; }
+        public Position Position { get; protected set; }
 
-        public abstract void Move();
+        public abstract void Move(Position position);
     }
 }

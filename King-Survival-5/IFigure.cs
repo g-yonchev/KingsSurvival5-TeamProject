@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace King
+﻿namespace King
 {
     interface IFigure
     {
         Position Position { get; }
 
-        void Move();
+        void Move(Position position);
     }
 }

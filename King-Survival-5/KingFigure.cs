@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace King
+﻿namespace King
 {
     public class KingFigure : Figure, IFigure
     {
+        public int MovesCounter { get; set; }
+
         public KingFigure(Position position)
             : base(position)
         {
+            this.MovesCounter = 0;
         }
 
-        public override void Move()
+        public override void Move(Position position)
         {
-            throw new NotImplementedException();
+            this.Position = position;
+            this.MovesCounter++;
         }
     }
 }
