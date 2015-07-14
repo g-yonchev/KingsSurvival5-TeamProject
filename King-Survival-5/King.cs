@@ -16,6 +16,14 @@
             return isRowOnTheBoard && isColOnTheBoard;
         }
 
+        static void PrintBoardColors(ConsoleColor color, int row, int col)
+        {
+            Console.BackgroundColor = color;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write(field[row, col]);
+            Console.ResetColor();
+        }
+
         static void PrintBoard()
         {
             Console.WriteLine();
@@ -31,17 +39,11 @@
                         {
                             if (col % 4 == 0)
                             {
-                                Console.BackgroundColor = ConsoleColor.Green;
-                                Console.ForegroundColor = ConsoleColor.Black;
-                                Console.Write(field[row, col]);
-                                Console.ResetColor();
+                                PrintBoardColors(ConsoleColor.Green, row, col);
                             }
                             else if (col % 2 == 0)
                             {
-                                Console.BackgroundColor = ConsoleColor.Blue;
-                                Console.ForegroundColor = ConsoleColor.Black;
-                                Console.Write(field[row, col]);
-                                Console.ResetColor();
+                                PrintBoardColors(ConsoleColor.Blue, row, col);
                             }
                             else if (col % 2 != 0)
                             {
@@ -50,17 +52,11 @@
                         }
                         else if (col % 4 == 0)
                         {
-                            Console.BackgroundColor = ConsoleColor.Blue;
-                            Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(field[row, col]);
-                            Console.ResetColor();
+                            PrintBoardColors(ConsoleColor.Blue, row, col);
                         }
                         else if (col % 2 == 0)
                         {
-                            Console.BackgroundColor = ConsoleColor.Green;
-                            Console.ForegroundColor = ConsoleColor.Black;
-                            Console.Write(field[row, col]);
-                            Console.ResetColor();
+                            PrintBoardColors(ConsoleColor.Green, row, col);
                         }
 
                         else if (col % 2 != 0)
@@ -460,7 +456,7 @@
                     }
 
                     CommandPrintWrongDirection();
-                    
+
                     return null;
                 }
             }
@@ -473,7 +469,6 @@
                     SetMovedFigure(currentCoordinates, newCoords);
 
                     Counter++;
-
 
                     SwitchCurrentPawnExistingMoves(currentPawn);
 
@@ -631,7 +626,7 @@
                         }
 
                         CommandPrintWrongDirection();
-                        
+
                         return null;
                     }
                 }
@@ -719,7 +714,8 @@
             }
         }
 
-        static void CommandPrintWrongDirection(){
+        static void CommandPrintWrongDirection()
+        {
             Console.BackgroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine("You can't go in this direction! ");
             Console.ResetColor();
