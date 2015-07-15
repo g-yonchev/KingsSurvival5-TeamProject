@@ -200,7 +200,7 @@
             }
         }
 
-        static bool ProverkaIProcess(string checkedInput)
+        static bool CommandCheck(string checkedInput)
         {
             bool commandNameIsOK = IsValidCommand(checkedInput);
             if (commandNameIsOK)
@@ -299,7 +299,7 @@
                 if (input != string.Empty)
                 {
                     input = input.ToUpper();
-                    isExecuted = ProverkaIProcess(input);
+                    isExecuted = CommandCheck(input);
                 }
                 else
                 {
@@ -326,7 +326,7 @@
                 {
                     // Console.WriteLine(input);
                     input = input.ToUpper();
-                    isExecuted = ProverkaIProcess(input);
+                    isExecuted = CommandCheck(input);
                 }
                 else
                 {
