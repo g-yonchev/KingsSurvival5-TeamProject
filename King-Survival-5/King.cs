@@ -17,6 +17,12 @@
             return isRowOnTheBoard && isColOnTheBoard;
         }
 
+        static void ColorBoard(ConsoleColor bgColor, ConsoleColor fgColor)
+        {
+            Console.BackgroundColor = bgColor;
+            Console.ForegroundColor = fgColor;
+        }
+
         static void PrintBoard()
         {
             Console.WriteLine();
@@ -32,15 +38,14 @@
                         {
                             if (col % 4 == 0)
                             {
-                                Console.BackgroundColor = ConsoleColor.Green;
-                                Console.ForegroundColor = ConsoleColor.Black;
+                                ColorBoard(ConsoleColor.Green, ConsoleColor.Black);
                                 Console.Write(field[row, col]);
                                 Console.ResetColor();
+
                             }
                             else if (col % 2 == 0)
                             {
-                                Console.BackgroundColor = ConsoleColor.Blue;
-                                Console.ForegroundColor = ConsoleColor.Black;
+                                ColorBoard(ConsoleColor.Blue, ConsoleColor.Black);
                                 Console.Write(field[row, col]);
                                 Console.ResetColor();
                             }
@@ -51,15 +56,13 @@
                         }
                         else if (col % 4 == 0)
                         {
-                            Console.BackgroundColor = ConsoleColor.Blue;
-                            Console.ForegroundColor = ConsoleColor.Black;
+                            ColorBoard(ConsoleColor.Blue, ConsoleColor.Black);
                             Console.Write(field[row, col]);
                             Console.ResetColor();
                         }
                         else if (col % 2 == 0)
                         {
-                            Console.BackgroundColor = ConsoleColor.Green;
-                            Console.ForegroundColor = ConsoleColor.Black;
+                            ColorBoard(ConsoleColor.Green, ConsoleColor.Black);
                             Console.Write(field[row, col]);
                             Console.ResetColor();
                         }
