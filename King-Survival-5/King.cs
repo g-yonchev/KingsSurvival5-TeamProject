@@ -128,7 +128,7 @@
 
                 if (!isValidCommand)
                 {
-                    InvalidComand();
+                    InvalidCommand();
                 }
 
                 return isValidCommand;
@@ -142,13 +142,13 @@
                 }
                 else
                 {
-                    InvalidComand();
+                    InvalidCommand();
                     return false;
                 }
             }
         }
 
-        private static void InvalidComand()
+        private static void InvalidCommand()
         {
             Console.BackgroundColor = ConsoleColor.Red;
             Console.WriteLine(Constants.INVALID_COMMAND_MESSAGE);
@@ -169,7 +169,7 @@
 
             if (!isValidCommand)
             {
-                InvalidComand();
+                InvalidCommand();
             }
 
             return isValidCommand;
