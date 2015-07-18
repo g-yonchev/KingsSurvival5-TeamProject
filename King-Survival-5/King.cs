@@ -38,16 +38,14 @@
                         {
                             if (col % 4 == 0)
                             {
-                                ColorBoard(ConsoleColor.Green, ConsoleColor.Black);
-                                Console.Write(field[row, col]);
-                                Console.ResetColor();
+                                var bgColor = ConsoleColor.Green;
+                                SetConsoleColor(bgColor, row, col);
 
                             }
                             else if (col % 2 == 0)
                             {
-                                ColorBoard(ConsoleColor.Blue, ConsoleColor.Black);
-                                Console.Write(field[row, col]);
-                                Console.ResetColor();
+                                var bgColor = ConsoleColor.Blue;
+                                SetConsoleColor(bgColor, row, col);
                             }
                             else if (col % 2 != 0)
                             {
@@ -56,15 +54,13 @@
                         }
                         else if (col % 4 == 0)
                         {
-                            ColorBoard(ConsoleColor.Blue, ConsoleColor.Black);
-                            Console.Write(field[row, col]);
-                            Console.ResetColor();
+                            var bgColor = ConsoleColor.Blue;
+                            SetConsoleColor(bgColor, row, col);
                         }
                         else if (col % 2 == 0)
                         {
-                            ColorBoard(ConsoleColor.Green, ConsoleColor.Black);
-                            Console.Write(field[row, col]);
-                            Console.ResetColor();
+                            var bgColor = ConsoleColor.Green;
+                                SetConsoleColor(bgColor, row, col);
                         }
 
                         else if (col % 2 != 0)
@@ -84,6 +80,14 @@
             }
 
             Console.WriteLine();
+        }
+
+        private static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
+        {
+            var fgColor = ConsoleColor.Black;
+            ColorBoard(bgColor, fgColor);
+            Console.Write(field[row, col]);
+            Console.ResetColor();
         }
 
         static void Start(int moveCounter)
@@ -124,9 +128,7 @@
 
                 if (!isValidCommand)
                 {
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    Console.WriteLine(Constants.INVALID_COMMAND_MESSAGE);
-                    Console.ResetColor();
+                    InvalidComand();
                 }
 
                 return isValidCommand;
@@ -140,12 +142,17 @@
                 }
                 else
                 {
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    Console.WriteLine(Constants.INVALID_COMMAND_MESSAGE);
-                    Console.ResetColor();
+                    InvalidComand();
                     return false;
                 }
             }
+        }
+
+        private static void InvalidComand()
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine(Constants.INVALID_COMMAND_MESSAGE);
+            Console.ResetColor();
         }
 
         private static bool IsValidPawnMove(string move)
@@ -162,9 +169,7 @@
 
             if (!isValidCommand)
             {
-                Console.BackgroundColor = ConsoleColor.Red;
-                Console.WriteLine(Constants.INVALID_COMMAND_MESSAGE);
-                Console.ResetColor();
+                InvalidComand();
             }
 
             return isValidCommand;
