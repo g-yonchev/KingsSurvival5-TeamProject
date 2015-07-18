@@ -1,6 +1,6 @@
 ﻿namespace King
 {
-    public struct Position
+    public struct Position : IPosition
     {
         public Position(int x, int y)
             : this()

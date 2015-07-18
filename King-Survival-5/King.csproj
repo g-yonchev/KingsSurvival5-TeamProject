@@ -43,8 +43,11 @@
   <ItemGroup>
     <Compile Include="BaseGame.cs" />
     <Compile Include="Commons\Constants.cs" />
+    <Compile Include="Enums\FigureType.cs" />
+    <Compile Include="Enums\MovingDirectionType.cs" />
     <Compile Include="Figure.cs" />
-    <Compile Include="IFigure.cs" />
+    <Compile Include="Interfaces\IFigure.cs" />
+    <Compile Include="Interfaces\IPosition.cs" />
     <Compile Include="King.cs" />
     <Compile Include="KingFigure.cs" />
     <Compile Include="PawnFigure.cs" />
