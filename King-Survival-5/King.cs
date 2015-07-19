@@ -128,7 +128,7 @@
 
                 if (!isValidCommand)
                 {
-                    InvalidCommand();
+                    PrintMassage(ConsoleColor.Red, Constants.INVALID_COMMAND_MESSAGE);
                 }
 
                 return isValidCommand;
@@ -142,16 +142,16 @@
                 }
                 else
                 {
-                    InvalidCommand();
+                    PrintMassage(ConsoleColor.Red, Constants.INVALID_COMMAND_MESSAGE);
                     return false;
                 }
             }
         }
 
-        private static void InvalidCommand()
+        private static void PrintMassage(ConsoleColor color, string massage)
         {
             Console.BackgroundColor = ConsoleColor.Red;
-            Console.WriteLine(Constants.INVALID_COMMAND_MESSAGE);
+            Console.WriteLine(massage);
             Console.ResetColor();
         }
 
@@ -169,7 +169,7 @@
 
             if (!isValidCommand)
             {
-                InvalidCommand();
+                PrintMassage(ConsoleColor.Red, Constants.INVALID_COMMAND_MESSAGE);
             }
 
             return isValidCommand;
@@ -297,9 +297,8 @@
             bool isExecuted = false;
             while (!isExecuted)
             {
-                Console.BackgroundColor = ConsoleColor.DarkGreen;
-                Console.Write(Constants.KING_TURN_MESSAGE);
-                Console.ResetColor();
+                PrintMassage(ConsoleColor.DarkGreen, Constants.KING_TURN_MESSAGE);
+               
                 string input = Console.ReadLine();
                 if (input != string.Empty)
                 {
@@ -309,9 +308,8 @@
                 else
                 {
                     isExecuted = false;
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(Constants.EMPTY_STRING_MESSAGE);
-                    Console.ResetColor();
+
+                    PrintMassage(ConsoleColor.DarkRed, Constants.EMPTY_STRING_MESSAGE);
                 }
             }
             Start(Counter);
@@ -322,9 +320,8 @@
             bool isExecuted = false;
             while (!isExecuted)
             {
-                Console.BackgroundColor = ConsoleColor.Blue;
-                Console.Write(Constants.PAWN_TURN_MASSAGE);
-                Console.ResetColor();
+                PrintMassage(ConsoleColor.Blue, Constants.PAWN_TURN_MASSAGE);
+
                 string input = Console.ReadLine();
                 //input = input.Trim();
                 if (input != string.Empty)//"/n")
@@ -336,9 +333,8 @@
                 else
                 {
                     isExecuted = false;
-                    Console.BackgroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine(Constants.EMPTY_STRING_MESSAGE);
-                    Console.ResetColor();
+                    
+                    PrintMassage(ConsoleColor.DarkRed, Constants.EMPTY_STRING_MESSAGE);
                 }
             }
             Start(Counter);
@@ -468,7 +464,7 @@
                         return null;
                     }
 
-                    CommandPrintWrongDirection();
+                    PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
 
                     return null;
                 }
@@ -541,7 +537,7 @@
                         return null;
                     }
 
-                    CommandPrintWrongDirection();
+                    PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
 
                     return null;
                 }
@@ -600,7 +596,7 @@
                             return null;
                         }
 
-                        CommandPrintWrongDirection();
+                        PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
 
                         return null;
                     }
@@ -639,7 +635,7 @@
                             return null;
                         }
 
-                        CommandPrintWrongDirection();
+                        PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
 
                         return null;
                     }
@@ -681,7 +677,7 @@
                             return null;
                         }
 
-                        CommandPrintWrongDirection();
+                        PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
 
                         return null;
                     }
@@ -720,7 +716,7 @@
                             return null;
                         }
 
-                        CommandPrintWrongDirection();
+                        PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
 
                         return null;
                     }
@@ -728,12 +724,12 @@
             }
         }
 
-        static void CommandPrintWrongDirection()
-        {
-            Console.BackgroundColor = ConsoleColor.DarkYellow;
-            Console.WriteLine(Constants.WRONG_DIRECTION_MESSAGE);
-            Console.ResetColor();
-        }
+        //static void CommandPrintWrongDirection()
+        //{
+        //    Console.BackgroundColor = ConsoleColor.DarkYellow;
+        //    Console.WriteLine(Constants.WRONG_DIRECTION_MESSAGE);
+        //    Console.ResetColor();
+        //}
 
         static void CommandPrintKingLosing()
         {

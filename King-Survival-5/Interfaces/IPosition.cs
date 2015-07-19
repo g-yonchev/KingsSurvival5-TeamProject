@@ -3,7 +3,7 @@ namespace King
 {
     interface IPosition
     {
-        int X { get; set; }
-        int Y { get; set; }
+        int X { get; }
+        int Y { get; }
     }
 }
