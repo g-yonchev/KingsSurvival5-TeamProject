@@ -97,12 +97,7 @@
 
         static void Start(int moveCounter)
         {
-            if (gameOver)
-            {
-                Console.WriteLine(Constants.FINISH_GAME_MESSAGE);
-                return;
-            }
-            else
+            if (!gameOver)
             {
                 PrintBoard();
 
@@ -115,6 +110,11 @@
                 {
                     ProcessPawnSide();
                 }
+            }
+            else
+            {
+                Console.WriteLine(Constants.FINISH_GAME_MESSAGE);
+                return;
             }
 
         }
