@@ -9,12 +9,17 @@
         static bool IsPositionOnTheBoard(int[] positionCoodinates)
         {
             int row = positionCoodinates[0];
-            bool isRowOnTheBoard = (row >= boardEdges[0, 0]) && (row <= boardEdges[3, 0]);
+            bool leftBoandariesOfRow = row >= boardEdges[0, 0];
+            bool rightBoandariesOfRow = row <= boardEdges[3, 0];
+            bool isRowOnTheBoard = (leftBoandariesOfRow) && rightBoandariesOfRow;
 
             int col = positionCoodinates[1];
-            bool isColOnTheBoard = (col >= boardEdges[0, 1]) && (col <= boardEdges[3, 1]);
+            bool leftBoandariesOfCol = col >= boardEdges[0, 1];
+            bool rightBoandariesOfCol = col <= boardEdges[3, 1];
+            bool isColOnTheBoard = leftBoandariesOfCol && rightBoandariesOfCol;
 
-            return isRowOnTheBoard && isColOnTheBoard;
+            bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
+            return isPositionOnTheBoard;
         }
 
         static void ColorBoard(ConsoleColor bgColor, ConsoleColor fgColor)
