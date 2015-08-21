@@ -124,7 +124,7 @@
             if (Counter % 2 == 0)
             {
                 bool isValidCommand = false;
-                foreach (var validKingMove in ValidKingInputs)
+                foreach (var validKingMove in KingPosibleDirections)
                 {
                     if (checkedString == validKingMove)
                     {
@@ -165,7 +165,7 @@
         private static bool IsValidPawnMove(string move)
         {
             bool isValidCommand = false;
-            foreach (var validPawnMove in A)
+            foreach (var validPawnMove in PawnAPosibleDirections)
             {
                 if (move.Substring(1) == validPawnMove.Substring(1))
                 {

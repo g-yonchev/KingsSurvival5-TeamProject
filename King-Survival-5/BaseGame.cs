@@ -30,16 +30,16 @@
             { true, true }, { true, true }, { true, true }, { true, true }
         };
 
-        protected static string[] ValidKingInputs = { "KUL", "KUR", "KDL", "KDR" };
+        protected static string[] KingPosibleDirections = { "KUL", "KUR", "KDL", "KDR" };
         protected static bool[] KingExistingMoves = { true, true, true, true };
 
-        protected static string[] A = { "ADL", "ADR" };
+        protected static string[] PawnAPosibleDirections = { "ADL", "ADR" };
 
-        protected static string[] B = { "BDL", "BDR" };
+        protected static string[] PawnBPosibleDirections = { "BDL", "BDR" };
 
-        protected static string[] C = { "CDL", "CDR" };
+        protected static string[] PawnCPosibleDirections = { "CDL", "CDR" };
 
-        protected static string[] D = { "DDL", "DDR" };
+        protected static string[] PawnDPosibleDirections = { "DDL", "DDR" };
 
         protected static int Counter = 0;
 
