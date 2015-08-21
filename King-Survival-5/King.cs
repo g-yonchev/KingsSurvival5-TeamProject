@@ -157,7 +157,7 @@
 
         private static void PrintMassage(ConsoleColor color, string massage)
         {
-            Console.BackgroundColor = ConsoleColor.Red;
+            Console.BackgroundColor = color;
             Console.WriteLine(massage);
             Console.ResetColor();
         }
