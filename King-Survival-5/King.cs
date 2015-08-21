@@ -1,4 +1,4 @@
-﻿namespace KingSurvivalGame
+﻿ namespace KingSurvivalGame
 {
     using System;
     using King;
@@ -412,7 +412,7 @@
                 bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
                 if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                 {
-                    SetMovedFigure(currentCoordinates, newCoords);
+                    MoveFigure(currentCoordinates, newCoords);
 
                     Counter++;
 
@@ -486,7 +486,7 @@
                 bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
                 if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                 {
-                    SetMovedFigure(currentCoordinates, newCoords);
+                    MoveFigure(currentCoordinates, newCoords);
 
                     Counter++;
 
@@ -556,11 +556,11 @@
 
         }
 
-        static void SetMovedFigure(int[] currentCoordinates, int[] newCoords)
+        static void MoveFigure(int[] currentCoordinates, int[] newCoords)
         {
-            char sign = field[currentCoordinates[0], currentCoordinates[1]];
+            char currentPos = field[currentCoordinates[0], currentCoordinates[1]];
             field[currentCoordinates[0], currentCoordinates[1]] = ' ';
-            field[newCoords[0], newCoords[1]] = sign;
+            field[newCoords[0], newCoords[1]] = currentPos;
         }
 
         static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
@@ -581,7 +581,7 @@
                     bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
                     if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
-                        SetMovedFigure(currentCoordinates, newCoords);
+                        MoveFigure(currentCoordinates, newCoords);
 
                         Counter++;
                         for (int i = 0; i < 4; i++)
@@ -614,7 +614,7 @@
                     bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
                     if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
-                        SetMovedFigure(currentCoordinates, newCoords);
+                        MoveFigure(currentCoordinates, newCoords);
 
                         Counter++;
                         for (int i = 0; i < 4; i++)
@@ -650,7 +650,7 @@
                     bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
                     if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
-                        SetMovedFigure(currentCoordinates, newCoords);
+                        MoveFigure(currentCoordinates, newCoords);
 
                         Counter++;
                         for (int i = 0; i < 4; i++)
@@ -683,7 +683,7 @@
                     bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
                     if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
-                        SetMovedFigure(currentCoordinates, newCoords);
+                        MoveFigure(currentCoordinates, newCoords);
 
                         Counter++;
                         for (int i = 0; i < 4; i++)
