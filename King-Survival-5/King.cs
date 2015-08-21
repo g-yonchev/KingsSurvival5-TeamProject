@@ -408,7 +408,9 @@
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+
+                bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                 {
                     SetMovedFigure(currentCoordinates, newCoords);
 
@@ -480,7 +482,9 @@
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+
+                bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                 {
                     SetMovedFigure(currentCoordinates, newCoords);
 
@@ -573,7 +577,9 @@
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpLeft[1];
-                    if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+
+                    bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                    if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
                         SetMovedFigure(currentCoordinates, newCoords);
 
@@ -587,15 +593,7 @@
                     }
                     else
                     {
-                        KingExistingMoves[0] = false;
-                        bool allAreFalse = true;
-                        for (int i = 0; i < 4; i++)
-                        {
-                            if (KingExistingMoves[i])
-                            {
-                                allAreFalse = false;
-                            }
-                        }
+                        bool allAreFalse = KingExistingMovesMethod(0);
                         if (allAreFalse)
                         {
                             gameOver = true;
@@ -612,7 +610,9 @@
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentUpRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpRight[1];
-                    if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+
+                    bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                    if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
                         SetMovedFigure(currentCoordinates, newCoords);
 
@@ -626,15 +626,7 @@
                     }
                     else
                     {
-                        KingExistingMoves[1] = false;
-                        bool allAreFalse = true;
-                        for (int i = 0; i < 4; i++)
-                        {
-                            if (KingExistingMoves[i])
-                            {
-                                allAreFalse = false;
-                            }
-                        }
+                        bool allAreFalse = KingExistingMovesMethod(1);
                         if (allAreFalse)
                         {
                             gameOver = true;
@@ -654,7 +646,9 @@
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
-                    if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+
+                    bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                    if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
                         SetMovedFigure(currentCoordinates, newCoords);
 
@@ -668,15 +662,7 @@
                     }
                     else
                     {
-                        KingExistingMoves[2] = false;
-                        bool allAreFalse = true;
-                        for (int i = 0; i < 4; i++)
-                        {
-                            if (KingExistingMoves[i])
-                            {
-                                allAreFalse = false;
-                            }
-                        }
+                        bool allAreFalse = KingExistingMovesMethod(2);
                         if (allAreFalse)
                         {
                             gameOver = true;
@@ -693,7 +679,9 @@
                 {
                     newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
-                    if (IsPositionOnTheBoard(newCoords) && field[newCoords[0], newCoords[1]] == ' ')
+
+                    bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                    if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
                         SetMovedFigure(currentCoordinates, newCoords);
 
@@ -707,15 +695,7 @@
                     }
                     else
                     {
-                        KingExistingMoves[3] = false;
-                        bool allAreFalse = true;
-                        for (int i = 0; i < 4; i++)
-                        {
-                            if (KingExistingMoves[i])
-                            {
-                                allAreFalse = false;
-                            }
-                        }
+                        bool allAreFalse = KingExistingMovesMethod(3);
                         if (allAreFalse)
                         {
                             gameOver = true;
@@ -729,6 +709,20 @@
                     }
                 }
             }
+        }
+
+        private static bool KingExistingMovesMethod(int someMagicNumber)
+        {
+            KingExistingMoves[someMagicNumber] = false;
+            bool allAreFalse = true;
+            for (int i = 0; i < 4; i++)
+            {
+                if (KingExistingMoves[i])
+                {
+                    allAreFalse = false;
+                }
+            }
+            return allAreFalse;
         }
 
         //static void CommandPrintWrongDirection()
