@@ -100,7 +100,9 @@
             else
             {
                 PrintBoard();
-                if (moveCounter % 2 == 0)
+
+                bool isKingTurn = moveCounter % 2 == 0;
+                if (isKingTurn)
                 {
                     ProcessKingSide();
                 }
