@@ -9,13 +9,13 @@
         static bool IsPositionOnTheBoard(int[] positionCoodinates)
         {
             int row = positionCoodinates[0];
-            bool leftBoandariesOfRow = row >= boardEdges[0, 0];
-            bool rightBoandariesOfRow = row <= boardEdges[3, 0];
+            bool leftBoandariesOfRow = row >= BoardEdges[0, 0];
+            bool rightBoandariesOfRow = row <= BoardEdges[3, 0];
             bool isRowOnTheBoard = (leftBoandariesOfRow) && rightBoandariesOfRow;
 
             int col = positionCoodinates[1];
-            bool leftBoandariesOfCol = col >= boardEdges[0, 1];
-            bool rightBoandariesOfCol = col <= boardEdges[3, 1];
+            bool leftBoandariesOfCol = col >= BoardEdges[0, 1];
+            bool rightBoandariesOfCol = col <= BoardEdges[3, 1];
             bool isColOnTheBoard = leftBoandariesOfCol && rightBoandariesOfCol;
 
             bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
@@ -31,9 +31,9 @@
         static void PrintBoard()
         {
             Console.WriteLine();
-            for (int row = 0; row < field.GetLength(0); row++)
+            for (int row = 0; row < Field.GetLength(0); row++)
             {
-                for (int col = 0; col < field.GetLength(1); col++)
+                for (int col = 0; col < Field.GetLength(1); col++)
                 {
                     int[] coordinates = { row, col };
                     bool isCellIn = IsPositionOnTheBoard(coordinates);
@@ -43,39 +43,39 @@
                         {
                             if (col % 4 == 0)
                             {
-                                var bgColor = ConsoleColor.Green;
+                                ConsoleColor bgColor = ConsoleColor.Green;
                                 SetConsoleColor(bgColor, row, col);
 
                             }
                             else if (col % 2 == 0)
                             {
-                                var bgColor = ConsoleColor.Blue;
+                                ConsoleColor bgColor = ConsoleColor.Blue;
                                 SetConsoleColor(bgColor, row, col);
                             }
                             else if (col % 2 != 0)
                             {
-                                Console.Write(field[row, col]);
+                                Console.Write(Field[row, col]);
                             }
                         }
                         else if (col % 4 == 0)
                         {
-                            var bgColor = ConsoleColor.Blue;
+                            ConsoleColor bgColor = ConsoleColor.Blue;
                             SetConsoleColor(bgColor, row, col);
                         }
                         else if (col % 2 == 0)
                         {
-                            var bgColor = ConsoleColor.Green;
+                            ConsoleColor bgColor = ConsoleColor.Green;
                                 SetConsoleColor(bgColor, row, col);
                         }
 
                         else if (col % 2 != 0)
                         {
-                            Console.Write(field[row, col]);
+                            Console.Write(Field[row, col]);
                         }
                     }
                     else
                     {
-                        Console.Write(field[row, col]);
+                        Console.Write(Field[row, col]);
                     }
 
                 }
@@ -89,15 +89,15 @@
 
         private static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
         {
-            var fgColor = ConsoleColor.Black;
+            ConsoleColor fgColor = ConsoleColor.Black;
             ColorBoard(bgColor, fgColor);
-            Console.Write(field[row, col]);
+            Console.Write(Field[row, col]);
             Console.ResetColor();
         }
 
         static void Start(int moveCounter)
         {
-            if (!gameOver)
+            if (!GameOver)
             {
                 PrintBoard();
 
@@ -113,7 +113,7 @@
             }
             else
             {
-                Console.WriteLine(Constants.FINISH_GAME_MESSAGE);
+                Console.WriteLine(Constants.FinishGameMessage);
                 return;
             }
 
@@ -135,7 +135,7 @@
 
                 if (!isValidCommand)
                 {
-                    PrintMassage(ConsoleColor.Red, Constants.INVALID_COMMAND_MESSAGE);
+                    PrintMassage(ConsoleColor.Red, Constants.InvalidCommandMessage);
                 }
 
                 return isValidCommand;
@@ -149,7 +149,7 @@
                 }
                 else
                 {
-                    PrintMassage(ConsoleColor.Red, Constants.INVALID_COMMAND_MESSAGE);
+                    PrintMassage(ConsoleColor.Red, Constants.InvalidCommandMessage);
                     return false;
                 }
             }
@@ -176,7 +176,7 @@
 
             if (!isValidCommand)
             {
-                PrintMassage(ConsoleColor.Red, Constants.INVALID_COMMAND_MESSAGE);
+                PrintMassage(ConsoleColor.Red, Constants.InvalidCommandMessage);
             }
 
             return isValidCommand;
@@ -184,31 +184,31 @@
 
         static void PawnDirection(char pawn, char direction, int pawnNumber)
         {
-            int[] oldCoordinates = new int[2];
-            oldCoordinates[0] = pawnPositions[pawnNumber, 0];
-            oldCoordinates[1] = pawnPositions[pawnNumber, 1];
+            var oldCoordinates = new int[2];
+            oldCoordinates[0] = PawnPositions[pawnNumber, 0];
+            oldCoordinates[1] = PawnPositions[pawnNumber, 1];
 
-            int[] coords = new int[2];
+            var coords = new int[2];
             coords = CheckNextPownPosition(oldCoordinates, direction, pawn);
 
             if (coords != null)
             {
-                pawnPositions[pawnNumber, 0] = coords[0];
-                pawnPositions[pawnNumber, 1] = coords[1];
+                PawnPositions[pawnNumber, 0] = coords[0];
+                PawnPositions[pawnNumber, 1] = coords[1];
             }
         }
 
         static void KingDirection(char upDownDirction, char leftRightDirection)
         {
-            int[] oldCoordinates = new int[2];
-            oldCoordinates[0] = kingPosition[0];
-            oldCoordinates[1] = kingPosition[1];
-            int[] coords = new int[2];
+            var oldCoordinates = new int[2];
+            oldCoordinates[0] = KingPosition[0];
+            oldCoordinates[1] = KingPosition[1];
+            var coords = new int[2];
             coords = CheckNextKingPosition(oldCoordinates, upDownDirction, leftRightDirection);
             if (coords != null)
             {
-                kingPosition[0] = coords[0];
-                kingPosition[1] = coords[1];
+                KingPosition[0] = coords[0];
+                KingPosition[1] = coords[1];
             }
         }
 
@@ -289,7 +289,7 @@
                         }
                         return true;
                     default:
-                        Console.WriteLine(Constants.ERROR_MESSAGE);
+                        Console.WriteLine(Constants.ErrorMessage);
                         return false;
                 }
             }
@@ -304,7 +304,7 @@
             bool isExecuted = false;
             while (!isExecuted)
             {
-                PrintMassage(ConsoleColor.DarkGreen, Constants.KING_TURN_MESSAGE);
+                PrintMassage(ConsoleColor.DarkGreen, Constants.KingTurnMessage);
                
                 string input = Console.ReadLine();
                 if (input != string.Empty)
@@ -316,7 +316,7 @@
                 {
                     isExecuted = false;
 
-                    PrintMassage(ConsoleColor.DarkRed, Constants.EMPTY_STRING_MESSAGE);
+                    PrintMassage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
                 }
             }
             Start(Counter);
@@ -327,7 +327,7 @@
             bool isExecuted = false;
             while (!isExecuted)
             {
-                PrintMassage(ConsoleColor.Blue, Constants.PAWN_TURN_MASSAGE);
+                PrintMassage(ConsoleColor.Blue, Constants.PawnTurnMassage);
 
                 string input = Console.ReadLine();
                 //input = input.Trim();
@@ -341,7 +341,7 @@
                 {
                     isExecuted = false;
                     
-                    PrintMassage(ConsoleColor.DarkRed, Constants.EMPTY_STRING_MESSAGE);
+                    PrintMassage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
                 }
             }
             Start(Counter);
@@ -352,8 +352,8 @@
             if (currentKingXAxe == 2)
             {
                 Console.WriteLine("End!");
-                Console.WriteLine(Constants.KING_VICTORY_MESSAGE, Counter / 2);
-                gameOver = true;
+                Console.WriteLine(Constants.KingVictoryMessage, Counter / 2);
+                GameOver = true;
             }
         }
 
@@ -378,7 +378,7 @@
                     PawnExistingMoves[3, 1] = true;
                     break;
                 default:
-                    Console.WriteLine(Constants.ERROR_MESSAGE);
+                    Console.WriteLine(Constants.ErrorMessage);
                     break;
             }
         }
@@ -403,13 +403,13 @@
         {
             int[] displasmentDownLeft = { 1, -2 };
             int[] displasmentDownRight = { 1, 2 };
-            int[] newCoords = new int[2];
+            var newCoords = new int[2];
             if (checkDirection == 'L')
             {
                 newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
 
-                bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
                 if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                 {
                     MoveFigure(currentCoordinates, newCoords);
@@ -459,7 +459,7 @@
                             PawnExistingMoves[3, 0] = false;
                             break;
                         default:
-                            Console.WriteLine(Constants.ERROR_MESSAGE);
+                            Console.WriteLine(Constants.ErrorMessage);
                             break;
                     }
 
@@ -467,13 +467,13 @@
 
                     if (allAreFalse)
                     {
-                        gameOver = true;
-                        Console.WriteLine(Constants.KING_VICTORY_MESSAGE, Counter / 2);
-                        gameOver = true;
+                        GameOver = true;
+                        Console.WriteLine(Constants.KingVictoryMessage, Counter / 2);
+                        GameOver = true;
                         return null;
                     }
 
-                    PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
+                    PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                     return null;
                 }
@@ -483,7 +483,7 @@
                 newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                 newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
 
-                bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
                 if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                 {
                     MoveFigure(currentCoordinates, newCoords);
@@ -534,7 +534,7 @@
                             PawnExistingMoves[3, 1] = false;
                             break;
                         default:
-                            Console.WriteLine(Constants.ERROR_MESSAGE);
+                            Console.WriteLine(Constants.ErrorMessage);
                             break;
                     }
 
@@ -542,13 +542,13 @@
 
                     if (allAreFalse)
                     {
-                        gameOver = true;
-                        Console.WriteLine(Constants.KING_VICTORY_MESSAGE, Counter / 2);
-                        gameOver = true;
+                        GameOver = true;
+                        Console.WriteLine(Constants.KingVictoryMessage, Counter / 2);
+                        GameOver = true;
                         return null;
                     }
 
-                    PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
+                    PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                     return null;
                 }
@@ -558,9 +558,9 @@
 
         static void MoveFigure(int[] currentCoordinates, int[] newCoords)
         {
-            char currentPos = field[currentCoordinates[0], currentCoordinates[1]];
-            field[currentCoordinates[0], currentCoordinates[1]] = ' ';
-            field[newCoords[0], newCoords[1]] = currentPos;
+            char currentPos = Field[currentCoordinates[0], currentCoordinates[1]];
+            Field[currentCoordinates[0], currentCoordinates[1]] = ' ';
+            Field[newCoords[0], newCoords[1]] = currentPos;
         }
 
         static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
@@ -569,7 +569,7 @@
             int[] displasmentDownRight = { 1, 2 };
             int[] displasmentUpLeft = { -1, -2 };
             int[] displasmentUpRight = { -1, 2 };
-            int[] newCoords = new int[2];
+            var newCoords = new int[2];
 
             if (firstDirection == 'U')
             {
@@ -578,7 +578,7 @@
                     newCoords[0] = currentCoordinates[0] + displasmentUpLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpLeft[1];
 
-                    bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                    bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
                     if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoords);
@@ -596,12 +596,12 @@
                         bool allAreFalse = KingExistingMovesMethod(0);
                         if (allAreFalse)
                         {
-                            gameOver = true;
+                            GameOver = true;
                             CommandPrintKingLosing();
                             return null;
                         }
 
-                        PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
+                        PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                         return null;
                     }
@@ -611,7 +611,7 @@
                     newCoords[0] = currentCoordinates[0] + displasmentUpRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentUpRight[1];
 
-                    bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                    bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
                     if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoords);
@@ -629,12 +629,12 @@
                         bool allAreFalse = KingExistingMovesMethod(1);
                         if (allAreFalse)
                         {
-                            gameOver = true;
+                            GameOver = true;
                             CommandPrintKingLosing();
                             return null;
                         }
 
-                        PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
+                        PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                         return null;
                     }
@@ -647,7 +647,7 @@
                     newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
 
-                    bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                    bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
                     if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoords);
@@ -665,12 +665,12 @@
                         bool allAreFalse = KingExistingMovesMethod(2);
                         if (allAreFalse)
                         {
-                            gameOver = true;
+                            GameOver = true;
                             CommandPrintKingLosing();
                             return null;
                         }
 
-                        PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
+                        PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                         return null;
                     }
@@ -680,7 +680,7 @@
                     newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
                     newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
 
-                    bool isEmptyCurrentCell = field[newCoords[0], newCoords[1]] == ' ';
+                    bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
                     if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoords);
@@ -698,12 +698,12 @@
                         bool allAreFalse = KingExistingMovesMethod(3);
                         if (allAreFalse)
                         {
-                            gameOver = true;
+                            GameOver = true;
                             CommandPrintKingLosing();
                             return null;
                         }
 
-                        PrintMassage(ConsoleColor.DarkYellow, Constants.WRONG_DIRECTION_MESSAGE);
+                        PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                         return null;
                     }
@@ -734,13 +734,13 @@
 
         static void CommandPrintKingLosing()
         {
-            Console.WriteLine(Constants.KING_LOST_MESSAGE, Counter / 2);
+            Console.WriteLine(Constants.KingLostMessage, Counter / 2);
         }
 
         static void Main()
         {
             Start(Counter);
-            Console.WriteLine(Constants.GOODBYE_MESSAGE);
+            Console.WriteLine(Constants.GoodbyeMessage);
             Console.ReadLine();
         }
     }

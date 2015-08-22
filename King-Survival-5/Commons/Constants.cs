@@ -3,22 +3,16 @@
     using System;
    public static class Constants
     {
-        public const string FINISH_GAME_MESSAGE = "Game is finished!";
-        public const string INVALID_COMMAND_MESSAGE = "Invalid command name!";
-        public const string ERROR_MESSAGE = "Sorry, there are some errors, but I can't tell you anything! You broked my program!";
-        public const string KING_TURN_MESSAGE = "Please enter king's turn: ";
-        public const string EMPTY_STRING_MESSAGE = "Empty command!";
-        public const string PAWN_TURN_MASSAGE = "Please enter pawn's turn: ";
-        public const string END_GAME_MESSAGE = "End!";
-        public const string KING_VICTORY_MESSAGE = "King wins in {0} moves!";
-        public const string WRONG_DIRECTION_MESSAGE = "You can't go in this direction! ";
-        public const string KING_LOST_MESSAGE = "King losesin {0} moves!";
-        public const string GOODBYE_MESSAGE = "\nThank you for using this game!\n\n";
-
-
-
-
-
-
+        internal const string FinishGameMessage = "Game is finished!";
+        internal const string InvalidCommandMessage = "Invalid command name!";
+        internal const string ErrorMessage = "Sorry, there are some errors, but I can't tell you anything! You broked my program!";
+        internal const string KingTurnMessage = "Please enter king's turn: ";
+        internal const string EmptyStringMessage = "Empty command!";
+        internal const string PawnTurnMassage = "Please enter pawn's turn: ";
+        internal const string EndGameMessage = "End!";
+       internal const string KingVictoryMessage = "King wins in {0} moves!";
+        internal const string WrongDirectionMessage = "You can't go in this direction! ";
+        internal const string KingLostMessage = "King losesin {0} moves!";
+        internal const string GoodbyeMessage = "\nThank you for using this game!\n\n";
     }
 }

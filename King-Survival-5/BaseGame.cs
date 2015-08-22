@@ -2,7 +2,7 @@
 {
     public class BaseGame
     {
-        protected static char[,] field = 
+        protected static char[,] Field = 
         {
             { 'U', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'U', 'R' },
             { ' ', ' ', ' ', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', '_', ' ', ' ', ' ' },
@@ -18,12 +18,12 @@
             { 'D', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'D', 'R' },
         };
 
-        protected static int[,] boardEdges = 
+        protected static int[,] BoardEdges = 
         {
             { 2, 4 }, { 2, 18 }, { 9, 4 }, { 9, 18 }
         };
 
-        protected static int[] kingPosition = { 9, 10 };
+        protected static int[] KingPosition = { 9, 10 };
 
         protected static bool[,] PawnExistingMoves = 
         {
@@ -43,8 +43,8 @@
 
         protected static int Counter = 0;
 
-        protected static bool gameOver = false;
-        protected static int[,] pawnPositions = 
+        protected static bool GameOver = false;
+        protected static int[,] PawnPositions = 
         {
             { 2, 4 }, { 2, 8 }, { 2, 12 }, { 2, 16 }
         };
