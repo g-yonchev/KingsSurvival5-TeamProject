@@ -1,5 +1,8 @@
 ﻿namespace King.Enums
 {
+    /// <summary>
+    /// Figures on the board
+    /// </summary>
     public enum FigureType
     {
         King = 'K',
