@@ -303,24 +303,33 @@ namespace KingSurvivalGame
 
         static void ProcessKingSide()
         {
-            bool isExecuted = false;
-            while (!isExecuted)
+            bool shouldAskForInput = true;
+            while (shouldAskForInput)
             {
                 PrintMessage(ConsoleColor.DarkGreen, Constants.KingTurnMessage);
 
-                string input = Console.ReadLine();
-                if (input != string.Empty)
+                string input = GetInput();
+                if (input == string.Empty)
                 {
-                    input = input.ToUpper();
-                    isExecuted = CommandCheck(input);
-                }
-                else
-                {
-                    isExecuted = false;
-
                     PrintMessage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
+                    continue;
                 }
+
+                bool isValidDirection = CheckIfValidKingDirection(input);
+                if (!isValidDirection)
+                {
+                    PrintMessage(ConsoleColor.Red, Constants.InvalidCommandMessage);
+                    continue;
+                }
+
+                shouldAskForInput = false;
+
+                // Does a lot of magic. Basically, if the king can move to the new position, it moves. The Counter is updated and
+                // it's pawns' turn. If the king can't move to the new position, the Counter is not updated and ProcessKingSide()
+                // is called again.
+                KingDirection(input[1], input[2]);
             }
+
             Start(Counter);
         }
 
