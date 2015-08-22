@@ -10,7 +10,7 @@
         internal const string EmptyStringMessage = "Empty command!";
         internal const string PawnTurnMassage = "Please enter pawn's turn: ";
         internal const string EndGameMessage = "End!";
-       internal const string KingVictoryMessage = "King wins in {0} moves!";
+        internal const string KingVictoryMessage = "King wins in {0} moves!";
         internal const string WrongDirectionMessage = "You can't go in this direction! ";
         internal const string KingLostMessage = "King losesin {0} moves!";
         internal const string GoodbyeMessage = "\nThank you for using this game!\n\n";

@@ -21,6 +21,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,13 +47,13 @@
     <Compile Include="Commons\Constants.cs" />
     <Compile Include="Enums\FigureType.cs" />
     <Compile Include="Enums\MovingDirectionType.cs" />
-    <Compile Include="Figure.cs" />
-    <Compile Include="Interfaces\IFigure.cs" />
-    <Compile Include="Interfaces\IPosition.cs" />
-    <Compile Include="King.cs" />
-    <Compile Include="KingFigure.cs" />
-    <Compile Include="PawnFigure.cs" />
-    <Compile Include="Position.cs" />
+    <Compile Include="Models\Figure.cs" />
+    <Compile Include="Contracts\IFigure.cs" />
+    <Compile Include="Contracts\IPosition.cs" />
+    <Compile Include="KingSurvivalGame.cs" />
+    <Compile Include="Models\KingFigure.cs" />
+    <Compile Include="Models\PawnFigure.cs" />
+    <Compile Include="Models\Position.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

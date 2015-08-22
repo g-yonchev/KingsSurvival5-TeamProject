@@ -1,10 +1,13 @@
 ﻿namespace King.Enums
 {
+    using System;
+
+    [Flags]
     public enum MovingDirectionType
     {
-        DownLeft,
-        DownRight,
-        UpLeft,
-        UpRight
+        Left = 'L',
+        Right = 'R',
+        Up = 'U',
+        Down = 'D'
     }
 }
