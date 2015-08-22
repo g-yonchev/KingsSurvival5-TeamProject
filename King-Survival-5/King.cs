@@ -1,4 +1,4 @@
-﻿ namespace KingSurvivalGame
+﻿namespace KingSurvivalGame
 {
     using System;
     using King;
@@ -22,11 +22,11 @@
             return isPositionOnTheBoard;
         }
 
-        static void ColorBoard(ConsoleColor bgColor, ConsoleColor fgColor)
-        {
-            Console.BackgroundColor = bgColor;
-            Console.ForegroundColor = fgColor;
-        }
+        //static void ColorBoard(ConsoleColor bgColor, ConsoleColor fgColor)
+        //{
+        //    Console.BackgroundColor = bgColor;
+        //    Console.ForegroundColor = fgColor;
+        //}
 
         static void PrintBoard()
         {
@@ -65,7 +65,7 @@
                         else if (col % 2 == 0)
                         {
                             ConsoleColor bgColor = ConsoleColor.Green;
-                                SetConsoleColor(bgColor, row, col);
+                            SetConsoleColor(bgColor, row, col);
                         }
 
                         else if (col % 2 != 0)
@@ -89,8 +89,10 @@
 
         private static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
         {
-            ConsoleColor fgColor = ConsoleColor.Black;
-            ColorBoard(bgColor, fgColor);
+            //ConsoleColor fgColor = ConsoleColor.Black;
+            //ColorBoard(bgColor, fgColor);
+            Console.BackgroundColor = bgColor;
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.Write(Field[row, col]);
             Console.ResetColor();
         }
@@ -305,7 +307,7 @@
             while (!isExecuted)
             {
                 PrintMessage(ConsoleColor.DarkGreen, Constants.KingTurnMessage);
-               
+
                 string input = Console.ReadLine();
                 if (input != string.Empty)
                 {
@@ -340,7 +342,7 @@
                 else
                 {
                     isExecuted = false;
-                    
+
                     PrintMessage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
                 }
             }
