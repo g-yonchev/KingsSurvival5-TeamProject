@@ -9,14 +9,14 @@
         static bool IsPositionOnTheBoard(int[] positionCoodinates)
         {
             int row = positionCoodinates[0];
-            bool leftBoandariesOfRow = row >= BoardEdges[0, 0];
-            bool rightBoandariesOfRow = row <= BoardEdges[3, 0];
-            bool isRowOnTheBoard = (leftBoandariesOfRow) && rightBoandariesOfRow;
+            bool leftBoundariesOfRow = row >= BoardEdges[0, 0];
+            bool rightBoundariesOfRow = row <= BoardEdges[3, 0];
+            bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
 
             int col = positionCoodinates[1];
-            bool leftBoandariesOfCol = col >= BoardEdges[0, 1];
-            bool rightBoandariesOfCol = col <= BoardEdges[3, 1];
-            bool isColOnTheBoard = leftBoandariesOfCol && rightBoandariesOfCol;
+            bool leftBoundariesOfCol = col >= BoardEdges[0, 1];
+            bool rightBoundariesOfCol = col <= BoardEdges[3, 1];
+            bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
 
             bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
             return isPositionOnTheBoard;
@@ -135,7 +135,7 @@
 
                 if (!isValidCommand)
                 {
-                    PrintMassage(ConsoleColor.Red, Constants.InvalidCommandMessage);
+                    PrintMessage(ConsoleColor.Red, Constants.InvalidCommandMessage);
                 }
 
                 return isValidCommand;
@@ -149,16 +149,16 @@
                 }
                 else
                 {
-                    PrintMassage(ConsoleColor.Red, Constants.InvalidCommandMessage);
+                    PrintMessage(ConsoleColor.Red, Constants.InvalidCommandMessage);
                     return false;
                 }
             }
         }
 
-        private static void PrintMassage(ConsoleColor color, string massage)
+        private static void PrintMessage(ConsoleColor color, string message)
         {
             Console.BackgroundColor = color;
-            Console.WriteLine(massage);
+            Console.WriteLine(message);
             Console.ResetColor();
         }
 
@@ -176,7 +176,7 @@
 
             if (!isValidCommand)
             {
-                PrintMassage(ConsoleColor.Red, Constants.InvalidCommandMessage);
+                PrintMessage(ConsoleColor.Red, Constants.InvalidCommandMessage);
             }
 
             return isValidCommand;
@@ -198,13 +198,13 @@
             }
         }
 
-        static void KingDirection(char upDownDirction, char leftRightDirection)
+        static void KingDirection(char upDownDirection, char leftRightDirection)
         {
             var oldCoordinates = new int[2];
             oldCoordinates[0] = KingPosition[0];
             oldCoordinates[1] = KingPosition[1];
             var coords = new int[2];
-            coords = CheckNextKingPosition(oldCoordinates, upDownDirction, leftRightDirection);
+            coords = CheckNextKingPosition(oldCoordinates, upDownDirection, leftRightDirection);
             if (coords != null)
             {
                 KingPosition[0] = coords[0];
@@ -304,7 +304,7 @@
             bool isExecuted = false;
             while (!isExecuted)
             {
-                PrintMassage(ConsoleColor.DarkGreen, Constants.KingTurnMessage);
+                PrintMessage(ConsoleColor.DarkGreen, Constants.KingTurnMessage);
                
                 string input = Console.ReadLine();
                 if (input != string.Empty)
@@ -316,7 +316,7 @@
                 {
                     isExecuted = false;
 
-                    PrintMassage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
+                    PrintMessage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
                 }
             }
             Start(Counter);
@@ -327,7 +327,7 @@
             bool isExecuted = false;
             while (!isExecuted)
             {
-                PrintMassage(ConsoleColor.Blue, Constants.PawnTurnMassage);
+                PrintMessage(ConsoleColor.Blue, Constants.PawnTurnMassage);
 
                 string input = Console.ReadLine();
                 //input = input.Trim();
@@ -341,7 +341,7 @@
                 {
                     isExecuted = false;
                     
-                    PrintMassage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
+                    PrintMessage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
                 }
             }
             Start(Counter);
@@ -473,7 +473,7 @@
                         return null;
                     }
 
-                    PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                    PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                     return null;
                 }
@@ -548,7 +548,7 @@
                         return null;
                     }
 
-                    PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                    PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                     return null;
                 }
@@ -601,7 +601,7 @@
                             return null;
                         }
 
-                        PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                        PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                         return null;
                     }
@@ -634,7 +634,7 @@
                             return null;
                         }
 
-                        PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                        PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                         return null;
                     }
@@ -670,7 +670,7 @@
                             return null;
                         }
 
-                        PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                        PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                         return null;
                     }
@@ -703,7 +703,7 @@
                             return null;
                         }
 
-                        PrintMassage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                        PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
 
                         return null;
                     }
