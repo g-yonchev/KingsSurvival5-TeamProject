@@ -324,6 +324,25 @@ namespace KingSurvivalGame
             Start(Counter);
         }
 
+        // Returns user input after trimming and making it to upper case. Returns empty string if input is only white spaces.
+        private static string GetInput()
+        {
+            string result = string.Empty;
+
+            string input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return result;
+            }
+            else
+            {
+                string inputTrimmed = input.Trim();
+                result = inputTrimmed.ToUpper();
+
+                return result;
+            }
+        }
+
         static void ProcessPawnSide()
         {
             bool isExecuted = false;
