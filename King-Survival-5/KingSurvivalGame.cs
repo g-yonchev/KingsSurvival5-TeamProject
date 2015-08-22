@@ -343,6 +343,23 @@ namespace KingSurvivalGame
             }
         }
 
+        // Checks if command is KDR, KUL, etc.
+        private static bool CheckIfValidKingDirection(string direction)
+        {
+            bool isValidDirection = false;
+
+            foreach (var possibleDirection in KingPosibleDirections)
+            {
+                if (direction == possibleDirection)
+                {
+                    isValidDirection = true;
+                    break;
+                }
+            }
+
+            return isValidDirection;
+        }
+
         static void ProcessPawnSide()
         {
             bool isExecuted = false;
