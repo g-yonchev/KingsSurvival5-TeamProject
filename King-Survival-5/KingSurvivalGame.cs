@@ -7,18 +7,14 @@ namespace KingSurvivalGame
 
     public class KingSurvivalGame : BaseGame
     {
-<<<<<<< HEAD
-        private IPrinter printer;
+        //private IPrinter printer;
 
-        public KingSurvivalGame(IPrinter printer)
-        {
-            this.printer = printer;
-        }
+        //public KingSurvivalGame(IPrinter printer)
+        //{
+        //    this.printer = printer;
+        //}
 
-        static bool IsPositionOnTheBoard(int[] positionCoodinates)
-=======
         static bool IsPositionOnTheBoard(int[] positionCoordinates)
->>>>>>> 4587e7a383c1f4acc80125e1e79665fc8cd92eb3
         {
             int row = positionCoordinates[0];
             bool leftBoundariesOfRow = row >= BoardEdges[0, 0];
