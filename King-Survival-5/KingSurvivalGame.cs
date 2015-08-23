@@ -6,14 +6,14 @@ namespace KingSurvivalGame
 
     public class KingSurvivalGame : BaseGame
     {
-        static bool IsPositionOnTheBoard(int[] positionCoodinates)
+        static bool IsPositionOnTheBoard(int[] positionCoordinates)
         {
-            int row = positionCoodinates[0];
+            int row = positionCoordinates[0];
             bool leftBoundariesOfRow = row >= BoardEdges[0, 0];
             bool rightBoundariesOfRow = row <= BoardEdges[3, 0];
             bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
 
-            int col = positionCoodinates[1];
+            int col = positionCoordinates[1];
             bool leftBoundariesOfCol = col >= BoardEdges[0, 1];
             bool rightBoundariesOfCol = col <= BoardEdges[3, 1];
             bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
@@ -126,7 +126,7 @@ namespace KingSurvivalGame
             if (Counter % 2 == 0)
             {
                 bool isValidCommand = false;
-                foreach (var validKingMove in KingPosibleDirections)
+                foreach (var validKingMove in KingPossibleDirections)
                 {
                     if (checkedString == validKingMove)
                     {
@@ -167,7 +167,7 @@ namespace KingSurvivalGame
         private static bool IsValidPawnMove(string move)
         {
             bool isValidCommand = false;
-            foreach (var validPawnMove in PawnAPosibleDirections)
+            foreach (var validPawnMove in PawnAPossibleDirections)
             {
                 if (move.Substring(1) == validPawnMove.Substring(1))
                 {
@@ -191,7 +191,7 @@ namespace KingSurvivalGame
             oldCoordinates[1] = PawnPositions[pawnNumber, 1];
 
             var coords = new int[2];
-            coords = CheckNextPownPosition(oldCoordinates, direction, pawn);
+            coords = CheckNextPawnPosition(oldCoordinates, direction, pawn);
 
             if (coords != null)
             {
@@ -357,7 +357,7 @@ namespace KingSurvivalGame
         {
             bool isValidDirection = false;
 
-            foreach (var possibleDirection in KingPosibleDirections)
+            foreach (var possibleDirection in KingPossibleDirections)
             {
                 if (direction == possibleDirection)
                 {
@@ -398,7 +398,7 @@ namespace KingSurvivalGame
         {
             if (currentKingXAxe == 2)
             {
-                Console.WriteLine("End!");
+                Console.WriteLine("=========================");
                 Console.WriteLine(Constants.KingVictoryMessage, Counter / 2);
                 GameOver = true;
             }
@@ -446,26 +446,26 @@ namespace KingSurvivalGame
             return true;
         }
 
-        static int[] CheckNextPownPosition(int[] currentCoordinates, char checkDirection, char currentPawn)
+        static int[] CheckNextPawnPosition(int[] currentCoordinates, char checkDirection, char currentPawn)
         {
-            int[] displasmentDownLeft = { 1, -2 };
-            int[] displasmentDownRight = { 1, 2 };
-            var newCoords = new int[2];
+            int[] displacementDownLeft = { 1, -2 };
+            int[] displacementDownRight = { 1, 2 };
+            var newCoordinates = new int[2];
             if (checkDirection == 'L')
             {
-                newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
-                newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
+                newCoordinates[0] = currentCoordinates[0] + displacementDownLeft[0];
+                newCoordinates[1] = currentCoordinates[1] + displacementDownLeft[1];
 
-                bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
-                if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
+                bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                 {
-                    MoveFigure(currentCoordinates, newCoords);
+                    MoveFigure(currentCoordinates, newCoordinates);
 
                     Counter++;
 
                     SwitchCurrentPawnExistingMoves(currentPawn);
 
-                    return newCoords;
+                    return newCoordinates;
                 }
                 else
                 {
@@ -527,20 +527,20 @@ namespace KingSurvivalGame
             }
             else
             {
-                newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
-                newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
+                newCoordinates[0] = currentCoordinates[0] + displacementDownRight[0];
+                newCoordinates[1] = currentCoordinates[1] + displacementDownRight[1];
 
-                bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
-                if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
+                bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                 {
-                    MoveFigure(currentCoordinates, newCoords);
+                    MoveFigure(currentCoordinates, newCoordinates);
 
                     Counter++;
 
 
                     SwitchCurrentPawnExistingMoves(currentPawn);
 
-                    return newCoords;
+                    return newCoordinates;
                 }
                 else
                 {
@@ -603,40 +603,40 @@ namespace KingSurvivalGame
 
         }
 
-        static void MoveFigure(int[] currentCoordinates, int[] newCoords)
+        static void MoveFigure(int[] currentCoordinates, int[] newCoordinates)
         {
             char currentPos = Field[currentCoordinates[0], currentCoordinates[1]];
             Field[currentCoordinates[0], currentCoordinates[1]] = ' ';
-            Field[newCoords[0], newCoords[1]] = currentPos;
+            Field[newCoordinates[0], newCoordinates[1]] = currentPos;
         }
 
         static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
         {
-            int[] displasmentDownLeft = { 1, -2 };
-            int[] displasmentDownRight = { 1, 2 };
-            int[] displasmentUpLeft = { -1, -2 };
-            int[] displasmentUpRight = { -1, 2 };
-            var newCoords = new int[2];
+            int[] displacementDownLeft = { 1, -2 };
+            int[] displacementDownRight = { 1, 2 };
+            int[] displacementUpLeft = { -1, -2 };
+            int[] displacementUpRight = { -1, 2 };
+            var newCoordinates = new int[2];
 
             if (firstDirection == 'U')
             {
                 if (secondDirection == 'L')
                 {
-                    newCoords[0] = currentCoordinates[0] + displasmentUpLeft[0];
-                    newCoords[1] = currentCoordinates[1] + displasmentUpLeft[1];
+                    newCoordinates[0] = currentCoordinates[0] + displacementUpLeft[0];
+                    newCoordinates[1] = currentCoordinates[1] + displacementUpLeft[1];
 
-                    bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
-                    if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
+                    bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
-                        MoveFigure(currentCoordinates, newCoords);
+                        MoveFigure(currentCoordinates, newCoordinates);
 
                         Counter++;
                         for (int i = 0; i < 4; i++)
                         {
                             KingExistingMoves[i] = true;
                         }
-                        CheckForKingExit(newCoords[0]);
-                        return newCoords;
+                        CheckForKingExit(newCoordinates[0]);
+                        return newCoordinates;
                     }
                     else
                     {
@@ -655,21 +655,21 @@ namespace KingSurvivalGame
                 }
                 else
                 {
-                    newCoords[0] = currentCoordinates[0] + displasmentUpRight[0];
-                    newCoords[1] = currentCoordinates[1] + displasmentUpRight[1];
+                    newCoordinates[0] = currentCoordinates[0] + displacementUpRight[0];
+                    newCoordinates[1] = currentCoordinates[1] + displacementUpRight[1];
 
-                    bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
-                    if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
+                    bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
-                        MoveFigure(currentCoordinates, newCoords);
+                        MoveFigure(currentCoordinates, newCoordinates);
 
                         Counter++;
                         for (int i = 0; i < 4; i++)
                         {
                             KingExistingMoves[i] = true;
                         }
-                        CheckForKingExit(newCoords[0]);
-                        return newCoords;
+                        CheckForKingExit(newCoordinates[0]);
+                        return newCoordinates;
                     }
                     else
                     {
@@ -691,21 +691,21 @@ namespace KingSurvivalGame
             {
                 if (secondDirection == 'L')
                 {
-                    newCoords[0] = currentCoordinates[0] + displasmentDownLeft[0];
-                    newCoords[1] = currentCoordinates[1] + displasmentDownLeft[1];
+                    newCoordinates[0] = currentCoordinates[0] + displacementDownLeft[0];
+                    newCoordinates[1] = currentCoordinates[1] + displacementDownLeft[1];
 
-                    bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
-                    if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
+                    bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
-                        MoveFigure(currentCoordinates, newCoords);
+                        MoveFigure(currentCoordinates, newCoordinates);
 
                         Counter++;
                         for (int i = 0; i < 4; i++)
                         {
                             KingExistingMoves[i] = true;
                         }
-                        CheckForKingExit(newCoords[0]);
-                        return newCoords;
+                        CheckForKingExit(newCoordinates[0]);
+                        return newCoordinates;
                     }
                     else
                     {
@@ -724,21 +724,21 @@ namespace KingSurvivalGame
                 }
                 else
                 {
-                    newCoords[0] = currentCoordinates[0] + displasmentDownRight[0];
-                    newCoords[1] = currentCoordinates[1] + displasmentDownRight[1];
+                    newCoordinates[0] = currentCoordinates[0] + displacementDownRight[0];
+                    newCoordinates[1] = currentCoordinates[1] + displacementDownRight[1];
 
-                    bool isEmptyCurrentCell = Field[newCoords[0], newCoords[1]] == ' ';
-                    if (IsPositionOnTheBoard(newCoords) && isEmptyCurrentCell)
+                    bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
-                        MoveFigure(currentCoordinates, newCoords);
+                        MoveFigure(currentCoordinates, newCoordinates);
 
                         Counter++;
                         for (int i = 0; i < 4; i++)
                         {
                             KingExistingMoves[i] = true;
                         }
-                        CheckForKingExit(newCoords[0]);
-                        return newCoords;
+                        CheckForKingExit(newCoordinates[0]);
+                        return newCoordinates;
                     }
                     else
                     {
