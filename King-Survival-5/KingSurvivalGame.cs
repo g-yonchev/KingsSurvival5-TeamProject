@@ -3,9 +3,17 @@ namespace KingSurvivalGame
     using System;
     using King;
     using King.Commons;
+    using King.Contracts;
 
     public class KingSurvivalGame : BaseGame
     {
+        private IPrinter printer;
+
+        public KingSurvivalGame(IPrinter printer)
+        {
+            this.printer = printer;
+        }
+
         static bool IsPositionOnTheBoard(int[] positionCoodinates)
         {
             int row = positionCoodinates[0];
@@ -751,7 +759,7 @@ namespace KingSurvivalGame
                         }
 
                         PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
-
+          
                         return null;
                     }
                 }
@@ -786,6 +794,7 @@ namespace KingSurvivalGame
 
         static void Main()
         {
+            IPrinter printer = new Printer();
             Start(Counter);
             Console.WriteLine(Constants.GoodbyeMessage);
             Console.ReadLine();

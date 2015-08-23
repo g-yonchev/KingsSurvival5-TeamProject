@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="BaseGame.cs" />
     <Compile Include="Commons\Constants.cs" />
+    <Compile Include="Contracts\IPrinter.cs" />
     <Compile Include="Enums\FigureType.cs" />
     <Compile Include="Enums\MovingDirectionType.cs" />
     <Compile Include="Models\Figure.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Models\KingFigure.cs" />
     <Compile Include="Models\PawnFigure.cs" />
     <Compile Include="Models\Position.cs" />
+    <Compile Include="Printer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

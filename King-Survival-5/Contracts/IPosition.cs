@@ -1,6 +1,6 @@
-﻿using System;
-namespace King
+﻿namespace King
 {
+    using System;
     interface IPosition
     {
         int X { get; }
