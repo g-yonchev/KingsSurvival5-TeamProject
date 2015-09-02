@@ -3,7 +3,7 @@
     /// <summary>
     ///  Interface definding figure characteristics.
     /// </summary>
-    interface IFigure
+    public interface IFigure
     {
         Position Position { get; }
 

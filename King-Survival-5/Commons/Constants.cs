@@ -1,7 +1,8 @@
 ﻿namespace King.Commons
 {
     using System;
-   public static class Constants
+
+    public static class Constants
     {
         internal const string FinishGameMessage = "Game is finished!";
         internal const string InvalidCommandMessage = "Invalid command name!";

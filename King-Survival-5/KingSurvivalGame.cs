@@ -7,14 +7,14 @@ namespace KingSurvivalGame
 
     public class KingSurvivalGame : BaseGame
     {
-        //private IPrinter printer;
+        ////private IPrinter printer;
 
-        //public KingSurvivalGame(IPrinter printer)
-        //{
-        //    this.printer = printer;
-        //}
+        ////public KingSurvivalGame(IPrinter printer)
+        ////{
+        ////    this.printer = printer;
+        ////}
 
-        static bool IsPositionOnTheBoard(int[] positionCoordinates)
+        public static bool IsPositionOnTheBoard(int[] positionCoordinates)
         {
             int row = positionCoordinates[0];
             bool leftBoundariesOfRow = row >= BoardEdges[0, 0];
@@ -30,13 +30,13 @@ namespace KingSurvivalGame
             return isPositionOnTheBoard;
         }
 
-        //static void ColorBoard(ConsoleColor bgColor, ConsoleColor fgColor)
-        //{
-        //    Console.BackgroundColor = bgColor;
-        //    Console.ForegroundColor = fgColor;
-        //}
+        ////static void ColorBoard(ConsoleColor bgColor, ConsoleColor fgColor)
+        ////{
+        ////    Console.BackgroundColor = bgColor;
+        ////    Console.ForegroundColor = fgColor;
+        ////}
 
-        static void PrintBoard()
+        public static void PrintBoard()
         {
             Console.WriteLine();
             for (int row = 0; row < Field.GetLength(0); row++)
@@ -53,7 +53,6 @@ namespace KingSurvivalGame
                             {
                                 ConsoleColor bgColor = ConsoleColor.Green;
                                 SetConsoleColor(bgColor, row, col);
-
                             }
                             else if (col % 2 == 0)
                             {
@@ -75,7 +74,6 @@ namespace KingSurvivalGame
                             ConsoleColor bgColor = ConsoleColor.Green;
                             SetConsoleColor(bgColor, row, col);
                         }
-
                         else if (col % 2 != 0)
                         {
                             Console.Write(Field[row, col]);
@@ -85,7 +83,6 @@ namespace KingSurvivalGame
                     {
                         Console.Write(Field[row, col]);
                     }
-
                 }
 
                 Console.WriteLine();
@@ -95,17 +92,7 @@ namespace KingSurvivalGame
             Console.WriteLine();
         }
 
-        private static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
-        {
-            //ConsoleColor fgColor = ConsoleColor.Black;
-            //ColorBoard(bgColor, fgColor);
-            Console.BackgroundColor = bgColor;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write(Field[row, col]);
-            Console.ResetColor();
-        }
-
-        static void Start(int moveCounter)
+        public static void Start(int moveCounter)
         {
             if (!GameOver)
             {
@@ -126,10 +113,9 @@ namespace KingSurvivalGame
                 Console.WriteLine(Constants.FinishGameMessage);
                 return;
             }
-
         }
 
-        static bool IsValidCommand(string checkedString)
+        public static bool IsValidCommand(string checkedString)
         {
             if (Counter % 2 == 0)
             {
@@ -165,34 +151,7 @@ namespace KingSurvivalGame
             }
         }
 
-        private static void PrintMessage(ConsoleColor color, string message)
-        {
-            Console.BackgroundColor = color;
-            Console.WriteLine(message);
-            Console.ResetColor();
-        }
-
-        private static bool IsValidPawnMove(string move)
-        {
-            bool isValidCommand = false;
-            foreach (var validPawnMove in PawnAPossibleDirections)
-            {
-                if (move.Substring(1) == validPawnMove.Substring(1))
-                {
-                    isValidCommand = true;
-                    break;
-                }
-            }
-
-            if (!isValidCommand)
-            {
-                PrintMessage(ConsoleColor.Red, Constants.InvalidCommandMessage);
-            }
-
-            return isValidCommand;
-        }
-
-        static void PawnDirection(char pawn, char direction, int pawnNumber)
+        public static void PawnDirection(char pawn, char direction, int pawnNumber)
         {
             var oldCoordinates = new int[2];
             oldCoordinates[0] = PawnPositions[pawnNumber, 0];
@@ -208,7 +167,7 @@ namespace KingSurvivalGame
             }
         }
 
-        static void KingDirection(char upDownDirection, char leftRightDirection)
+        public static void KingDirection(char upDownDirection, char leftRightDirection)
         {
             var oldCoordinates = new int[2];
             oldCoordinates[0] = KingPosition[0];
@@ -222,7 +181,7 @@ namespace KingSurvivalGame
             }
         }
 
-        static bool CommandCheck(string checkedInput)
+        public static bool CommandCheck(string checkedInput)
         {
             bool commandNameIsOK = IsValidCommand(checkedInput);
             if (commandNameIsOK)
@@ -239,6 +198,7 @@ namespace KingSurvivalGame
                         {
                             PawnDirection('A', 'R', 0);
                         }
+
                         return true;
 
                     case 'B':
@@ -250,6 +210,7 @@ namespace KingSurvivalGame
                         {
                             PawnDirection('B', 'R', 1);
                         }
+
                         return true;
 
                     case 'C':
@@ -261,6 +222,7 @@ namespace KingSurvivalGame
                         {
                             PawnDirection('C', 'R', 2);
                         }
+
                         return true;
 
                     case 'D':
@@ -272,6 +234,7 @@ namespace KingSurvivalGame
                         {
                             PawnDirection('D', 'R', 3);
                         }
+
                         return true;
 
                     case 'K':
@@ -297,6 +260,7 @@ namespace KingSurvivalGame
                                 KingDirection('D', 'R');
                             }
                         }
+
                         return true;
                     default:
                         Console.WriteLine(Constants.ErrorMessage);
@@ -309,7 +273,7 @@ namespace KingSurvivalGame
             }
         }
 
-        static void ProcessKingSide()
+        public static void ProcessKingSide()
         {
             bool shouldAskForInput = true;
             while (shouldAskForInput)
@@ -341,43 +305,7 @@ namespace KingSurvivalGame
             Start(Counter);
         }
 
-        // Returns user input after trimming and making it to upper case. Returns empty string if input is only white spaces.
-        private static string GetInput()
-        {
-            string result = string.Empty;
-
-            string input = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                return result;
-            }
-            else
-            {
-                string inputTrimmed = input.Trim();
-                result = inputTrimmed.ToUpper();
-
-                return result;
-            }
-        }
-
-        // Checks if command is KDR, KUL, etc.
-        private static bool CheckIfValidKingDirection(string direction)
-        {
-            bool isValidDirection = false;
-
-            foreach (var possibleDirection in KingPossibleDirections)
-            {
-                if (direction == possibleDirection)
-                {
-                    isValidDirection = true;
-                    break;
-                }
-            }
-
-            return isValidDirection;
-        }
-
-        static void ProcessPawnSide()
+        public static void ProcessPawnSide()
         {
             bool isExecuted = false;
             while (!isExecuted)
@@ -385,7 +313,8 @@ namespace KingSurvivalGame
                 PrintMessage(ConsoleColor.Blue, Constants.PawnTurnMassage);
 
                 string input = Console.ReadLine();
-                //input = input.Trim();
+
+                // input = input.Trim();
                 if (input != string.Empty)//"/n")
                 {
                     // Console.WriteLine(input);
@@ -399,10 +328,11 @@ namespace KingSurvivalGame
                     PrintMessage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
                 }
             }
+
             Start(Counter);
         }
 
-        static void CheckForKingExit(int currentKingXAxe)
+        public static void CheckForKingExit(int currentKingXAxe)
         {
             if (currentKingXAxe == 2)
             {
@@ -412,7 +342,7 @@ namespace KingSurvivalGame
             }
         }
 
-        static void SwitchCurrentPawnExistingMoves(char currentPawn)
+        public static void SwitchCurrentPawnExistingMoves(char currentPawn)
         {
             switch (currentPawn)
             {
@@ -438,7 +368,7 @@ namespace KingSurvivalGame
             }
         }
 
-        static bool CheckingAllPawnMoves()
+        public static bool CheckingAllPawnMoves()
         {
             for (int i = 0; i < 4; i++)
             {
@@ -454,7 +384,7 @@ namespace KingSurvivalGame
             return true;
         }
 
-        static int[] CheckNextPawnPosition(int[] currentCoordinates, char checkDirection, char currentPawn)
+        public static int[] CheckNextPawnPosition(int[] currentCoordinates, char checkDirection, char currentPawn)
         {
             int[] displacementDownLeft = { 1, -2 };
             int[] displacementDownRight = { 1, 2 };
@@ -545,7 +475,6 @@ namespace KingSurvivalGame
 
                     Counter++;
 
-
                     SwitchCurrentPawnExistingMoves(currentPawn);
 
                     return newCoordinates;
@@ -608,17 +537,16 @@ namespace KingSurvivalGame
                     return null;
                 }
             }
-
         }
 
-        static void MoveFigure(int[] currentCoordinates, int[] newCoordinates)
+        public static void MoveFigure(int[] currentCoordinates, int[] newCoordinates)
         {
             char currentPos = Field[currentCoordinates[0], currentCoordinates[1]];
             Field[currentCoordinates[0], currentCoordinates[1]] = ' ';
             Field[newCoordinates[0], newCoordinates[1]] = currentPos;
         }
 
-        static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
+        public static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
         {
             int[] displacementDownLeft = { 1, -2 };
             int[] displacementDownRight = { 1, 2 };
@@ -643,6 +571,7 @@ namespace KingSurvivalGame
                         {
                             KingExistingMoves[i] = true;
                         }
+
                         CheckForKingExit(newCoordinates[0]);
                         return newCoordinates;
                     }
@@ -676,6 +605,7 @@ namespace KingSurvivalGame
                         {
                             KingExistingMoves[i] = true;
                         }
+
                         CheckForKingExit(newCoordinates[0]);
                         return newCoordinates;
                     }
@@ -712,6 +642,7 @@ namespace KingSurvivalGame
                         {
                             KingExistingMoves[i] = true;
                         }
+
                         CheckForKingExit(newCoordinates[0]);
                         return newCoordinates;
                     }
@@ -745,6 +676,7 @@ namespace KingSurvivalGame
                         {
                             KingExistingMoves[i] = true;
                         }
+
                         CheckForKingExit(newCoordinates[0]);
                         return newCoordinates;
                     }
@@ -777,27 +709,101 @@ namespace KingSurvivalGame
                     allAreFalse = false;
                 }
             }
+
             return allAreFalse;
         }
 
-        //static void CommandPrintWrongDirection()
-        //{
-        //    Console.BackgroundColor = ConsoleColor.DarkYellow;
-        //    Console.WriteLine(Constants.WRONG_DIRECTION_MESSAGE);
-        //    Console.ResetColor();
-        //}
+        ////static void CommandPrintWrongDirection()
+        ////{
+        ////    Console.BackgroundColor = ConsoleColor.DarkYellow;
+        ////    Console.WriteLine(Constants.WRONG_DIRECTION_MESSAGE);
+        ////    Console.ResetColor();
+        ////}
 
-        static void CommandPrintKingLosing()
+        public static void CommandPrintKingLosing()
         {
             Console.WriteLine(Constants.KingLostMessage, Counter / 2);
         }
 
-        static void Main()
+        public static void Main()
         {
             IPrinter printer = new Printer();
             Start(Counter);
             Console.WriteLine(Constants.GoodbyeMessage);
             Console.ReadLine();
+        }
+
+        // Checks if command is KDR, KUL, etc.
+        private static bool CheckIfValidKingDirection(string direction)
+        {
+            bool isValidDirection = false;
+
+            foreach (var possibleDirection in KingPossibleDirections)
+            {
+                if (direction == possibleDirection)
+                {
+                    isValidDirection = true;
+                    break;
+                }
+            }
+
+            return isValidDirection;
+        }
+
+        // Returns user input after trimming and making it to upper case. Returns empty string if input is only white spaces.
+        private static string GetInput()
+        {
+            string result = string.Empty;
+
+            string input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return result;
+            }
+            else
+            {
+                string inputTrimmed = input.Trim();
+                result = inputTrimmed.ToUpper();
+
+                return result;
+            }
+        }
+
+        private static bool IsValidPawnMove(string move)
+        {
+            bool isValidCommand = false;
+            foreach (var validPawnMove in PawnAPossibleDirections)
+            {
+                if (move.Substring(1) == validPawnMove.Substring(1))
+                {
+                    isValidCommand = true;
+                    break;
+                }
+            }
+
+            if (!isValidCommand)
+            {
+                PrintMessage(ConsoleColor.Red, Constants.InvalidCommandMessage);
+            }
+
+            return isValidCommand;
+        }
+
+        private static void PrintMessage(ConsoleColor color, string message)
+        {
+            Console.BackgroundColor = color;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
+        private static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
+        {
+            //ConsoleColor fgColor = ConsoleColor.Black;
+            //ColorBoard(bgColor, fgColor);
+            Console.BackgroundColor = bgColor;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write(Field[row, col]);
+            Console.ResetColor();
         }
     }
 }
