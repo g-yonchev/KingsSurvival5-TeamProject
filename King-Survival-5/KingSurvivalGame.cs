@@ -3,7 +3,7 @@ namespace KingSurvivalGame
     using System;
     using King;
     using King.Commons;
-    using King.Contracts;
+    // using King.Contracts;
 
     public class KingSurvivalGame : BaseGame
     {
@@ -727,7 +727,7 @@ namespace KingSurvivalGame
 
         public static void Main()
         {
-            IPrinter printer = new Printer();
+            //IPrinter printer = new Printer();
             Start(Counter);
             Console.WriteLine(Constants.GoodbyeMessage);
             Console.ReadLine();
