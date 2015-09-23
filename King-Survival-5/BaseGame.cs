@@ -44,9 +44,9 @@
         protected static int Counter = 0;
 
         protected static bool GameOver = false;
-        protected static int[,] PawnPositions = 
+        protected static IPosition[] PawnPositions = 
         {
-            { 2, 4 }, { 2, 8 }, { 2, 12 }, { 2, 16 }
+            new Position(2, 4), new Position(2, 8), new Position(2, 12), new Position(2, 16)
         };
     }
 }

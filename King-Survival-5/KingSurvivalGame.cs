@@ -151,14 +151,13 @@ namespace KingSurvivalGame
 
         public static void PawnDirection(char pawn, char direction, int pawnNumber)
         {
-            var oldCoordinates = new Position(PawnPositions[pawnNumber, 0], PawnPositions[pawnNumber, 1]);
+            var oldCoordinates = PawnPositions[pawnNumber];
 
             var coords = CheckNextPawnPosition(oldCoordinates, direction, pawn);
 
             // if (coords != null)
             // {
-                PawnPositions[pawnNumber, 0] = coords.Row;
-                PawnPositions[pawnNumber, 1] = coords.Col;
+            PawnPositions[pawnNumber] = coords;
             // }
         }
 
