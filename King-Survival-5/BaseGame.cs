@@ -18,12 +18,12 @@
             { 'D', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'D', 'R' },
         };
 
-        protected static int[,] BoardEdges = 
+        protected static IPosition[] BoardEdges = 
         {
-            { 2, 4 }, { 2, 18 }, { 9, 4 }, { 9, 18 }
+            new Position(2, 4), new Position(2, 18), new Position(9, 4), new Position(9, 18)
         };
 
-        protected static int[] KingPosition = { 9, 10 };
+        protected static IPosition KingPosition = new Position(9, 10);
 
         protected static bool[,] PawnExistingMoves = 
         {

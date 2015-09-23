@@ -16,12 +16,12 @@ namespace KingSurvivalGame
 
         public static bool IsPositionOnTheBoard(IPosition Position)
         {
-            bool leftBoundariesOfRow = Position.Row >= BoardEdges[0, 0];
-            bool rightBoundariesOfRow = Position.Row <= BoardEdges[3, 0];
+            bool leftBoundariesOfRow = Position.Row >= BoardEdges[0].Row;
+            bool rightBoundariesOfRow = Position.Row <= BoardEdges[3].Row;
             bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
 
-            bool leftBoundariesOfCol = Position.Col >= BoardEdges[0, 1];
-            bool rightBoundariesOfCol = Position.Col <= BoardEdges[3, 1];
+            bool leftBoundariesOfCol = Position.Col >= BoardEdges[0].Col;
+            bool rightBoundariesOfCol = Position.Col <= BoardEdges[3].Col;
             bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
 
             bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
@@ -164,13 +164,12 @@ namespace KingSurvivalGame
 
         public static void KingDirection(char upDownDirection, char leftRightDirection)
         {
-            var oldCoordinates = new Position(KingPosition[0], KingPosition[1]);
+            var oldCoordinates = new Position(KingPosition.Row, KingPosition.Col);
 
             var coords = CheckNextKingPosition(oldCoordinates, upDownDirection, leftRightDirection);
             if (coords != null)
             {
-                KingPosition[0] = coords.Row;
-                KingPosition[1] = coords.Col;
+                KingPosition = coords;
             }
         }
 
