@@ -4,8 +4,8 @@
 
     public interface IPosition
     {
-        int X { get; }
+        int Row { get; }
 
-        int Y { get; }
+        int Col { get; }
     }
 }

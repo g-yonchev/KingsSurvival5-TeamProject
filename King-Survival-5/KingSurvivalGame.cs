@@ -14,16 +14,14 @@ namespace KingSurvivalGame
         ////    this.printer = printer;
         ////}
 
-        public static bool IsPositionOnTheBoard(int[] positionCoordinates)
+        public static bool IsPositionOnTheBoard(IPosition Position)
         {
-            int row = positionCoordinates[0];
-            bool leftBoundariesOfRow = row >= BoardEdges[0, 0];
-            bool rightBoundariesOfRow = row <= BoardEdges[3, 0];
+            bool leftBoundariesOfRow = Position.Row >= BoardEdges[0, 0];
+            bool rightBoundariesOfRow = Position.Row <= BoardEdges[3, 0];
             bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
 
-            int col = positionCoordinates[1];
-            bool leftBoundariesOfCol = col >= BoardEdges[0, 1];
-            bool rightBoundariesOfCol = col <= BoardEdges[3, 1];
+            bool leftBoundariesOfCol = Position.Col >= BoardEdges[0, 1];
+            bool rightBoundariesOfCol = Position.Col <= BoardEdges[3, 1];
             bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
 
             bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
