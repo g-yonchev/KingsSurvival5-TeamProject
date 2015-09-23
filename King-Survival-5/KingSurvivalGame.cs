@@ -41,7 +41,7 @@ namespace KingSurvivalGame
             {
                 for (int col = 0; col < Field.GetLength(1); col++)
                 {
-                    int[] coordinates = { row, col };
+                    Position coordinates = new Position(row, col);
                     bool isCellIn = IsPositionOnTheBoard(coordinates);
                     if (isCellIn)
                     {
@@ -151,31 +151,26 @@ namespace KingSurvivalGame
 
         public static void PawnDirection(char pawn, char direction, int pawnNumber)
         {
-            var oldCoordinates = new int[2];
-            oldCoordinates[0] = PawnPositions[pawnNumber, 0];
-            oldCoordinates[1] = PawnPositions[pawnNumber, 1];
+            var oldCoordinates = new Position(PawnPositions[pawnNumber, 0], PawnPositions[pawnNumber, 1]);
 
-            var coords = new int[2];
-            coords = CheckNextPawnPosition(oldCoordinates, direction, pawn);
+            var coords = CheckNextPawnPosition(oldCoordinates, direction, pawn);
 
-            if (coords != null)
-            {
-                PawnPositions[pawnNumber, 0] = coords[0];
-                PawnPositions[pawnNumber, 1] = coords[1];
-            }
+            // if (coords != null)
+            // {
+                PawnPositions[pawnNumber, 0] = coords.Row;
+                PawnPositions[pawnNumber, 1] = coords.Col;
+            // }
         }
 
         public static void KingDirection(char upDownDirection, char leftRightDirection)
         {
-            var oldCoordinates = new int[2];
-            oldCoordinates[0] = KingPosition[0];
-            oldCoordinates[1] = KingPosition[1];
-            var coords = new int[2];
-            coords = CheckNextKingPosition(oldCoordinates, upDownDirection, leftRightDirection);
+            var oldCoordinates = new Position(KingPosition[0], KingPosition[1]);
+
+            var coords = CheckNextKingPosition(oldCoordinates, upDownDirection, leftRightDirection);
             if (coords != null)
             {
-                KingPosition[0] = coords[0];
-                KingPosition[1] = coords[1];
+                KingPosition[0] = coords.Row;
+                KingPosition[1] = coords.Col;
             }
         }
 
@@ -382,17 +377,17 @@ namespace KingSurvivalGame
             return true;
         }
 
-        public static int[] CheckNextPawnPosition(int[] currentCoordinates, char checkDirection, char currentPawn)
+        public static IPosition CheckNextPawnPosition(IPosition currentCoordinates, char checkDirection, char currentPawn)
         {
             int[] displacementDownLeft = { 1, -2 };
             int[] displacementDownRight = { 1, 2 };
-            var newCoordinates = new int[2];
+            var newCoordinates = new Position();
             if (checkDirection == 'L')
             {
-                newCoordinates[0] = currentCoordinates[0] + displacementDownLeft[0];
-                newCoordinates[1] = currentCoordinates[1] + displacementDownLeft[1];
+                newCoordinates.Row = currentCoordinates.Row + displacementDownLeft[0];
+                newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
 
-                bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
                 if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                 {
                     MoveFigure(currentCoordinates, newCoordinates);
@@ -463,10 +458,10 @@ namespace KingSurvivalGame
             }
             else
             {
-                newCoordinates[0] = currentCoordinates[0] + displacementDownRight[0];
-                newCoordinates[1] = currentCoordinates[1] + displacementDownRight[1];
+                newCoordinates.Row = currentCoordinates.Row + displacementDownRight[0];
+                newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
 
-                bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
                 if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                 {
                     MoveFigure(currentCoordinates, newCoordinates);
@@ -537,29 +532,29 @@ namespace KingSurvivalGame
             }
         }
 
-        public static void MoveFigure(int[] currentCoordinates, int[] newCoordinates)
+        public static void MoveFigure(IPosition currentCoordinates, IPosition newCoordinates)
         {
-            char currentPos = Field[currentCoordinates[0], currentCoordinates[1]];
-            Field[currentCoordinates[0], currentCoordinates[1]] = ' ';
-            Field[newCoordinates[0], newCoordinates[1]] = currentPos;
+            char currentPos = Field[currentCoordinates.Row, currentCoordinates.Col];
+            Field[currentCoordinates.Row, currentCoordinates.Col] = ' ';
+            Field[newCoordinates.Row, newCoordinates.Col] = currentPos;
         }
 
-        public static int[] CheckNextKingPosition(int[] currentCoordinates, char firstDirection, char secondDirection)
+        public static IPosition CheckNextKingPosition(IPosition currentCoordinates, char firstDirection, char secondDirection)
         {
             int[] displacementDownLeft = { 1, -2 };
             int[] displacementDownRight = { 1, 2 };
             int[] displacementUpLeft = { -1, -2 };
             int[] displacementUpRight = { -1, 2 };
-            var newCoordinates = new int[2];
+            var newCoordinates = new Position();
 
             if (firstDirection == 'U')
             {
                 if (secondDirection == 'L')
                 {
-                    newCoordinates[0] = currentCoordinates[0] + displacementUpLeft[0];
-                    newCoordinates[1] = currentCoordinates[1] + displacementUpLeft[1];
+                    newCoordinates.Row = currentCoordinates.Row + displacementUpLeft[0];
+                    newCoordinates.Col = currentCoordinates.Col + displacementUpLeft[1];
 
-                    bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                    bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
                     if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
@@ -570,7 +565,7 @@ namespace KingSurvivalGame
                             KingExistingMoves[i] = true;
                         }
 
-                        CheckForKingExit(newCoordinates[0]);
+                        CheckForKingExit(newCoordinates.Row);
                         return newCoordinates;
                     }
                     else
@@ -590,10 +585,10 @@ namespace KingSurvivalGame
                 }
                 else
                 {
-                    newCoordinates[0] = currentCoordinates[0] + displacementUpRight[0];
-                    newCoordinates[1] = currentCoordinates[1] + displacementUpRight[1];
+                    newCoordinates.Row = currentCoordinates.Row + displacementUpRight[0];
+                    newCoordinates.Col = currentCoordinates.Col + displacementUpRight[1];
 
-                    bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                    bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
                     if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
@@ -604,7 +599,7 @@ namespace KingSurvivalGame
                             KingExistingMoves[i] = true;
                         }
 
-                        CheckForKingExit(newCoordinates[0]);
+                        CheckForKingExit(newCoordinates.Row);
                         return newCoordinates;
                     }
                     else
@@ -627,10 +622,10 @@ namespace KingSurvivalGame
             {
                 if (secondDirection == 'L')
                 {
-                    newCoordinates[0] = currentCoordinates[0] + displacementDownLeft[0];
-                    newCoordinates[1] = currentCoordinates[1] + displacementDownLeft[1];
+                    newCoordinates.Row = currentCoordinates.Row + displacementDownLeft[0];
+                    newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
 
-                    bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                    bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
                     if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
@@ -641,7 +636,7 @@ namespace KingSurvivalGame
                             KingExistingMoves[i] = true;
                         }
 
-                        CheckForKingExit(newCoordinates[0]);
+                        CheckForKingExit(newCoordinates.Row);
                         return newCoordinates;
                     }
                     else
@@ -661,10 +656,10 @@ namespace KingSurvivalGame
                 }
                 else
                 {
-                    newCoordinates[0] = currentCoordinates[0] + displacementDownRight[0];
-                    newCoordinates[1] = currentCoordinates[1] + displacementDownRight[1];
+                    newCoordinates.Row = currentCoordinates.Row + displacementDownRight[0];
+                    newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
 
-                    bool isEmptyCurrentCell = Field[newCoordinates[0], newCoordinates[1]] == ' ';
+                    bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
                     if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
@@ -675,7 +670,7 @@ namespace KingSurvivalGame
                             KingExistingMoves[i] = true;
                         }
 
-                        CheckForKingExit(newCoordinates[0]);
+                        CheckForKingExit(newCoordinates.Row);
                         return newCoordinates;
                     }
                     else

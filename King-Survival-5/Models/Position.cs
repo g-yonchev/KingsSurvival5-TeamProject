@@ -2,11 +2,11 @@
 {
     public struct Position : IPosition
     {
-        public Position(int x, int y)
+        public Position(int row, int col)
             : this()
         {
-            this.Row = x;
-            this.Col = y;
+            this.Row = row;
+            this.Col = col;
         }
 
         public int Row { get; set; }
