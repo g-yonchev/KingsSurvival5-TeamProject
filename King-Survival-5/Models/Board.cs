@@ -12,7 +12,6 @@
             this.Height = height;
         }
 
-
         public int Height { get; set; }
 
         public int Width { get; set; }
@@ -34,6 +33,5 @@
                 return instance;
             }
         }
-
     }
 }
