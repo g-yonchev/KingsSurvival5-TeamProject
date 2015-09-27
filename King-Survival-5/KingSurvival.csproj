@@ -47,6 +47,10 @@
     <Compile Include="Commons\Constants.cs" />
     <Compile Include="Enums\FigureType.cs" />
     <Compile Include="Enums\MovingDirectionType.cs" />
+    <Compile Include="Models\Board.cs" />
+    <Compile Include="Models\Factories\FigureFactory.cs" />
+    <Compile Include="Models\Factories\KingFactory.cs" />
+    <Compile Include="Models\Factories\PawnFactory.cs" />
     <Compile Include="Models\Figure.cs" />
     <Compile Include="Contracts\IFigure.cs" />
     <Compile Include="Contracts\IPosition.cs" />
@@ -54,9 +58,13 @@
     <Compile Include="Models\KingFigure.cs" />
     <Compile Include="Models\PawnFigure.cs" />
     <Compile Include="Models\Position.cs" />
+    <Compile Include="Printer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Settings.StyleCop" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
