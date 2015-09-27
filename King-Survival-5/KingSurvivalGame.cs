@@ -37,9 +37,9 @@ namespace KingSurvivalGame
         public static void PrintBoard()
         {
             Console.WriteLine();
-            for (int row = 0; row < Field.GetLength(0); row++)
+            for (int row = 0; row < GetField.GetLength(0); row++)
             {
-                for (int col = 0; col < Field.GetLength(1); col++)
+                for (int col = 0; col < GetField.GetLength(1); col++)
                 {
                     Position coordinates = new Position(row, col);
                     bool isCellIn = IsPositionOnTheBoard(coordinates);
@@ -59,7 +59,7 @@ namespace KingSurvivalGame
                             }
                             else if (col % 2 != 0)
                             {
-                                Console.Write(Field[row, col]);
+                                Console.Write(GetField[row, col]);
                             }
                         }
                         else if (col % 4 == 0)
@@ -74,12 +74,12 @@ namespace KingSurvivalGame
                         }
                         else if (col % 2 != 0)
                         {
-                            Console.Write(Field[row, col]);
+                            Console.Write(GetField[row, col]);
                         }
                     }
                     else
                     {
-                        Console.Write(Field[row, col]);
+                        Console.Write(GetField[row, col]);
                     }
                 }
 
@@ -385,7 +385,7 @@ namespace KingSurvivalGame
                 newCoordinates.Row = currentCoordinates.Row + displacementDownLeft[0];
                 newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
 
-                bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
+                bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
                 if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                 {
                     MoveFigure(currentCoordinates, newCoordinates);
@@ -459,7 +459,7 @@ namespace KingSurvivalGame
                 newCoordinates.Row = currentCoordinates.Row + displacementDownRight[0];
                 newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
 
-                bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
+                bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
                 if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                 {
                     MoveFigure(currentCoordinates, newCoordinates);
@@ -532,9 +532,9 @@ namespace KingSurvivalGame
 
         public static void MoveFigure(IPosition currentCoordinates, IPosition newCoordinates)
         {
-            char currentPos = Field[currentCoordinates.Row, currentCoordinates.Col];
-            Field[currentCoordinates.Row, currentCoordinates.Col] = ' ';
-            Field[newCoordinates.Row, newCoordinates.Col] = currentPos;
+            char currentPos = GetField[currentCoordinates.Row, currentCoordinates.Col];
+            GetField[currentCoordinates.Row, currentCoordinates.Col] = ' ';
+            GetField[newCoordinates.Row, newCoordinates.Col] = currentPos;
         }
 
         public static IPosition CheckNextKingPosition(IPosition currentCoordinates, char firstDirection, char secondDirection)
@@ -552,7 +552,7 @@ namespace KingSurvivalGame
                     newCoordinates.Row = currentCoordinates.Row + displacementUpLeft[0];
                     newCoordinates.Col = currentCoordinates.Col + displacementUpLeft[1];
 
-                    bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
+                    bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
                     if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
@@ -586,7 +586,7 @@ namespace KingSurvivalGame
                     newCoordinates.Row = currentCoordinates.Row + displacementUpRight[0];
                     newCoordinates.Col = currentCoordinates.Col + displacementUpRight[1];
 
-                    bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
+                    bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
                     if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
@@ -623,7 +623,7 @@ namespace KingSurvivalGame
                     newCoordinates.Row = currentCoordinates.Row + displacementDownLeft[0];
                     newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
 
-                    bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
+                    bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
                     if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
@@ -657,7 +657,7 @@ namespace KingSurvivalGame
                     newCoordinates.Row = currentCoordinates.Row + displacementDownRight[0];
                     newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
 
-                    bool isEmptyCurrentCell = Field[newCoordinates.Row, newCoordinates.Col] == ' ';
+                    bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
                     if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
@@ -778,16 +778,6 @@ namespace KingSurvivalGame
             }
 
             return isValidCommand;
-        }
-
-        private static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
-        {
-            //ConsoleColor fgColor = ConsoleColor.Black;
-            //ColorBoard(bgColor, fgColor);
-            Console.BackgroundColor = bgColor;
-            Console.ForegroundColor = ConsoleColor.Black;
-            Console.Write(Field[row, col]);
-            Console.ResetColor();
         }
     }
 }

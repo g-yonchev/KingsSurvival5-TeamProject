@@ -1,7 +1,16 @@
 ﻿namespace King
 {
+    using System;
     public class BaseGame
     {
+        public static char[,] GetField
+        {
+            get
+            {
+                return Field;
+            }
+        }
+
         protected static char[,] Field = 
         {
             { 'U', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'U', 'R' },
@@ -48,5 +57,15 @@
         {
             new Position(2, 4), new Position(2, 8), new Position(2, 12), new Position(2, 16)
         };
+
+        protected static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
+        {
+            //ConsoleColor fgColor = ConsoleColor.Black;
+            //ColorBoard(bgColor, fgColor);
+            Console.BackgroundColor = bgColor;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.Write(GetField[row, col]);
+            Console.ResetColor();
+        }
     }
 }
