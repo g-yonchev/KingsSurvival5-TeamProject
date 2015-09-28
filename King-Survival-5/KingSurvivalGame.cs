@@ -115,21 +115,17 @@ namespace KingSurvivalGame
             }
         }
 
-        public static bool IsValidCommand(string checkedString)
+        public static bool IsValidCommand(string input)
         {
             if (Counter % 2 == 0)
             {
                 bool isValidCommand = false;
-                foreach (var validKingMove in KingPossibleDirections)
-                {
-                    if (checkedString == validKingMove)
-                    {
-                        isValidCommand = true;
-                        break;
-                    }
-                }
 
-                if (!isValidCommand)
+                if (IsValidKingMove(input))
+                {
+                    isValidCommand = true;
+                }
+                else
                 {
                     Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
                 }
@@ -138,17 +134,20 @@ namespace KingSurvivalGame
             }
             else
             {
-                char startLetter = checkedString[0];
-                if ((int)startLetter >= (int)'A' && (int)startLetter <= (int)'D')
+                bool isValidCommand = false;
+
+                if (IsValidPawnMove(input))
                 {
-                    return IsValidPawnMove(checkedString);
+                    isValidCommand = true;
                 }
                 else
                 {
                     Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
-                    return false;
                 }
+
+                return isValidCommand;
             }
+
         }
 
         public static void PawnDirection(char pawn, char direction, int pawnNumber)
