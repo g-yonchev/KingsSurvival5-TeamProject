@@ -155,10 +155,10 @@ namespace KingSurvivalGame
 
             var coords = CheckNextPawnPosition(oldCoordinates, direction, pawn);
 
-            // if (coords != null)
-            // {
-            PawnPositions[pawnNumber] = coords;
-            // }
+            if (coords != null)
+            {
+                PawnPositions[pawnNumber] = coords;
+            }
         }
 
         public static void KingDirection(char upDownDirection, char leftRightDirection)
@@ -301,7 +301,7 @@ namespace KingSurvivalGame
             bool isExecuted = false;
             while (!isExecuted)
             {
-                Printer.PrintMessage(ConsoleColor.Blue, Constants.PawnTurnMassage);
+                Printer.PrintMessage(ConsoleColor.Blue, Constants.PawnTurnMessage);
 
                 string input = Console.ReadLine();
 
