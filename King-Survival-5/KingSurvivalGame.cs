@@ -18,20 +18,6 @@ namespace KingSurvival
         ////    this.printer = printer;
         ////}
 
-        public static bool IsPositionOnTheBoard(IPosition Position)
-        {
-            bool leftBoundariesOfRow = Position.Row >= BoardEdges[0].Row;
-            bool rightBoundariesOfRow = Position.Row <= BoardEdges[3].Row;
-            bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
-
-            bool leftBoundariesOfCol = Position.Col >= BoardEdges[0].Col;
-            bool rightBoundariesOfCol = Position.Col <= BoardEdges[3].Col;
-            bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
-
-            bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
-            return isPositionOnTheBoard;
-        }
-
         ////static void ColorBoard(ConsoleColor bgColor, ConsoleColor fgColor)
         ////{
         ////    Console.BackgroundColor = bgColor;
