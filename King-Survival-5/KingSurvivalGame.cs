@@ -108,7 +108,7 @@ namespace KingSurvivalGame
             }
             else
             {
-                Console.WriteLine(Constants.FinishGameMessage);
+                Console.WriteLine(MessageConstants.FinishGameMessage);
                 return;
             }
         }
@@ -129,7 +129,7 @@ namespace KingSurvivalGame
 
                 if (!isValidCommand)
                 {
-                    Printer.PrintMessage(ConsoleColor.Red, Constants.InvalidCommandMessage);
+                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
                 }
 
                 return isValidCommand;
@@ -143,7 +143,7 @@ namespace KingSurvivalGame
                 }
                 else
                 {
-                    Printer.PrintMessage(ConsoleColor.Red, Constants.InvalidCommandMessage);
+                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
                     return false;
                 }
             }
@@ -254,7 +254,7 @@ namespace KingSurvivalGame
 
                         return true;
                     default:
-                        Console.WriteLine(Constants.ErrorMessage);
+                        Console.WriteLine(MessageConstants.ErrorMessage);
                         return false;
                 }
             }
@@ -269,19 +269,19 @@ namespace KingSurvivalGame
             bool shouldAskForInput = true;
             while (shouldAskForInput)
             {
-                Printer.PrintMessage(ConsoleColor.DarkGreen, Constants.KingTurnMessage);
+                Printer.PrintMessage(ConsoleColor.DarkGreen, MessageConstants.KingTurnMessage);
 
                 string input = GetInput();
                 if (input == string.Empty)
                 {
-                    Printer.PrintMessage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
+                    Printer.PrintMessage(ConsoleColor.DarkRed, MessageConstants.EmptyStringMessage);
                     continue;
                 }
 
                 bool isValidDirection = CheckIfValidKingDirection(input);
                 if (!isValidDirection)
                 {
-                    Printer.PrintMessage(ConsoleColor.Red, Constants.InvalidCommandMessage);
+                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
                     continue;
                 }
 
@@ -301,7 +301,7 @@ namespace KingSurvivalGame
             bool isExecuted = false;
             while (!isExecuted)
             {
-                Printer.PrintMessage(ConsoleColor.Blue, Constants.PawnTurnMessage);
+                Printer.PrintMessage(ConsoleColor.Blue, MessageConstants.PawnTurnMessage);
 
                 string input = Console.ReadLine();
 
@@ -316,7 +316,7 @@ namespace KingSurvivalGame
                 {
                     isExecuted = false;
 
-                    Printer.PrintMessage(ConsoleColor.DarkRed, Constants.EmptyStringMessage);
+                    Printer.PrintMessage(ConsoleColor.DarkRed, MessageConstants.EmptyStringMessage);
                 }
             }
 
@@ -328,7 +328,7 @@ namespace KingSurvivalGame
             if (currentKingXAxe == 2)
             {
                 Console.WriteLine("=========================");
-                Console.WriteLine(Constants.KingVictoryMessage, Counter / 2);
+                Console.WriteLine(MessageConstants.KingVictoryMessage, Counter / 2);
                 GameOver = true;
             }
         }
@@ -354,7 +354,7 @@ namespace KingSurvivalGame
                     PawnExistingMoves[3, 1] = true;
                     break;
                 default:
-                    Console.WriteLine(Constants.ErrorMessage);
+                    Console.WriteLine(MessageConstants.ErrorMessage);
                     break;
             }
         }
@@ -435,7 +435,7 @@ namespace KingSurvivalGame
                             PawnExistingMoves[3, 0] = false;
                             break;
                         default:
-                            Console.WriteLine(Constants.ErrorMessage);
+                            Console.WriteLine(MessageConstants.ErrorMessage);
                             break;
                     }
 
@@ -444,12 +444,12 @@ namespace KingSurvivalGame
                     if (allAreFalse)
                     {
                         GameOver = true;
-                        Console.WriteLine(Constants.KingVictoryMessage, Counter / 2);
+                        Console.WriteLine(MessageConstants.KingVictoryMessage, Counter / 2);
                         GameOver = true;
                         return null;
                     }
 
-                    Printer.PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                    Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
 
                     return null;
                 }
@@ -509,7 +509,7 @@ namespace KingSurvivalGame
                             PawnExistingMoves[3, 1] = false;
                             break;
                         default:
-                            Console.WriteLine(Constants.ErrorMessage);
+                            Console.WriteLine(MessageConstants.ErrorMessage);
                             break;
                     }
 
@@ -518,12 +518,12 @@ namespace KingSurvivalGame
                     if (allAreFalse)
                     {
                         GameOver = true;
-                        Console.WriteLine(Constants.KingVictoryMessage, Counter / 2);
+                        Console.WriteLine(MessageConstants.KingVictoryMessage, Counter / 2);
                         GameOver = true;
                         return null;
                     }
 
-                    Printer.PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                    Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
 
                     return null;
                 }
@@ -576,7 +576,7 @@ namespace KingSurvivalGame
                             return null;
                         }
 
-                        Printer.PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
 
                         return null;
                     }
@@ -610,7 +610,7 @@ namespace KingSurvivalGame
                             return null;
                         }
 
-                        Printer.PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
 
                         return null;
                     }
@@ -647,7 +647,7 @@ namespace KingSurvivalGame
                             return null;
                         }
 
-                        Printer.PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
 
                         return null;
                     }
@@ -681,7 +681,7 @@ namespace KingSurvivalGame
                             return null;
                         }
 
-                        Printer.PrintMessage(ConsoleColor.DarkYellow, Constants.WrongDirectionMessage);
+                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
           
                         return null;
                     }
@@ -713,14 +713,14 @@ namespace KingSurvivalGame
 
         public static void CommandPrintKingLosing()
         {
-            Console.WriteLine(Constants.KingLostMessage, Counter / 2);
+            Console.WriteLine(MessageConstants.KingLostMessage, Counter / 2);
         }
 
         public static void Main()
         {
             //IPrinter printer = new Printer();
             Start(Counter);
-            Console.WriteLine(Constants.GoodbyeMessage);
+            Console.WriteLine(MessageConstants.GoodbyeMessage);
             Console.ReadLine();
         }
 
@@ -774,7 +774,7 @@ namespace KingSurvivalGame
 
             if (!isValidCommand)
             {
-                Printer.PrintMessage(ConsoleColor.Red, Constants.InvalidCommandMessage);
+                Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
             }
 
             return isValidCommand;
