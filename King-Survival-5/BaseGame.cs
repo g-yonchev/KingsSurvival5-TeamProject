@@ -53,7 +53,9 @@
 
         protected static string[] PawnDPossibleDirections = { "DDL", "DDR" };
 
-        protected static int Counter = 0;
+        //protected static int Counter = 0;
+
+        public static int Counter { get; set; }
 
         protected static bool GameOver = false;
         protected static IPosition[] PawnPositions = 
