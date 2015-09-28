@@ -1,5 +1,7 @@
-﻿namespace King
+﻿namespace Models
 {
+    using Contracts;
+
     public struct Position : IPosition
     {
         public Position(int row, int col)

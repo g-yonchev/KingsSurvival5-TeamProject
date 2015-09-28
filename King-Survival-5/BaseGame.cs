@@ -1,6 +1,9 @@
-﻿namespace King
+﻿namespace KingSurvival
 {
+    using Contracts;
+    using Models;
     using System;
+
     public class BaseGame
     {
         public static char[,] GetField

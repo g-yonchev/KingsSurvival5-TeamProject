@@ -1,4 +1,4 @@
-﻿namespace King
+﻿namespace KingSurvival
 {
     using System;
 

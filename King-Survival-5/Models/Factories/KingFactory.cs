@@ -1,14 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace King.Models.Factories
+﻿namespace King.Models.Factories
 {
+    using Contarcts;
+    using global::Models;
+    using Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public class KingFactory : FigureFactory
     {
-        public override IFigure CreateFigure(Position position)
+        public override IFigure CreateFigure(global::Models.Position position)
         {
             return new KingFigure(position);
         }

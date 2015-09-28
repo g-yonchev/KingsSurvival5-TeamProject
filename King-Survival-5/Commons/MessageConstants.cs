@@ -1,4 +1,4 @@
-﻿namespace King.Commons
+﻿namespace Commons
 {
     using System;
 

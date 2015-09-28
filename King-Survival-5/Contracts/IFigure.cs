@@ -1,4 +1,6 @@
-﻿namespace King
+﻿using Models;
+
+namespace Contarcts
 {
     /// <summary>
     ///  Interface definding figure characteristics.

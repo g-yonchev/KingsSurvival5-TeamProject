@@ -1,5 +1,7 @@
-﻿namespace King
+﻿namespace Models
 {
+    using Contarcts;
+
     public class KingFigure : Figure, IFigure
     {
         public int MovesCounter { get; set; }

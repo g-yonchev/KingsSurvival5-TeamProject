@@ -1,4 +1,4 @@
-﻿namespace King.Enums
+﻿namespace Enums
 {
     /// <summary>
     /// Figures on the board

@@ -1,4 +1,4 @@
-﻿namespace King
+﻿namespace Models
 {
     public class Board
     {

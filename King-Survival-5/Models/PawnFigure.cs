@@ -1,5 +1,7 @@
-﻿namespace King
+﻿namespace Models
 {
+    using Contarcts;
+
     public class PawnFigure : Figure, IFigure
     {
         public PawnFigure(Position position)

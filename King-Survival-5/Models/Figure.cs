@@ -1,5 +1,6 @@
-﻿namespace King
+﻿namespace Models
 {
+    using Contarcts;
     public abstract class Figure : IFigure
     {
         protected Figure(Position position)

@@ -1,4 +1,4 @@
-﻿namespace King
+﻿namespace Contracts
 {
     using System;
 

@@ -1,9 +1,11 @@
-namespace KingSurvivalGame
+namespace KingSurvival
 {
     using System;
-    using King;
-    using King.Commons;
+    using Models;
+    using Commons;
+    using Contarcts;
     using System.Text.RegularExpressions;
+    using Contracts;
 
     // using King.Contracts;
 

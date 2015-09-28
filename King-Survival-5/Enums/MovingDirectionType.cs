@@ -1,4 +1,4 @@
-﻿namespace King.Enums
+﻿namespace Enums
 {
     using System;
 
