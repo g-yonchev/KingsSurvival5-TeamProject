@@ -89,11 +89,11 @@ namespace KingSurvival
                 bool isKingTurn = moveCounter % 2 == 0;
                 if (isKingTurn)
                 {
-                    ProcessKingSide();
+                    ProcessKingTurn();
                 }
                 else
                 {
-                    ProcessPawnSide();
+                    ProcessPawnTurn();
                 }
             }
             else
@@ -253,7 +253,7 @@ namespace KingSurvival
             }
         }
 
-        public static void ProcessKingSide()
+        public static void ProcessKingTurn()
         {
             bool shouldAskForInput = true;
             while (shouldAskForInput)
@@ -285,7 +285,7 @@ namespace KingSurvival
             Start(Counter);
         }
 
-        public static void ProcessPawnSide()
+        public static void ProcessPawnTurn()
         {
             bool isExecuted = false;
             while (!isExecuted)
