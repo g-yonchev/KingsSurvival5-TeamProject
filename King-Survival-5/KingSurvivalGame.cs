@@ -3,6 +3,8 @@ namespace KingSurvivalGame
     using System;
     using King;
     using King.Commons;
+    using System.Text.RegularExpressions;
+
     // using King.Contracts;
 
     public class KingSurvivalGame : BaseGame
@@ -760,24 +762,34 @@ namespace KingSurvivalGame
             }
         }
 
-        private static bool IsValidPawnMove(string move)
+        private static bool IsValidPawnMove(string input)
         {
-            bool isValidCommand = false;
-            foreach (var validPawnMove in PawnAPossibleDirections)
-            {
-                if (move.Substring(1) == validPawnMove.Substring(1))
-                {
-                    isValidCommand = true;
-                    break;
-                }
-            }
+            string validInput = input.ToUpper();
+            var regex = new Regex(GameConstants.RegexPawnPattern);
 
-            if (!isValidCommand)
+            if (regex.IsMatch(validInput))
             {
-                Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
+                return true;
             }
+            else
+            {
+                return false;
+            }
+        }
 
-            return isValidCommand;
+        private static bool IsValidKingMove(string input)
+        {
+            string validInput = input.ToUpper();
+            var regex = new Regex(GameConstants.RegexKingPattern);
+
+            if (regex.IsMatch(validInput))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
