@@ -22,3 +22,4 @@ A turn-based console game project for Telerik Software Academy.
 ✖ Player loses when the Pawns block the King's way so that he can't move.
 
 ## Screenshots:
+![screen](images/screen.png)
