@@ -1,12 +1,12 @@
 ﻿namespace KingSurvival
 {
+    using System;
+    using System.Text.RegularExpressions;
     using Commons;
     using Contracts;
     using Models;
-    using System;
-    using System.Text.RegularExpressions;
 
-    public class BaseGame
+    public class BaseGame   // Defines the game elements and rules
     {
         public static char[,] GetField
         {
@@ -114,11 +114,6 @@
         {
             new Position(2, 4), new Position(2, 8), new Position(2, 12), new Position(2, 16)
         };
-
-        // RULE CHECKER:   <<< BaseGame is the class that sets the rules and CHECKS for them.
-        // So all kinds of checks should be here. All the moves the player executes should be in 
-        // KingSurvivalGame
-        
 
         protected static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
         {

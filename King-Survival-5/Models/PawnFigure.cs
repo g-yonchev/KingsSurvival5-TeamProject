@@ -1,6 +1,6 @@
 ﻿namespace Models
 {
-    using Contarcts;
+    using Contracts;
 
     public class PawnFigure : Figure, IFigure
     {

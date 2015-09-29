@@ -1,16 +1,11 @@
-﻿using Commons;
-using Contracts;
-using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
-namespace KingSurvival
+﻿namespace KingSurvival
 {
-    public static class Checker
+    using System;
+    using System.Text.RegularExpressions;
+    using Commons;
+    using Contracts;
+    using Models;
+    public static class Checker // Checks if the game rules are correctly executed or broken
     {
         public static bool IsPositionOnTheBoard(IPosition Position)
         {
