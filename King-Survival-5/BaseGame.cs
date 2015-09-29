@@ -50,7 +50,7 @@
         protected static string[] PawnBPossibleDirections = { "BDL", "BDR" };
 
         protected static string[] PawnCPossibleDirections = { "CDL", "CDR" };
-
+         
         protected static string[] PawnDPossibleDirections = { "DDL", "DDR" };
 
         //protected static int Counter = 0;

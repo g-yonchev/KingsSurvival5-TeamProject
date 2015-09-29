@@ -6,6 +6,7 @@ namespace KingSurvival
     using Contarcts;
     using System.Text.RegularExpressions;
     using Contracts;
+    using global::Commons;
 
     // using King.Contracts;
 
@@ -109,7 +110,7 @@ namespace KingSurvival
             {
                 bool isValidCommand = false;
 
-                if (IsValidKingMove(input))
+                if (Validator.IsValidKingMove(input))
                 {
                     isValidCommand = true;
                 }
@@ -124,7 +125,7 @@ namespace KingSurvival
             {
                 bool isValidCommand = false;
 
-                if (IsValidPawnMove(input))
+                if (Validator.IsValidPawnMove(input))
                 {
                     isValidCommand = true;
                 }
@@ -671,7 +672,7 @@ namespace KingSurvival
                         }
 
                         Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-          
+
                         return null;
                     }
                 }
@@ -746,36 +747,6 @@ namespace KingSurvival
                 result = inputTrimmed.ToUpper();
 
                 return result;
-            }
-        }
-
-        private static bool IsValidPawnMove(string input)
-        {
-            string validInput = input.ToUpper();
-            var regex = new Regex(GameConstants.RegexPawnPattern);
-
-            if (regex.IsMatch(validInput))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private static bool IsValidKingMove(string input)
-        {
-            string validInput = input.ToUpper();
-            var regex = new Regex(GameConstants.RegexKingPattern);
-
-            if (regex.IsMatch(validInput))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
     }
