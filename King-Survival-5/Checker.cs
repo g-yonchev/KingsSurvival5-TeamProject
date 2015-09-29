@@ -198,5 +198,15 @@ namespace KingSurvival
                 return false;
             }
         }
+
+        public static void CheckForKingExit(int currentKingXAxe)
+        {
+            if (currentKingXAxe == 2)
+            {
+                Console.WriteLine("=========================");
+                Console.WriteLine(MessageConstants.KingVictoryMessage, BaseGame.Counter / 2);
+                BaseGame.GameOverGetter = true;
+            }
+        }
     }
 }

@@ -77,6 +77,16 @@
         }
 
         protected static bool GameOver = false;
+        public static bool GameOverGetter {
+            get
+            {
+                return GameOver;
+            }
+            set
+            {
+                GameOver = value;
+            }
+        }
         protected static IPosition[] PawnPositions = 
         {
             new Position(2, 4), new Position(2, 8), new Position(2, 12), new Position(2, 16)
@@ -352,7 +362,7 @@
                             KingExistingMoves[i] = true;
                         }
 
-                        CheckForKingExit(newCoordinates.Row);
+                        Checker.CheckForKingExit(newCoordinates.Row);
                         return newCoordinates;
                     }
                     else
@@ -386,7 +396,7 @@
                             KingExistingMoves[i] = true;
                         }
 
-                        CheckForKingExit(newCoordinates.Row);
+                        Checker.CheckForKingExit(newCoordinates.Row);
                         return newCoordinates;
                     }
                     else
@@ -423,7 +433,7 @@
                             KingExistingMoves[i] = true;
                         }
 
-                        CheckForKingExit(newCoordinates.Row);
+                        Checker.CheckForKingExit(newCoordinates.Row);
                         return newCoordinates;
                     }
                     else
@@ -457,7 +467,7 @@
                             KingExistingMoves[i] = true;
                         }
 
-                        CheckForKingExit(newCoordinates.Row);
+                        Checker.CheckForKingExit(newCoordinates.Row);
                         return newCoordinates;
                     }
                     else
@@ -493,15 +503,7 @@
             return allAreFalse;
         }
 
-        public static void CheckForKingExit(int currentKingXAxe)
-        {
-            if (currentKingXAxe == 2)
-            {
-                Console.WriteLine("=========================");
-                Console.WriteLine(MessageConstants.KingVictoryMessage, Counter / 2);
-                GameOver = true;
-            }
-        }
+        
 
         
 
