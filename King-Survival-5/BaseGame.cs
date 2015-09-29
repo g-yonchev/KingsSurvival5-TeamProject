@@ -102,74 +102,11 @@
             Console.WriteLine(MessageConstants.KingLostMessage, Counter / 2);
         }
 
-        public static bool IsValidCommand(string input)
-        {
-            if (Counter % 2 == 0)
-            {
-                bool isValidCommand = false;
-
-                if (IsValidKingMove(input))
-                {
-                    isValidCommand = true;
-                }
-                else
-                {
-                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
-                }
-
-                return isValidCommand;
-            }
-            else
-            {
-                bool isValidCommand = false;
-
-                if (IsValidPawnMove(input))
-                {
-                    isValidCommand = true;
-                }
-                else
-                {
-                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
-                }
-
-                return isValidCommand;
-            }
-
-        }
-
-        private static bool IsValidPawnMove(string input)
-        {
-            string validInput = input.ToUpper();
-            var regex = new Regex(GameConstants.RegexPawnPattern);
-
-            if (regex.IsMatch(validInput))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private static bool IsValidKingMove(string input)
-        {
-            string validInput = input.ToUpper();
-            var regex = new Regex(GameConstants.RegexKingPattern);
-
-            if (regex.IsMatch(validInput))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        
 
         public static bool CommandCheck(string checkedInput)
         {
-            bool commandNameIsOK = IsValidCommand(checkedInput);
+            bool commandNameIsOK = Checker.IsValidCommand(checkedInput);
             if (commandNameIsOK)
             {
                 char startLetter = checkedInput[0];
