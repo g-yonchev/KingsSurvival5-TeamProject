@@ -168,7 +168,7 @@ namespace KingSurvival
                 {
                     // Console.WriteLine(input);
                     input = input.ToUpper();
-                    isExecuted = CommandCheck(input);
+                    isExecuted = Checker.CommandCheck(input);
                 }
                 else
                 {
