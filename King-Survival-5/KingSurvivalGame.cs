@@ -106,37 +106,18 @@ namespace KingSurvival
 
         public static bool IsValidCommand(string input)
         {
-            //if (Counter % 2 == 0)
-            //{
-            //    bool isValidCommand = false;
+            bool isValidCommand = false;
 
-            //    if (Validator.IsValidKingMove(input))
-            //    {
-            //        isValidCommand = true;
-            //    }
-            //    else
-            //    {
-            //        Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
-            //    }
+            if (Validator.IsValidPawnMove(input))
+            {
+                isValidCommand = true;
+            }
+            else
+            {
+                Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
+            }
 
-            //    return isValidCommand;
-            //}
-            //else
-            //{
-                bool isValidCommand = false;
-
-                if (Validator.IsValidPawnMove(input))
-                {
-                    isValidCommand = true;
-                }
-                else
-                {
-                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
-                }
-
-                return isValidCommand;
-            //}
-
+            return isValidCommand;
         }
 
         public static void PawnDirection(char pawn, char direction, int pawnNumber)
@@ -218,31 +199,6 @@ namespace KingSurvival
 
                         return true;
 
-                    case 'K':
-                        if (checkedInput[1] == 'U')
-                        {
-                            if (checkedInput[2] == 'L')
-                            {
-                                KingDirection('U', 'L');
-                            }
-                            else
-                            {
-                                KingDirection('U', 'R');
-                            }
-                        }
-                        else
-                        {
-                            if (checkedInput[2] == 'L')
-                            {
-                                KingDirection('D', 'L');
-                            }
-                            else
-                            {
-                                KingDirection('D', 'R');
-                            }
-                        }
-
-                        return true;
                     default:
                         Console.WriteLine(MessageConstants.ErrorMessage);
                         return false;
