@@ -12,6 +12,20 @@ namespace KingSurvival
 {
     public static class Checker
     {
+        public static bool IsPositionOnTheBoard(IPosition Position)
+        {
+            bool leftBoundariesOfRow = Position.Row >= BaseGame.BoardEdgesGetter[0].Row;
+            bool rightBoundariesOfRow = Position.Row <= BaseGame.BoardEdgesGetter[3].Row;
+            bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
+
+            bool leftBoundariesOfCol = Position.Col >= BaseGame.BoardEdgesGetter[0].Col;
+            bool rightBoundariesOfCol = Position.Col <= BaseGame.BoardEdgesGetter[3].Col;
+            bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
+
+            bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
+            return isPositionOnTheBoard;
+        }
+
         // Checks if command is KDR, KUL, etc.
         public static bool CheckIfValidKingDirection(string direction)
         {
@@ -27,20 +41,6 @@ namespace KingSurvival
             }
 
             return isValidDirection;
-        }
-
-        public static bool IsPositionOnTheBoard(IPosition Position)
-        {
-            bool leftBoundariesOfRow = Position.Row >= BaseGame.BoardEdgesGetter[0].Row;
-            bool rightBoundariesOfRow = Position.Row <= BaseGame.BoardEdgesGetter[3].Row;
-            bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
-
-            bool leftBoundariesOfCol = Position.Col >= BaseGame.BoardEdgesGetter[0].Col;
-            bool rightBoundariesOfCol = Position.Col <= BaseGame.BoardEdgesGetter[3].Col;
-            bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
-
-            bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
-            return isPositionOnTheBoard;
         }
 
         public static bool CommandCheck(string checkedInput)
@@ -376,6 +376,158 @@ namespace KingSurvival
                     Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
 
                     return null;
+                }
+            }
+        }
+
+        public static IPosition CheckNextKingPosition(IPosition currentCoordinates, char firstDirection, char secondDirection)
+        {
+            int[] displacementDownLeft = { 1, -2 };
+            int[] displacementDownRight = { 1, 2 };
+            int[] displacementUpLeft = { -1, -2 };
+            int[] displacementUpRight = { -1, 2 };
+            var newCoordinates = new Position();
+
+            if (firstDirection == 'U')
+            {
+                if (secondDirection == 'L')
+                {
+                    newCoordinates.Row = currentCoordinates.Row + displacementUpLeft[0];
+                    newCoordinates.Col = currentCoordinates.Col + displacementUpLeft[1];
+
+                    bool isEmptyCurrentCell = BaseGame.GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
+                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    {
+                        Mover.MoveFigure(currentCoordinates, newCoordinates);
+
+                        BaseGame.Counter++;
+                        for (int i = 0; i < 4; i++)
+                        {
+                            BaseGame.KingExistingMovesGetter[i] = true;
+                        }
+
+                        Checker.CheckForKingExit(newCoordinates.Row);
+                        return newCoordinates;
+                    }
+                    else
+                    {
+                        bool allAreFalse = BaseGame.KingExistingMovesMethod(0);
+                        if (allAreFalse)
+                        {
+                            BaseGame.GameOverGetter = true;
+                            BaseGame.CommandPrintKingLosing();
+                            return null;
+                        }
+
+                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
+
+                        return null;
+                    }
+                }
+                else
+                {
+                    newCoordinates.Row = currentCoordinates.Row + displacementUpRight[0];
+                    newCoordinates.Col = currentCoordinates.Col + displacementUpRight[1];
+
+                    bool isEmptyCurrentCell = BaseGame.GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
+                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    {
+                        Mover.MoveFigure(currentCoordinates, newCoordinates);
+
+                        BaseGame.Counter++;
+                        for (int i = 0; i < 4; i++)
+                        {
+                            BaseGame.KingExistingMovesGetter[i] = true;
+                        }
+
+                        Checker.CheckForKingExit(newCoordinates.Row);
+                        return newCoordinates;
+                    }
+                    else
+                    {
+                        bool allAreFalse = BaseGame.KingExistingMovesMethod(1);
+                        if (allAreFalse)
+                        {
+                            BaseGame.GameOverGetter = true;
+                            BaseGame.CommandPrintKingLosing();
+                            return null;
+                        }
+
+                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
+
+                        return null;
+                    }
+                }
+            }
+            else
+            {
+                if (secondDirection == 'L')
+                {
+                    newCoordinates.Row = currentCoordinates.Row + displacementDownLeft[0];
+                    newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
+
+                    bool isEmptyCurrentCell = BaseGame.GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
+                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    {
+                        Mover.MoveFigure(currentCoordinates, newCoordinates);
+
+                        BaseGame.Counter++;
+                        for (int i = 0; i < 4; i++)
+                        {
+                            BaseGame.KingExistingMovesGetter[i] = true;
+                        }
+
+                        Checker.CheckForKingExit(newCoordinates.Row);
+                        return newCoordinates;
+                    }
+                    else
+                    {
+                        bool allAreFalse = BaseGame.KingExistingMovesMethod(2);
+                        if (allAreFalse)
+                        {
+                            BaseGame.GameOverGetter = true;
+                            BaseGame.CommandPrintKingLosing();
+                            return null;
+                        }
+
+                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
+
+                        return null;
+                    }
+                }
+                else
+                {
+                    newCoordinates.Row = currentCoordinates.Row + displacementDownRight[0];
+                    newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
+
+                    bool isEmptyCurrentCell = BaseGame.GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
+                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    {
+                        Mover.MoveFigure(currentCoordinates, newCoordinates);
+
+                        BaseGame.Counter++;
+                        for (int i = 0; i < 4; i++)
+                        {
+                            BaseGame.KingExistingMovesGetter[i] = true;
+                        }
+
+                        Checker.CheckForKingExit(newCoordinates.Row);
+                        return newCoordinates;
+                    }
+                    else
+                    {
+                        bool allAreFalse = BaseGame.KingExistingMovesMethod(3);
+                        if (allAreFalse)
+                        {
+                            BaseGame.GameOverGetter = true;
+                            BaseGame.CommandPrintKingLosing();
+                            return null;
+                        }
+
+                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
+
+                        return null;
+                    }
                 }
             }
         }

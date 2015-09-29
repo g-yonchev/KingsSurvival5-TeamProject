@@ -67,6 +67,17 @@
         protected static string[] KingPossibleDirections = { "KUL", "KUR", "KDL", "KDR" };
 
         protected static bool[] KingExistingMoves = { true, true, true, true };
+        public static bool[] KingExistingMovesGetter
+        {
+            get
+            {
+                return KingExistingMoves;
+            }
+            set
+            {
+                KingExistingMoves = value;
+            }
+        }
 
         protected static string[] PawnAPossibleDirections = { "ADL", "ADR" };
 
@@ -174,166 +185,16 @@
         {
             var oldCoordinates = new Position(KingPosition.Row, KingPosition.Col);
 
-            var coords = CheckNextKingPosition(oldCoordinates, upDownDirection, leftRightDirection);
+            var coords = Checker.CheckNextKingPosition(oldCoordinates, upDownDirection, leftRightDirection);
             if (coords != null)
             {
                 KingPosition = coords;
             }
         }
 
-        public static IPosition CheckNextKingPosition(IPosition currentCoordinates, char firstDirection, char secondDirection)
-        {
-            int[] displacementDownLeft = { 1, -2 };
-            int[] displacementDownRight = { 1, 2 };
-            int[] displacementUpLeft = { -1, -2 };
-            int[] displacementUpRight = { -1, 2 };
-            var newCoordinates = new Position();
+        
 
-            if (firstDirection == 'U')
-            {
-                if (secondDirection == 'L')
-                {
-                    newCoordinates.Row = currentCoordinates.Row + displacementUpLeft[0];
-                    newCoordinates.Col = currentCoordinates.Col + displacementUpLeft[1];
-
-                    bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
-                    {
-                        Mover.MoveFigure(currentCoordinates, newCoordinates);
-
-                        Counter++;
-                        for (int i = 0; i < 4; i++)
-                        {
-                            KingExistingMoves[i] = true;
-                        }
-
-                        Checker.CheckForKingExit(newCoordinates.Row);
-                        return newCoordinates;
-                    }
-                    else
-                    {
-                        bool allAreFalse = KingExistingMovesMethod(0);
-                        if (allAreFalse)
-                        {
-                            GameOver = true;
-                            CommandPrintKingLosing();
-                            return null;
-                        }
-
-                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
-                        return null;
-                    }
-                }
-                else
-                {
-                    newCoordinates.Row = currentCoordinates.Row + displacementUpRight[0];
-                    newCoordinates.Col = currentCoordinates.Col + displacementUpRight[1];
-
-                    bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
-                    {
-                        Mover.MoveFigure(currentCoordinates, newCoordinates);
-
-                        Counter++;
-                        for (int i = 0; i < 4; i++)
-                        {
-                            KingExistingMoves[i] = true;
-                        }
-
-                        Checker.CheckForKingExit(newCoordinates.Row);
-                        return newCoordinates;
-                    }
-                    else
-                    {
-                        bool allAreFalse = KingExistingMovesMethod(1);
-                        if (allAreFalse)
-                        {
-                            GameOver = true;
-                            CommandPrintKingLosing();
-                            return null;
-                        }
-
-                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
-                        return null;
-                    }
-                }
-            }
-            else
-            {
-                if (secondDirection == 'L')
-                {
-                    newCoordinates.Row = currentCoordinates.Row + displacementDownLeft[0];
-                    newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
-
-                    bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
-                    {
-                        Mover.MoveFigure(currentCoordinates, newCoordinates);
-
-                        Counter++;
-                        for (int i = 0; i < 4; i++)
-                        {
-                            KingExistingMoves[i] = true;
-                        }
-
-                        Checker.CheckForKingExit(newCoordinates.Row);
-                        return newCoordinates;
-                    }
-                    else
-                    {
-                        bool allAreFalse = KingExistingMovesMethod(2);
-                        if (allAreFalse)
-                        {
-                            GameOver = true;
-                            CommandPrintKingLosing();
-                            return null;
-                        }
-
-                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
-                        return null;
-                    }
-                }
-                else
-                {
-                    newCoordinates.Row = currentCoordinates.Row + displacementDownRight[0];
-                    newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
-
-                    bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
-                    {
-                        Mover.MoveFigure(currentCoordinates, newCoordinates);
-
-                        Counter++;
-                        for (int i = 0; i < 4; i++)
-                        {
-                            KingExistingMoves[i] = true;
-                        }
-
-                        Checker.CheckForKingExit(newCoordinates.Row);
-                        return newCoordinates;
-                    }
-                    else
-                    {
-                        bool allAreFalse = KingExistingMovesMethod(3);
-                        if (allAreFalse)
-                        {
-                            GameOver = true;
-                            CommandPrintKingLosing();
-                            return null;
-                        }
-
-                        Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
-                        return null;
-                    }
-                }
-            }
-        }
-
-        private static bool KingExistingMovesMethod(int someMagicNumber)
+        public static bool KingExistingMovesMethod(int someMagicNumber)
         {
             KingExistingMoves[someMagicNumber] = false;
             bool allAreFalse = true;
