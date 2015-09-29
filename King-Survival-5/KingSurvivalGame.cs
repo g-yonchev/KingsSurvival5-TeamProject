@@ -104,22 +104,6 @@ namespace KingSurvival
             }
         }
 
-        public static bool IsValidCommand(string input)
-        {
-            bool isValidCommand = false;
-
-            if (Validator.IsValidPawnMove(input))
-            {
-                isValidCommand = true;
-            }
-            else
-            {
-                Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
-            }
-
-            return isValidCommand;
-        }
-
         public static void PawnDirection(char pawn, char direction, int pawnNumber)
         {
             var oldCoordinates = PawnPositions[pawnNumber];
@@ -140,73 +124,6 @@ namespace KingSurvival
             if (coords != null)
             {
                 KingPosition = coords;
-            }
-        }
-
-        public static bool CommandCheck(string checkedInput)
-        {
-            bool commandNameIsOK = IsValidCommand(checkedInput);
-            if (commandNameIsOK)
-            {
-                char startLetter = checkedInput[0];
-                switch (startLetter)
-                {
-                    case 'A':
-                        if (checkedInput[2] == 'L')
-                        {
-                            PawnDirection('A', 'L', 0);
-                        }
-                        else
-                        {
-                            PawnDirection('A', 'R', 0);
-                        }
-
-                        return true;
-
-                    case 'B':
-                        if (checkedInput[2] == 'L')
-                        {
-                            PawnDirection('B', 'L', 1);
-                        }
-                        else
-                        {
-                            PawnDirection('B', 'R', 1);
-                        }
-
-                        return true;
-
-                    case 'C':
-                        if (checkedInput[2] == 'L')
-                        {
-                            PawnDirection('C', 'L', 2);
-                        }
-                        else
-                        {
-                            PawnDirection('C', 'R', 2);
-                        }
-
-                        return true;
-
-                    case 'D':
-                        if (checkedInput[2] == 'L')
-                        {
-                            PawnDirection('D', 'L', 3);
-                        }
-                        else
-                        {
-                            PawnDirection('D', 'R', 3);
-                        }
-
-                        return true;
-
-                    default:
-                        Console.WriteLine(MessageConstants.ErrorMessage);
-                        return false;
-                }
-            }
-            else
-            {
-                return false;
             }
         }
 
