@@ -59,6 +59,7 @@
     <Compile Include="Models\KingFigure.cs" />
     <Compile Include="Models\PawnFigure.cs" />
     <Compile Include="Models\Position.cs" />
+    <Compile Include="Mover.cs" />
     <Compile Include="Printer.cs" />
   </ItemGroup>
   <ItemGroup>
