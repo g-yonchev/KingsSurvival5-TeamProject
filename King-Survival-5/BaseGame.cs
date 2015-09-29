@@ -37,6 +37,14 @@
             new Position(2, 4), new Position(2, 18), new Position(9, 4), new Position(9, 18)
         };
 
+        public static IPosition[] BoardEdgesGetter
+        {
+            get
+            {
+                return BoardEdges;
+            }
+        }
+
         protected static IPosition KingPosition = new Position(9, 10);
 
         protected static bool[,] PawnExistingMoves = 
@@ -77,19 +85,7 @@
         // RULE CHECKER:   <<< BaseGame is the class that sets the rules and CHECKS for them.
         // So all kinds of checks should be here. All the moves the player executes should be in 
         // KingSurvivalGame
-        protected static bool IsPositionOnTheBoard(IPosition Position)
-        {
-            bool leftBoundariesOfRow = Position.Row >= BoardEdges[0].Row;
-            bool rightBoundariesOfRow = Position.Row <= BoardEdges[3].Row;
-            bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
-
-            bool leftBoundariesOfCol = Position.Col >= BoardEdges[0].Col;
-            bool rightBoundariesOfCol = Position.Col <= BoardEdges[3].Col;
-            bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
-
-            bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
-            return isPositionOnTheBoard;
-        }
+        
 
         protected static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
         {
@@ -274,7 +270,7 @@
                 newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
 
                 bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                 {
                     Mover.MoveFigure(currentCoordinates, newCoordinates);
 
@@ -348,7 +344,7 @@
                 newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
 
                 bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                 {
                     Mover.MoveFigure(currentCoordinates, newCoordinates);
 
@@ -499,7 +495,7 @@
                     newCoordinates.Col = currentCoordinates.Col + displacementUpLeft[1];
 
                     bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         Mover.MoveFigure(currentCoordinates, newCoordinates);
 
@@ -533,7 +529,7 @@
                     newCoordinates.Col = currentCoordinates.Col + displacementUpRight[1];
 
                     bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         Mover.MoveFigure(currentCoordinates, newCoordinates);
 
@@ -570,7 +566,7 @@
                     newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
 
                     bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         Mover.MoveFigure(currentCoordinates, newCoordinates);
 
@@ -604,7 +600,7 @@
                     newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
 
                     bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         Mover.MoveFigure(currentCoordinates, newCoordinates);
 

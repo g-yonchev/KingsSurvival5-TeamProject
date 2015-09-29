@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,20 @@ namespace KingSurvival
             }
 
             return isValidDirection;
+        }
+
+        public static bool IsPositionOnTheBoard(IPosition Position)
+        {
+            bool leftBoundariesOfRow = Position.Row >= BaseGame.BoardEdgesGetter[0].Row;
+            bool rightBoundariesOfRow = Position.Row <= BaseGame.BoardEdgesGetter[3].Row;
+            bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
+
+            bool leftBoundariesOfCol = Position.Col >= BaseGame.BoardEdgesGetter[0].Col;
+            bool rightBoundariesOfCol = Position.Col <= BaseGame.BoardEdgesGetter[3].Col;
+            bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
+
+            bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
+            return isPositionOnTheBoard;
         }
     }
 }

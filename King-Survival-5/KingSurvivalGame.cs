@@ -32,7 +32,7 @@ namespace KingSurvival
                 for (int col = 0; col < GetField.GetLength(1); col++)
                 {
                     Position coordinates = new Position(row, col);
-                    bool isCellIn = IsPositionOnTheBoard(coordinates);
+                    bool isCellIn = Checker.IsPositionOnTheBoard(coordinates);
                     if (isCellIn)
                     {
                         if (row % 2 == 0)
