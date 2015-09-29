@@ -52,6 +52,18 @@
             { true, true }, { true, true }, { true, true }, { true, true }
         };
 
+        public static bool[,] PawnExistingMovesGetter
+        {
+            get
+            {
+                return PawnExistingMoves;
+            }
+            set
+            {
+                PawnExistingMoves = value;
+            }
+        }
+
         protected static string[] KingPossibleDirections = { "KUL", "KUR", "KDL", "KDR" };
 
         protected static bool[] KingExistingMoves = { true, true, true, true };
@@ -116,160 +128,7 @@
 
         
 
-        public static IPosition CheckNextPawnPosition(IPosition currentCoordinates, char checkDirection, char currentPawn)
-        {
-            int[] displacementDownLeft = { 1, -2 };
-            int[] displacementDownRight = { 1, 2 };
-            var newCoordinates = new Position();
-            if (checkDirection == 'L')
-            {
-                newCoordinates.Row = currentCoordinates.Row + displacementDownLeft[0];
-                newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
-
-                bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
-                {
-                    Mover.MoveFigure(currentCoordinates, newCoordinates);
-
-                    Counter++;
-
-                    SwitchCurrentPawnExistingMoves(currentPawn);
-
-                    return newCoordinates;
-                }
-                else
-                {
-                    /* switch (currentPawn)
-                     {
-                         case 'A':
-                             pawnExistingMoves[0, 0] = false;
-                             break;
-
-                         case 'B':
-                             pawnExistingMoves[1, 0] = false;
-                             break;
-                         case 'C':
-                             pawnExistingMoves[2, 0] = false;
-                             break;
-
-                         case 'D':
-                             pawnExistingMoves[3, 0] = false;
-                             break;
-
-                         default:
-                             Console.WriteLine("ERROR!");
-                             break;
-                     }*/
-                    bool allAreFalse = true;
-                    switch (currentPawn)
-                    {
-                        case 'A':
-                            PawnExistingMoves[0, 0] = false;
-                            break;
-                        case 'B':
-                            PawnExistingMoves[1, 0] = false;
-                            break;
-                        case 'C':
-                            PawnExistingMoves[2, 0] = false;
-                            break;
-                        case 'D':
-                            PawnExistingMoves[3, 0] = false;
-                            break;
-                        default:
-                            Console.WriteLine(MessageConstants.ErrorMessage);
-                            break;
-                    }
-
-                    allAreFalse = CheckingAllPawnMoves();
-
-                    if (allAreFalse)
-                    {
-                        GameOver = true;
-                        Console.WriteLine(MessageConstants.KingVictoryMessage, Counter / 2);
-                        GameOver = true;
-                        return null;
-                    }
-
-                    Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
-                    return null;
-                }
-            }
-            else
-            {
-                newCoordinates.Row = currentCoordinates.Row + displacementDownRight[0];
-                newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
-
-                bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
-                {
-                    Mover.MoveFigure(currentCoordinates, newCoordinates);
-
-                    Counter++;
-
-                    SwitchCurrentPawnExistingMoves(currentPawn);
-
-                    return newCoordinates;
-                }
-                else
-                {
-                    /*   switch (currentPawn)
-                       {
-                           case 'A':
-                               pawnExistingMoves[0, 1] = false;
-                               break;
-
-                           case 'B':
-                               pawnExistingMoves[1, 1] = false;
-                               break;
-                           case 'C':
-                               pawnExistingMoves[2, 1] = false;
-                               break;
-
-                           case 'D':
-                               pawnExistingMoves[3, 1] = false;
-                               break;
-
-                           default:
-                               Console.WriteLine("ERROR!");
-                               break;
-                       }*/
-                    bool allAreFalse = true;
-                    switch (currentPawn)
-                    {
-                        case 'A':
-                            PawnExistingMoves[0, 1] = false;
-                            break;
-                        case 'B':
-                            PawnExistingMoves[1, 1] = false;
-                            break;
-                        case 'C':
-                            PawnExistingMoves[2, 1] = false;
-                            break;
-                        case 'D':
-                            PawnExistingMoves[3, 1] = false;
-                            break;
-                        default:
-                            Console.WriteLine(MessageConstants.ErrorMessage);
-                            break;
-                    }
-
-                    allAreFalse = CheckingAllPawnMoves();
-
-                    if (allAreFalse)
-                    {
-                        GameOver = true;
-                        Console.WriteLine(MessageConstants.KingVictoryMessage, Counter / 2);
-                        GameOver = true;
-                        return null;
-                    }
-
-                    Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
-                    return null;
-                }
-            }
-        }
+        
 
         public static void SwitchCurrentPawnExistingMoves(char currentPawn)
         {
@@ -297,27 +156,13 @@
             }
         }
 
-        public static bool CheckingAllPawnMoves()
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 2; j++)
-                {
-                    if (PawnExistingMoves[i, j])
-                    {
-                        return false;
-                    }
-                }
-            }
-
-            return true;
-        }
+        
 
         public static void PawnDirection(char pawn, char direction, int pawnNumber)
         {
             var oldCoordinates = PawnPositions[pawnNumber];
 
-            var coords = CheckNextPawnPosition(oldCoordinates, direction, pawn);
+            var coords = Checker.CheckNextPawnPosition(oldCoordinates, direction, pawn);
 
             if (coords != null)
             {

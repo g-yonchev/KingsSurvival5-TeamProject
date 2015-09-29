@@ -1,5 +1,6 @@
 ﻿using Commons;
 using Contracts;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -206,6 +207,176 @@ namespace KingSurvival
                 Console.WriteLine("=========================");
                 Console.WriteLine(MessageConstants.KingVictoryMessage, BaseGame.Counter / 2);
                 BaseGame.GameOverGetter = true;
+            }
+        }
+
+        public static bool CheckingAllPawnMoves()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 2; j++)
+                {
+                    if (BaseGame.PawnExistingMovesGetter[i, j])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        public static IPosition CheckNextPawnPosition(IPosition currentCoordinates, char checkDirection, char currentPawn)
+        {
+            int[] displacementDownLeft = { 1, -2 };
+            int[] displacementDownRight = { 1, 2 };
+            var newCoordinates = new Position();
+            if (checkDirection == 'L')
+            {
+                newCoordinates.Row = currentCoordinates.Row + displacementDownLeft[0];
+                newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
+
+                bool isEmptyCurrentCell = BaseGame.GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
+                if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                {
+                    Mover.MoveFigure(currentCoordinates, newCoordinates);
+
+                    BaseGame.Counter++;
+
+                    BaseGame.SwitchCurrentPawnExistingMoves(currentPawn);
+
+                    return newCoordinates;
+                }
+                else
+                {
+                    /* switch (currentPawn)
+                     {
+                         case 'A':
+                             pawnExistingMoves[0, 0] = false;
+                             break;
+
+                         case 'B':
+                             pawnExistingMoves[1, 0] = false;
+                             break;
+                         case 'C':
+                             pawnExistingMoves[2, 0] = false;
+                             break;
+
+                         case 'D':
+                             pawnExistingMoves[3, 0] = false;
+                             break;
+
+                         default:
+                             Console.WriteLine("ERROR!");
+                             break;
+                     }*/
+                    bool allAreFalse = true;
+                    switch (currentPawn)
+                    {
+                        case 'A':
+                            BaseGame.PawnExistingMovesGetter[0, 0] = false;
+                            break;
+                        case 'B':
+                            BaseGame.PawnExistingMovesGetter[1, 0] = false;
+                            break;
+                        case 'C':
+                            BaseGame.PawnExistingMovesGetter[2, 0] = false;
+                            break;
+                        case 'D':
+                            BaseGame.PawnExistingMovesGetter[3, 0] = false;
+                            break;
+                        default:
+                            Console.WriteLine(MessageConstants.ErrorMessage);
+                            break;
+                    }
+
+                    allAreFalse = CheckingAllPawnMoves();
+
+                    if (allAreFalse)
+                    {
+                        BaseGame.GameOverGetter = true;
+                        Console.WriteLine(MessageConstants.KingVictoryMessage, BaseGame.Counter / 2);
+                        BaseGame.GameOverGetter = true;
+                        return null;
+                    }
+
+                    Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
+
+                    return null;
+                }
+            }
+            else
+            {
+                newCoordinates.Row = currentCoordinates.Row + displacementDownRight[0];
+                newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
+
+                bool isEmptyCurrentCell = BaseGame.GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
+                if (Checker.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                {
+                    Mover.MoveFigure(currentCoordinates, newCoordinates);
+
+                    BaseGame.Counter++;
+
+                    BaseGame.SwitchCurrentPawnExistingMoves(currentPawn);
+
+                    return newCoordinates;
+                }
+                else
+                {
+                    /*   switch (currentPawn)
+                       {
+                           case 'A':
+                               pawnExistingMoves[0, 1] = false;
+                               break;
+
+                           case 'B':
+                               pawnExistingMoves[1, 1] = false;
+                               break;
+                           case 'C':
+                               pawnExistingMoves[2, 1] = false;
+                               break;
+
+                           case 'D':
+                               pawnExistingMoves[3, 1] = false;
+                               break;
+
+                           default:
+                               Console.WriteLine("ERROR!");
+                               break;
+                       }*/
+                    bool allAreFalse = true;
+                    switch (currentPawn)
+                    {
+                        case 'A':
+                            BaseGame.PawnExistingMovesGetter[0, 1] = false;
+                            break;
+                        case 'B':
+                            BaseGame.PawnExistingMovesGetter[1, 1] = false;
+                            break;
+                        case 'C':
+                            BaseGame.PawnExistingMovesGetter[2, 1] = false;
+                            break;
+                        case 'D':
+                            BaseGame.PawnExistingMovesGetter[3, 1] = false;
+                            break;
+                        default:
+                            Console.WriteLine(MessageConstants.ErrorMessage);
+                            break;
+                    }
+
+                    allAreFalse = CheckingAllPawnMoves();
+
+                    if (allAreFalse)
+                    {
+                        BaseGame.GameOverGetter = true;
+                        Console.WriteLine(MessageConstants.KingVictoryMessage, BaseGame.Counter / 2);
+                        BaseGame.GameOverGetter = true;
+                        return null;
+                    }
+
+                    Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
+
+                    return null;
+                }
             }
         }
     }
