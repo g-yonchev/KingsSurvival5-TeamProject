@@ -106,23 +106,23 @@ namespace KingSurvival
 
         public static bool IsValidCommand(string input)
         {
-            if (Counter % 2 == 0)
-            {
-                bool isValidCommand = false;
+            //if (Counter % 2 == 0)
+            //{
+            //    bool isValidCommand = false;
 
-                if (Validator.IsValidKingMove(input))
-                {
-                    isValidCommand = true;
-                }
-                else
-                {
-                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
-                }
+            //    if (Validator.IsValidKingMove(input))
+            //    {
+            //        isValidCommand = true;
+            //    }
+            //    else
+            //    {
+            //        Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
+            //    }
 
-                return isValidCommand;
-            }
-            else
-            {
+            //    return isValidCommand;
+            //}
+            //else
+            //{
                 bool isValidCommand = false;
 
                 if (Validator.IsValidPawnMove(input))
@@ -135,7 +135,7 @@ namespace KingSurvival
                 }
 
                 return isValidCommand;
-            }
+            //}
 
         }
 
