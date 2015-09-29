@@ -3,7 +3,6 @@ namespace KingSurvival
     using System;
     using Models;
     using Commons;
-    using Contarcts;
     using System.Text.RegularExpressions;
     using Contracts;
     using global::Commons;
