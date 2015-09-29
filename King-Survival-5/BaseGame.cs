@@ -1,8 +1,10 @@
 ﻿namespace KingSurvival
 {
+    using Commons;
     using Contracts;
     using Models;
     using System;
+    using System.Text.RegularExpressions;
 
     public class BaseGame
     {
@@ -88,6 +90,71 @@
             Console.ForegroundColor = ConsoleColor.Black;
             Console.Write(GetField[row, col]);
             Console.ResetColor();
+        }
+
+        public static bool IsValidCommand(string input)
+        {
+            if (Counter % 2 == 0)
+            {
+                bool isValidCommand = false;
+
+                if (IsValidKingMove(input))
+                {
+                    isValidCommand = true;
+                }
+                else
+                {
+                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
+                }
+
+                return isValidCommand;
+            }
+            else
+            {
+                bool isValidCommand = false;
+
+                if (IsValidPawnMove(input))
+                {
+                    isValidCommand = true;
+                }
+                else
+                {
+                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
+                }
+
+                return isValidCommand;
+            }
+
+        }
+
+        private static bool IsValidPawnMove(string input)
+        {
+            string validInput = input.ToUpper();
+            var regex = new Regex(GameConstants.RegexPawnPattern);
+
+            if (regex.IsMatch(validInput))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private static bool IsValidKingMove(string input)
+        {
+            string validInput = input.ToUpper();
+            var regex = new Regex(GameConstants.RegexKingPattern);
+
+            if (regex.IsMatch(validInput))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }
