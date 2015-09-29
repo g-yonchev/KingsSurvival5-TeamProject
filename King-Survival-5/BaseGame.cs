@@ -45,6 +45,7 @@
         };
 
         protected static string[] KingPossibleDirections = { "KUL", "KUR", "KDL", "KDR" };
+
         protected static bool[] KingExistingMoves = { true, true, true, true };
 
         protected static string[] PawnAPossibleDirections = { "ADL", "ADR" };
@@ -58,6 +59,14 @@
         //protected static int Counter = 0;
 
         public static int Counter { get; set; }
+
+        public static string[] KingPossibleDirectionsGetter
+        {
+            get
+            {
+                return KingPossibleDirections;
+            }
+        }
 
         protected static bool GameOver = false;
         protected static IPosition[] PawnPositions = 
@@ -650,6 +659,8 @@
                 GameOver = true;
             }
         }
+
+        
 
     }
 }

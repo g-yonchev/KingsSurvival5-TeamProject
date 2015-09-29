@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseGame.cs" />
+    <Compile Include="Checker.cs" />
     <Compile Include="Commons\GameConstants.cs" />
     <Compile Include="Commons\MessageConstants.cs" />
     <Compile Include="Enums\FigureType.cs" />

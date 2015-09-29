@@ -4,7 +4,6 @@ namespace KingSurvival
     using Models;
     using Commons;
     using Contarcts;
-    //using System.Text.RegularExpressions;
     using Contracts;
     using King;
 
@@ -104,11 +103,24 @@ namespace KingSurvival
             }
         }
 
-        
+        // Returns user input after trimming and making it to upper case. Returns empty string if input is only white spaces.
+        private static string GetInput()
+        {
+            string result = string.Empty;
 
-        
+            string input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return result;
+            }
+            else
+            {
+                string inputTrimmed = input.Trim();
+                result = inputTrimmed.ToUpper();
 
-        
+                return result;
+            }
+        }
 
         public static void ProcessKingTurn()
         {
@@ -124,7 +136,7 @@ namespace KingSurvival
                     continue;
                 }
 
-                bool isValidDirection = CheckIfValidKingDirection(input);
+                bool isValidDirection = Checker.CheckIfValidKingDirection(input);
                 if (!isValidDirection)
                 {
                     Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
@@ -169,28 +181,12 @@ namespace KingSurvival
             Start(Counter);
         }
 
-        
-
-        
-
-       
-
-        
-
-        
-
-        
-
-       
-
         ////static void CommandPrintWrongDirection()
         ////{
         ////    Console.BackgroundColor = ConsoleColor.DarkYellow;
         ////    Console.WriteLine(Constants.WRONG_DIRECTION_MESSAGE);
         ////    Console.ResetColor();
         ////}
-
-        
 
         public static void Main()
         {
@@ -199,43 +195,5 @@ namespace KingSurvival
             Console.WriteLine(MessageConstants.GoodbyeMessage);
             Console.ReadLine();
         }
-
-        // Checks if command is KDR, KUL, etc.
-        private static bool CheckIfValidKingDirection(string direction)
-        {
-            bool isValidDirection = false;
-
-            foreach (var possibleDirection in KingPossibleDirections)
-            {
-                if (direction == possibleDirection)
-                {
-                    isValidDirection = true;
-                    break;
-                }
-            }
-
-            return isValidDirection;
-        }
-
-        // Returns user input after trimming and making it to upper case. Returns empty string if input is only white spaces.
-        private static string GetInput()
-        {
-            string result = string.Empty;
-
-            string input = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(input))
-            {
-                return result;
-            }
-            else
-            {
-                string inputTrimmed = input.Trim();
-                result = inputTrimmed.ToUpper();
-
-                return result;
-            }
-        }
-
-        
     }
 }
