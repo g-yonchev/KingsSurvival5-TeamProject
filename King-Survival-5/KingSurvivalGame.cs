@@ -244,26 +244,32 @@ namespace KingSurvival
 
         public static void ProcessPawnTurn()
         {
-            bool isExecuted = false;
-            while (!isExecuted)
+            bool shouldAskForInput = true;
+            while (shouldAskForInput)
             {
                 Printer.PrintMessage(ConsoleColor.Blue, MessageConstants.PawnTurnMessage);
 
-                string input = Console.ReadLine();
-
-                // input = input.Trim();
-                if (input != string.Empty)//"/n")
+                string input = GetInput();
+                if (input == string.Empty)
                 {
-                    // Console.WriteLine(input);
-                    input = input.ToUpper();
-                    isExecuted = CommandCheck(input);
-                }
-                else
-                {
-                    isExecuted = false;
-
                     Printer.PrintMessage(ConsoleColor.DarkRed, MessageConstants.EmptyStringMessage);
+                    continue;
                 }
+
+                bool isValidDirection = CheckIfValidPawnDirection(input);
+                if (!isValidDirection)
+                {
+                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
+                    continue;
+                }
+
+                shouldAskForInput = false;
+
+                // I suppose it works in a way similar to KingDirection()
+                char pawnName = input[0];
+                char directionLeftRight = input[2];
+                int pawnNumber = pawnName - 65;
+                PawnDirection(pawnName, directionLeftRight, pawnNumber);
             }
 
             Start(Counter);
@@ -684,6 +690,13 @@ namespace KingSurvival
                 }
             }
 
+            return isValidDirection;
+        }
+
+        // Checks if command is ADR, ADL, BDR, etc.
+        private static bool CheckIfValidPawnDirection(string direction)
+        {
+            bool isValidDirection = Validator.IsValidPawnMove(direction);
             return isValidDirection;
         }
 
