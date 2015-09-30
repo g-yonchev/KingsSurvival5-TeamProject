@@ -3,7 +3,6 @@ namespace KingSurvival
     using System;
     using Models;
     using Commons;
-    using Contarcts;
     using System.Text.RegularExpressions;
     using Contracts;
     using global::Commons;
@@ -104,41 +103,6 @@ namespace KingSurvival
             }
         }
 
-        public static bool IsValidCommand(string input)
-        {
-            if (Counter % 2 == 0)
-            {
-                bool isValidCommand = false;
-
-                if (Validator.IsValidKingMove(input))
-                {
-                    isValidCommand = true;
-                }
-                else
-                {
-                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
-                }
-
-                return isValidCommand;
-            }
-            else
-            {
-                bool isValidCommand = false;
-
-                if (Validator.IsValidPawnMove(input))
-                {
-                    isValidCommand = true;
-                }
-                else
-                {
-                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
-                }
-
-                return isValidCommand;
-            }
-
-        }
-
         public static void PawnDirection(char pawn, char direction, int pawnNumber)
         {
             var oldCoordinates = PawnPositions[pawnNumber];
@@ -159,98 +123,6 @@ namespace KingSurvival
             if (coords != null)
             {
                 KingPosition = coords;
-            }
-        }
-
-        public static bool CommandCheck(string checkedInput)
-        {
-            bool commandNameIsOK = IsValidCommand(checkedInput);
-            if (commandNameIsOK)
-            {
-                char startLetter = checkedInput[0];
-                switch (startLetter)
-                {
-                    case 'A':
-                        if (checkedInput[2] == 'L')
-                        {
-                            PawnDirection('A', 'L', 0);
-                        }
-                        else
-                        {
-                            PawnDirection('A', 'R', 0);
-                        }
-
-                        return true;
-
-                    case 'B':
-                        if (checkedInput[2] == 'L')
-                        {
-                            PawnDirection('B', 'L', 1);
-                        }
-                        else
-                        {
-                            PawnDirection('B', 'R', 1);
-                        }
-
-                        return true;
-
-                    case 'C':
-                        if (checkedInput[2] == 'L')
-                        {
-                            PawnDirection('C', 'L', 2);
-                        }
-                        else
-                        {
-                            PawnDirection('C', 'R', 2);
-                        }
-
-                        return true;
-
-                    case 'D':
-                        if (checkedInput[2] == 'L')
-                        {
-                            PawnDirection('D', 'L', 3);
-                        }
-                        else
-                        {
-                            PawnDirection('D', 'R', 3);
-                        }
-
-                        return true;
-
-                    case 'K':
-                        if (checkedInput[1] == 'U')
-                        {
-                            if (checkedInput[2] == 'L')
-                            {
-                                KingDirection('U', 'L');
-                            }
-                            else
-                            {
-                                KingDirection('U', 'R');
-                            }
-                        }
-                        else
-                        {
-                            if (checkedInput[2] == 'L')
-                            {
-                                KingDirection('D', 'L');
-                            }
-                            else
-                            {
-                                KingDirection('D', 'R');
-                            }
-                        }
-
-                        return true;
-                    default:
-                        Console.WriteLine(MessageConstants.ErrorMessage);
-                        return false;
-                }
-            }
-            else
-            {
-                return false;
             }
         }
 
@@ -288,26 +160,32 @@ namespace KingSurvival
 
         public static void ProcessPawnTurn()
         {
-            bool isExecuted = false;
-            while (!isExecuted)
+            bool shouldAskForInput = true;
+            while (shouldAskForInput)
             {
                 Printer.PrintMessage(ConsoleColor.Blue, MessageConstants.PawnTurnMessage);
 
-                string input = Console.ReadLine();
-
-                // input = input.Trim();
-                if (input != string.Empty)//"/n")
+                string input = GetInput();
+                if (input == string.Empty)
                 {
-                    // Console.WriteLine(input);
-                    input = input.ToUpper();
-                    isExecuted = CommandCheck(input);
-                }
-                else
-                {
-                    isExecuted = false;
-
                     Printer.PrintMessage(ConsoleColor.DarkRed, MessageConstants.EmptyStringMessage);
+                    continue;
                 }
+
+                bool isValidDirection = CheckIfValidPawnDirection(input);
+                if (!isValidDirection)
+                {
+                    Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
+                    continue;
+                }
+
+                shouldAskForInput = false;
+
+                // I suppose it works in a way similar to KingDirection()
+                char pawnName = input[0];
+                char directionLeftRight = input[2];
+                int pawnNumber = pawnName - 65;
+                PawnDirection(pawnName, directionLeftRight, pawnNumber);
             }
 
             Start(Counter);
@@ -728,6 +606,13 @@ namespace KingSurvival
                 }
             }
 
+            return isValidDirection;
+        }
+
+        // Checks if command is ADR, ADL, BDR, etc.
+        private static bool CheckIfValidPawnDirection(string direction)
+        {
+            bool isValidDirection = Validator.IsValidPawnMove(direction);
             return isValidDirection;
         }
 

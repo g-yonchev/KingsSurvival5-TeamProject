@@ -1,6 +1,6 @@
 ﻿using Models;
 
-namespace Contarcts
+namespace Contracts
 {
     /// <summary>
     ///  Interface definding figure characteristics.

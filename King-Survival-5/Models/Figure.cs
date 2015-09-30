@@ -1,6 +1,6 @@
 ﻿namespace Models
 {
-    using Contarcts;
+    using Contracts;
     public abstract class Figure : IFigure
     {
         protected Figure(Position position)

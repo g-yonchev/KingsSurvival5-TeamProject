@@ -1,6 +1,6 @@
 ﻿namespace King.Models.Factories
 {
-    using Contarcts;
+    using Contracts;
     using global::Models;
     using Models;
     using System;
