@@ -1,6 +1,7 @@
-﻿namespace Models
+﻿namespace KingSurvival.GameLogic.Models
 {
-    using Contracts;
+    using KingSurvival.GameLogic.Contracts;
+
     public abstract class Figure : IFigure
     {
         protected Figure(Position position)

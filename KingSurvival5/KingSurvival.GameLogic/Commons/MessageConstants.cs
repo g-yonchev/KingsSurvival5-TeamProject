@@ -1,7 +1,5 @@
-﻿namespace Commons
+﻿namespace KingSurvival.GameLogic.Commons
 {
-    using System;
-
     public static class MessageConstants
     {
         public const string FinishGameMessage = "Game is finished!";

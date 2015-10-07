@@ -1,7 +1,5 @@
-﻿namespace Contracts
+﻿namespace KingSurvival.GameLogic.Contracts
 {
-    using System;
-
     public interface IPosition
     {
         int Row { get; }

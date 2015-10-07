@@ -1,7 +1,7 @@
-﻿using Models;
-
-namespace Contracts
+﻿namespace KingSurvival.GameLogic.Contracts
 {
+    using KingSurvival.GameLogic.Models;
+
     /// <summary>
     ///  Interface definding figure characteristics.
     /// </summary>

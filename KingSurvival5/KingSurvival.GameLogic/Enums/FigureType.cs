@@ -1,4 +1,4 @@
-﻿namespace Enums
+﻿namespace KingSurvival.GameLogic.Enums
 {
     /// <summary>
     /// Figures on the board

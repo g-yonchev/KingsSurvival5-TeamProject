@@ -1,14 +1,7 @@
-﻿
-using Contracts;
-using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace King.Models.Factories
+﻿namespace KingSurvival.GameLogic.Models.Factories
 {
+    using KingSurvival.GameLogic.Contracts;
+
     public abstract class FigureFactory
     {
         public abstract IFigure CreateFigure(Position position);

@@ -1,8 +1,9 @@
-﻿namespace KingSurvival
+﻿namespace KingSurvival.ConsoleClient
 {
-    using Contracts;
-    using Models;
     using System;
+
+    using KingSurvival.GameLogic.Contracts;
+    using KingSurvival.GameLogic.Models;
 
     public class BaseGame
     {

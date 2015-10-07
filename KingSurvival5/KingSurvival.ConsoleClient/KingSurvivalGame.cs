@@ -1,14 +1,11 @@
-namespace KingSurvival
+namespace KingSurvival.ConsoleClient
 {
     using System;
-    using Models;
-    using Commons;
-    using System.Text.RegularExpressions;
-    using Contracts;
-    using global::Commons;
-
-    // using King.Contracts;
-
+    
+    using KingSurvival.GameLogic.Commons;
+    using KingSurvival.GameLogic.Contracts;
+    using KingSurvival.GameLogic.Models;
+    
     public class KingSurvivalGame : BaseGame
     {
         ////private IPrinter printer;
