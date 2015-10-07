@@ -3,9 +3,9 @@
     using global::Commons;
     using System.Text.RegularExpressions;
 
-    class Validator
+    public class Validator
     {
-        internal static bool IsValidPawnMove(string input)
+        public static bool IsValidPawnMove(string input)
         {
             string validInput = input.ToUpper();
             var regex = new Regex(GameConstants.RegexPawnPattern);
@@ -20,7 +20,7 @@
             }
         }
 
-       internal static bool IsValidKingMove(string input)
+        public static bool IsValidKingMove(string input)
         {
             string validInput = input.ToUpper();
             var regex = new Regex(GameConstants.RegexKingPattern);

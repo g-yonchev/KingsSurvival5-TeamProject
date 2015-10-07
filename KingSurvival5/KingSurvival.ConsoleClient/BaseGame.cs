@@ -66,14 +66,14 @@
         // RULE CHECKER:   <<< BaseGame is the class that sets the rules and CHECKS for them.
         // So all kinds of checks should be here. All the moves the player executes should be in 
         // KingSurvivalGame
-        protected static bool IsPositionOnTheBoard(IPosition Position)
+        protected static bool IsPositionOnTheBoard(IPosition position)
         {
-            bool leftBoundariesOfRow = Position.Row >= BoardEdges[0].Row;
-            bool rightBoundariesOfRow = Position.Row <= BoardEdges[3].Row;
+            bool leftBoundariesOfRow = position.Row >= BoardEdges[0].Row;
+            bool rightBoundariesOfRow = position.Row <= BoardEdges[3].Row;
             bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
 
-            bool leftBoundariesOfCol = Position.Col >= BoardEdges[0].Col;
-            bool rightBoundariesOfCol = Position.Col <= BoardEdges[3].Col;
+            bool leftBoundariesOfCol = position.Col >= BoardEdges[0].Col;
+            bool rightBoundariesOfCol = position.Col <= BoardEdges[3].Col;
             bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
 
             bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
