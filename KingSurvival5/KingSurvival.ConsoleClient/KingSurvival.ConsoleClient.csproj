@@ -7,8 +7,8 @@
     <ProjectGuid>{842DAF0E-7B19-48CE-8066-4639CC1F6FB0}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>KingSurvival</RootNamespace>
-    <AssemblyName>KingSurvival</AssemblyName>
+    <RootNamespace>KingSurvival.ConsolClient</RootNamespace>
+    <AssemblyName>KingSurvival.ConsolClient</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
