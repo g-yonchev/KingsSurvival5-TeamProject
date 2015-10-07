@@ -1,4 +1,4 @@
-﻿namespace KingSurvival
+﻿namespace KingSurvival.ConsoleClient
 {
     using System;
 

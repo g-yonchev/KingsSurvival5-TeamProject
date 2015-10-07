@@ -1,4 +1,4 @@
-﻿namespace Models
+﻿namespace KingSurvival.GameLogic.Models
 {
     public class Board
     {

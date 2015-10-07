@@ -1,8 +1,8 @@
-﻿namespace Commons
+﻿namespace KingSurvival.GameLogic.Commons
 {
-    internal class GameConstants
+    public class GameConstants
     {
-        internal const string RegexKingPattern = @"(K(U|D)(L|R)";
-        internal const string RegexPawnPattern = @"^(A|B|C|D)D(L|R)$";
+        public const string RegexKingPattern = @"(K(U|D)(L|R)";
+        public const string RegexPawnPattern = @"^(A|B|C|D)D(L|R)$";
     }
 }

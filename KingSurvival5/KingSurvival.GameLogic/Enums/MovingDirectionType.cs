@@ -1,4 +1,4 @@
-﻿namespace Enums
+﻿namespace KingSurvival.GameLogic.Enums
 {
     using System;
 

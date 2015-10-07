@@ -1,6 +1,5 @@
-﻿namespace KingSurvival.Commons
+﻿namespace KingSurvival.GameLogic.Commons
 {
-    using global::Commons;
     using System.Text.RegularExpressions;
 
     public class Validator

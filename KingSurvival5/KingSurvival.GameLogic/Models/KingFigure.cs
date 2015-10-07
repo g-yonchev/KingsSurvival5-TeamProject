@@ -1,6 +1,6 @@
-﻿namespace Models
+﻿namespace KingSurvival.GameLogic.Models
 {
-    using Contracts;
+    using KingSurvival.GameLogic.Contracts;
 
     public class KingFigure : Figure, IFigure
     {
