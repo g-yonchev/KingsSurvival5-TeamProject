@@ -6,7 +6,7 @@
     {
         public override IFigure CreateFigure(Position position)
         {
-            return new PawnFigure(position);
+            return new Pawn(position);
         }
     }
 }

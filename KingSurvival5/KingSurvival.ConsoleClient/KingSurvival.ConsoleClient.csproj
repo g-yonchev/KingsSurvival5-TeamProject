@@ -47,6 +47,7 @@
     <Compile Include="BaseGame.cs" />
     <Compile Include="KingSurvivalGame.cs" />
     <Compile Include="Printer.cs" />
+    <Compile Include="Renderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

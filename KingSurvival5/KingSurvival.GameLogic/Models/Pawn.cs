@@ -2,20 +2,16 @@
 {
     using KingSurvival.GameLogic.Contracts;
 
-    public class KingFigure : Figure, IFigure
+    public class Pawn : Figure, IFigure
     {
-        public int MovesCounter { get; set; }
-
-        public KingFigure(Position position)
+        public Pawn(Position position)
             : base(position)
         {
-            this.MovesCounter = 0;
         }
 
         public override void Move(Position position)
         {
             this.Position = position;
-            this.MovesCounter++;
         }
     }
 }

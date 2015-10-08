@@ -6,7 +6,7 @@
     {
         public override IFigure CreateFigure(Position position)
         {
-            return new KingFigure(position);
+            return new King(position);
         }
     }
 }
