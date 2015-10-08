@@ -2,9 +2,9 @@
 {
     using KingSurvival.GameLogic.Contracts;
 
-    public class Move
+    public class Movement
     {
-        public Move(IPosition currentPosition, IPosition nextPosition)
+        public Movement(IPosition currentPosition, IPosition nextPosition)
         {
             this.CurrentPosition = currentPosition;
             this.NextPosition = nextPosition;

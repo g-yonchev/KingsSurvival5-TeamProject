@@ -42,7 +42,7 @@
     <Compile Include="Commons\FigurePrototype.cs" />
     <Compile Include="Commons\GameConstants.cs" />
     <Compile Include="Commons\MessageConstants.cs" />
-    <Compile Include="Commons\Move.cs" />
+    <Compile Include="Commons\Movement.cs" />
     <Compile Include="Commons\Validator.cs" />
     <Compile Include="Contracts\IFigure.cs" />
     <Compile Include="Contracts\IBoard.cs" />
@@ -59,6 +59,8 @@
     <Compile Include="Models\King.cs" />
     <Compile Include="Models\Pawn.cs" />
     <Compile Include="Models\Position.cs" />
+    <Compile Include="MovementStrategies\BasicKingMovementStrategy.cs" />
+    <Compile Include="MovementStrategies\IMovementStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

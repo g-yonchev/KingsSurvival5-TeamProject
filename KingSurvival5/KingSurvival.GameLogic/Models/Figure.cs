@@ -2,17 +2,20 @@
 {
     using KingSurvival.GameLogic.Commons;
     using KingSurvival.GameLogic.Contracts;
+    using MovementStrategies;
 
     public abstract class Figure : FigurePrototype, IFigure
     {
-        protected Figure(Position position)
+        protected Figure(string name, IMovementStrategy movementStrategy)
         {
-            this.Position = position;
+            this.Name = name;
         }
 
-        public Position Position { get; protected set; }
+        public string Name { get; set; }
 
-        public abstract void Move(Position position);
+        public IMovementStrategy MovementStrategy { get; protected set; }
+
+        public abstract bool CanMove(Movement movement);
 
         public override FigurePrototype Clone()
         {

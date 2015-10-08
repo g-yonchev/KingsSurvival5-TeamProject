@@ -1,23 +1,31 @@
 ﻿namespace KingSurvival.GameLogic.Models
 {
+    using System;
+
+    using Commons;
     using KingSurvival.GameLogic.Contracts;
+    using MovementStrategies;
 
     public class King : Figure, IFigure
     {
         private const int InitialMovesCount = 0;
 
-        public int MovesCount { get; private set; }
-
-        public King(Position position)
-            : base(position)
+        public King(string name, IMovementStrategy movementStrategy)
+            : base(name, movementStrategy)
         {
             this.MovesCount = InitialMovesCount;
         }
 
-        public override void Move(Position position)
+        public int MovesCount { get; private set; }
+
+        public override bool CanMove(Movement movement)
         {
-            this.Position = position;
-            this.MovesCount++;
+            return this.MovementStrategy.CanMove(movement);
+        }
+
+        public void UpdateMovesCount()
+        {
+            this.MovesCount += 1;
         }
     }
 }

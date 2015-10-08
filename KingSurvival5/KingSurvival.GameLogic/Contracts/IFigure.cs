@@ -1,14 +1,20 @@
 ﻿namespace KingSurvival.GameLogic.Contracts
 {
-    using KingSurvival.GameLogic.Models;
+    using Commons;
+    using MovementStrategies;
 
     /// <summary>
-    ///  Interface definding figure characteristics.
+    ///  Interface defining figure characteristics.
     /// </summary>
     public interface IFigure
     {
-        Position Position { get; }
+        //Position Position { get; }
+        //void Move(Position position);
 
-        void Move(Position position);
+        string Name { get; }
+
+        IMovementStrategy MovementStrategy { get; }
+
+        bool CanMove(Movement move);
     }
 }
