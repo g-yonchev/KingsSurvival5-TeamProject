@@ -42,6 +42,7 @@
     <Compile Include="Commons\FigurePrototype.cs" />
     <Compile Include="Commons\GameConstants.cs" />
     <Compile Include="Commons\MessageConstants.cs" />
+    <Compile Include="Commons\Move.cs" />
     <Compile Include="Commons\Validator.cs" />
     <Compile Include="Contracts\IFigure.cs" />
     <Compile Include="Contracts\IBoard.cs" />
