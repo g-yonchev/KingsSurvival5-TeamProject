@@ -33,5 +33,13 @@
                 return false;
             }
         }
+
+        public static void CheckIfObjectIsNull(object obj, string errorMessage = MessageConstants.EmptyString)
+        {
+            if (obj == null)
+            {
+                throw new NullReferenceException(GlobalErrorMessages.NullFigureErrorMessage);
+            }
+        }
     }
 }

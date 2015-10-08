@@ -12,5 +12,8 @@
         public const string WrongDirectionMessage = "You can't go in this direction! ";
         public const string KingLostMessage = "King loses in {0} moves!";
         public const string GoodbyeMessage = "\nThank you for playing!\n\n";
+        public const string EmptyString = "";
+        public const string NullFigureErrorMessage = "Figure cannot be null!";
+        public const string FigureOnTheWayErrorMessage = "There is a figure on your way!";
     }
 }

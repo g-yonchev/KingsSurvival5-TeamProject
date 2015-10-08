@@ -6,12 +6,13 @@
         public const string RegexPawnPattern = @"^(A|B|C|D)D(L|R)$";
 
         public const int MaxNumberOfRows = 8;
-        public const int MaxNumberOfCols = 8;
+        public const int MaxNumberOfCols = 17;
         public const int MinNumberOfRows = 0;
         public const int MinNumberOfCols = 0;
 
-        public const int BoardHeight = 8;
-        public const int BoardWidth = 17;
+        public const int BoardRows = 8;
+        public const int BoardCols = 8;
+        public const string Cell = " ";
 
         public const int FirstPawnInitialRow = 0;
         public const int FirstPawnInitialCol = 0;
