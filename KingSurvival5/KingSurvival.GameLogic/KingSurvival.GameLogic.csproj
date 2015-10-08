@@ -52,8 +52,8 @@
     <Compile Include="Models\Factories\KingFactory.cs" />
     <Compile Include="Models\Factories\PawnFactory.cs" />
     <Compile Include="Models\Figure.cs" />
-    <Compile Include="Models\KingFigure.cs" />
-    <Compile Include="Models\PawnFigure.cs" />
+    <Compile Include="Models\King.cs" />
+    <Compile Include="Models\Pawn.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
