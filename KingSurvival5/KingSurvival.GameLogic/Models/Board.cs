@@ -1,45 +1,65 @@
 ﻿namespace KingSurvival.GameLogic.Models
 {
     using KingSurvival.GameLogic.Commons;
-
-    /// <summary>
-    /// A Singleton class for the board 
-    /// </summary>
-    public class Board
-    {
-        private static readonly object SyncLock = new object();
-        private static volatile Board instance;
-
-        /// <summary>
-        /// A private constructor for the Singleton implementation
-        /// </summary>
-        private Board(int width, int height)
+    using Contracts;
+    using System;
+   
+        public class Board : IBoard
         {
-            this.Width = width;
-            this.Height = height;
-        }
+            private readonly IFigure[,] board;
 
-        public int Height { get; set; }
-
-        public int Width { get; set; }
-
-        public static Board Instance
-        {
-            get
+            public Board(
+                int rows = GameConstants.BoardRows,
+        int cols = GameConstants.BoardRows)
             {
-                if (instance == null)
-                {
-                    lock (SyncLock)
-                    {
-                        if (instance == null)
-                        {
-                            instance = new Board(GameConstants.MaxNumberOfCols, GameConstants.MaxNumberOfRows);
-                        }
-                    }
-                }
-
-                return instance;
+                this.TotalRows = rows;
+                this.TotalCols = cols;
+                this.board = new IFigure[rows, cols];
             }
+
+            public int TotalRows { get; private set; }
+
+            public int TotalCols { get; private set; }
+
+            public void AddFigure(IFigure figure, Position position)
+            {
+                Validator.CheckIfObjectIsNull(figure, MessageConstants.NullFigureErrorMessage);
+                //TODO
+                //Position.CheckIfValid(position);
+
+                int arrRow = this.GetArrayRow(position.Row);
+                int arrCol = this.GetArrayCol(position.Col);
+                this.board[arrRow, arrCol] = figure;
+            }
+
+
+            public IFigure GetFigureAtPosition(Position position)
+            {
+                int arrRow = this.GetArrayRow(position.Row);
+                int arrCol = this.GetArrayCol(position.Col);
+                return this.board[arrRow, arrCol];
+            }
+
+            public void MoveFigureAtPosition(IFigure figure, Position from, Position to)
+            {
+                int arrFromRow = this.GetArrayRow(from.Row);
+                int arrFromCol = this.GetArrayCol(from.Col);
+                this.board[arrFromRow, arrFromCol] = null;
+
+                int arrToRow = this.GetArrayRow(to.Row);
+                int arrToCol = this.GetArrayCol(to.Col);
+                this.board[arrToRow, arrToCol] = figure;
+            }
+
+            private int GetArrayRow(int currentRow)
+            {
+                return this.TotalRows - currentRow;
+            }
+
+            private int GetArrayCol(int currentCol)
+            {
+            return this.TotalCols - currentCol;
+        }
         }
     }
 }

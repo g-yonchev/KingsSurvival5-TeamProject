@@ -44,6 +44,7 @@
     <Compile Include="Commons\MessageConstants.cs" />
     <Compile Include="Commons\Validator.cs" />
     <Compile Include="Contracts\IFigure.cs" />
+    <Compile Include="Contracts\IBoard.cs" />
     <Compile Include="Contracts\IPosition.cs" />
     <Compile Include="Enums\FigureType.cs" />
     <Compile Include="Enums\MovingDirectionType.cs" />
