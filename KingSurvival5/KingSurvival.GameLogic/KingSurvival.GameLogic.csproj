@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commons\FigurePrototype.cs" />
     <Compile Include="Commons\GameConstants.cs" />
     <Compile Include="Commons\MessageConstants.cs" />
     <Compile Include="Commons\Validator.cs" />
