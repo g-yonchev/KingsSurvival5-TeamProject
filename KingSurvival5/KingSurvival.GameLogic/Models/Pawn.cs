@@ -1,17 +1,20 @@
 ﻿namespace KingSurvival.GameLogic.Models
 {
+    using System;
+    using Commons;
     using KingSurvival.GameLogic.Contracts;
+    using MovementStrategies;
 
     public class Pawn : Figure, IFigure
     {
-        public Pawn(Position position)
-            : base(position)
+        public Pawn(string name, IMovementStrategy movementStrategy)
+            : base(name, movementStrategy)
         {
         }
 
-        public override void Move(Position position)
+        public override bool CanMove(Movement movement)
         {
-            this.Position = position;
+            return this.MovementStrategy.CanMove(movement);
         }
     }
 }
