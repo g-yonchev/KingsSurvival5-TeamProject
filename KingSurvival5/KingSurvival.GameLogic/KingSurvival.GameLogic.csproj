@@ -45,6 +45,8 @@
     <Compile Include="Commons\Validator.cs" />
     <Compile Include="Contracts\IFigure.cs" />
     <Compile Include="Contracts\IPosition.cs" />
+    <Compile Include="Engine\Engine.cs" />
+    <Compile Include="Engine\IEngine.cs" />
     <Compile Include="Enums\FigureType.cs" />
     <Compile Include="Enums\MovingDirectionType.cs" />
     <Compile Include="Models\Board.cs" />
