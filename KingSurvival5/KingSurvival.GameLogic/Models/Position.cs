@@ -2,10 +2,14 @@
 {
     using KingSurvival.GameLogic.Contracts;
 
-    public struct Position : IPosition
+    public class Position : IPosition
     {
+        // Probably, there's no need of empty ctor. It is here for now in order to not break the code.
+        public Position()
+        {
+        }
+
         public Position(int row, int col)
-            : this()
         {
             this.Row = row;
             this.Col = col;
