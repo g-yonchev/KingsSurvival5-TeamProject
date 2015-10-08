@@ -81,7 +81,7 @@
             return isPositionOnTheBoard;
         }
 
-        /*
+        
         protected static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
         {
             //ConsoleColor fgColor = ConsoleColor.Black;
@@ -91,7 +91,7 @@
             Console.Write(GetField[row, col]);
             Console.ResetColor();
         }
-        */
+        
 
     }
 }

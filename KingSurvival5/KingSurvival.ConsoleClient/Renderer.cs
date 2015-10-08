@@ -71,7 +71,7 @@
             Console.ResetColor();
         }
 
-        protected static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
+        public static void SetConsoleColor(ConsoleColor bgColor, int row, int col)
         {
             Console.BackgroundColor = bgColor;
             Console.ForegroundColor = ConsoleColor.Black;
