@@ -8,22 +8,12 @@
     {
         private const int InitialMovesCount = 0;
 
-        public King(string name, IMovementStrategy movementStrategy)
-            : base(name, movementStrategy)
+        public King(string name, IPosition position)
+            : base(name, position)
         {
-            this.MovesCount = InitialMovesCount;
         }
 
         public int MovesCount { get; private set; }
 
-        public override bool CanMove(Movement movement)
-        {
-            return this.MovementStrategy.CanMove(movement);
-        }
-
-        public void UpdateMovesCount()
-        {
-            this.MovesCount += 1;
-        }
     }
 }

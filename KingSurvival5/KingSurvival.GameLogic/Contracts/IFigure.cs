@@ -8,13 +8,9 @@
     /// </summary>
     public interface IFigure
     {
-        //Position Position { get; }
+        IPosition Position { get; }
         //void Move(Position position);
 
         string Name { get; }
-
-        IMovementStrategy MovementStrategy { get; }
-
-        bool CanMove(Movement move);
     }
 }

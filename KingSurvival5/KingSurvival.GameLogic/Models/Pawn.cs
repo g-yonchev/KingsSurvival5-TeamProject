@@ -7,14 +7,10 @@
 
     public class Pawn : Figure, IFigure
     {
-        public Pawn(string name, IMovementStrategy movementStrategy)
-            : base(name, movementStrategy)
+        public Pawn(string name, IPosition position)
+            : base(name, position)
         {
-        }
 
-        public override bool CanMove(Movement movement)
-        {
-            return this.MovementStrategy.CanMove(movement);
         }
     }
 }

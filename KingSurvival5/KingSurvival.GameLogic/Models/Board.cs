@@ -59,7 +59,7 @@
             private int GetArrayCol(int currentCol)
             {
             return this.TotalCols - currentCol;
-        }
+        
         }
     }
 }
