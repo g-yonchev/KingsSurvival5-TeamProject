@@ -8,10 +8,6 @@
 
         int TotalCols { get; }
 
-        void AddFigure(IFigure figure, Position position);
-
-        IFigure GetFigureAtPosition(Position position);
-
-        void MoveFigureAtPosition(IFigure figure, Position from, Position to);
+        char[,] Field { get; }
     }
 }
