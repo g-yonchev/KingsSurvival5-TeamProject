@@ -13,96 +13,55 @@ namespace KingSurvival.GameLogic.Engine
     {
         //private IRenderer renderer;
         private Board board;
+        private King king = new King("King", new Position(1,1));
+
+
+        public Engine()
+        {
+            this.Initialize();
+        }
 
         public void Initialize()
         {
-            this.board = Board.Instance;
-           // this.renderer = new Renderer();
+            board = new Board(8, 8);
         }
-
+         
         public void Start()
         {
             while (true)
             {
-                if (true /*!GameOver*/)
+                var command = Console.ReadLine();
+
+                // K, or A, b, c,....
+                var commandName = command.Substring(0,1);
+
+                // Which direction
+                var commandDirection = command.Substring(1,2);
+
+                IPosition newPosition = null;
+
+                if (!Validator.IsValidCommand(command))
                 {
-                    Console.WriteLine("board"); //renderer.RenderBoard();
 
-                    // for exaple this is hardcore variable, represent the pawn is his turn
-                    var moveCounter = 3;
-                    bool isKingTurn = moveCounter % 2 == 0;
-                    if (isKingTurn)
-                    {
-                        //ProcessKingTurn();
-                    }
-                    else
-                    {
-                        //ProcessPawnTurn(); // this method does exactly what is written bewol
-                        
+                    // commandName validate
+                    // Which direction validate
 
-
-                        // TODO: In the future when renderer is implemented, the console will be replaced with the renderer
-                        // same for the king
-                        Console.WriteLine(MessageConstants.PawnTurnMessage);
-
-                        string input = Console.ReadLine();
-                        if (input == string.Empty)
-                        {
-                            Console.WriteLine(MessageConstants.EmptyStringMessage);
-                            continue;
-                        }
-
-                        bool isValidDirection = true;
-                        if (!isValidDirection)
-                        {
-                            Console.WriteLine(MessageConstants.InvalidCommandMessage);
-                            continue;
-                        }
-
-                        // I suppose it works in a way similar to KingDirection()
-                        char pawnName = input[0];
-                        char directionLeftRight = input[2];
-                        int pawnNumber = pawnName - 65;
-                        PawnDirection(pawnName, directionLeftRight, pawnNumber);
-                    }
+                    throw new Exception();
                 }
-                else
+
+                if (!Validator.CanMove())
                 {
-                    Console.WriteLine(MessageConstants.FinishGameMessage);
-                    return;
+                    // first the command "UL" will be parse new ++ or -- position... blah blah...
+
+                    newPosition = new Position(2, 2);
+
+                    var isThisPlaceInOutOfTheBorders = board.Field[2, 2];
+                    var isThisPlaceInFree = board.Field[2, 2];
+                    throw new Exception();
                 }
+                newPosition = new Position(2, 2);
+                king.Move(newPosition);
             }
         }
-
-        // TODO: Delete later, when all is implemented
-        private void PawnDirection(char pawn, char direction, int pawnNumber)
-        {
-            var oldCoordinates = PawnPositions[pawnNumber];
-
-            var coords = CheckNextPawnPosition();
-
-            if (coords != null)
-            {
-                PawnPositions[pawnNumber] = coords;
-            }
-        }
-
-        // TODO: Delete later, when all is implemented
-        private IPosition CheckNextPawnPosition()
-        {
-            return new Position();
-        }
-
-        // TODO: Delete later, when all is implemented
-        public bool shouldAskForInput { get; set; }
-
-        // TODO: Delete later, when all is implemented
-        protected IPosition[] PawnPositions = 
-        {
-            new Position(2, 4), 
-            new Position(2, 8), 
-            new Position(2, 12), 
-            new Position(2, 16)
-        };
     }
 }

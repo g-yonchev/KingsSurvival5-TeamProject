@@ -15,5 +15,10 @@
 
         public int MovesCount { get; private set; }
 
+
+        internal void Move(IPosition newPosition)
+        {
+            this.Position = newPosition;
+        }
     }
 }
