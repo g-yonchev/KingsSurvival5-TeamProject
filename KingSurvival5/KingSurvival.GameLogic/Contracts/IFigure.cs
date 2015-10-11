@@ -9,8 +9,9 @@
     public interface IFigure
     {
         IPosition Position { get; }
-        //void Move(Position position);
 
-        string Name { get; }
+        char Symbol { get; }
+
+        IMovementStrategy MovementStrategy { get; }
     }
 }

@@ -8,6 +8,6 @@
 
         int TotalCols { get; }
 
-        char[,] Field { get; }
+       // char[,] Field { get; }
     }
 }
