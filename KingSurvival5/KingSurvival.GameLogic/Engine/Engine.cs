@@ -1,6 +1,7 @@
 ﻿using KingSurvival.GameLogic.Commons;
 using KingSurvival.GameLogic.Contracts;
 using KingSurvival.GameLogic.Models;
+using KingSurvival.GameLogic.Models.Factories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,100 +10,153 @@ using System.Threading.Tasks;
 
 namespace KingSurvival.GameLogic.Engine
 {
-    public class Engine : IEngine
+    public class Engine
     {
-        //private IRenderer renderer;
-        private Board board;
+        private IBoard board;
 
-        public void Initialize()
+        private Dictionary<char, IFigure> figuresInPlay = new Dictionary<char, IFigure>();
+
+        private int moveCounter;
+
+        // TODO Must change!
+        public Engine()
         {
-            this.board = Board.Instance;
-           // this.renderer = new Renderer();
+            this.board = new Board(GameConstants.BoardRows, GameConstants.BoardCols);
+
+            this.moveCounter = 0;
+
+            var kingFactory = new KingFactory();
+            var king = kingFactory.CreateFigure('K', new Position(7, 3));
+            this.figuresInPlay.Add(king.Symbol, king);
+
+            var pawnsFactory = new PawnFactory();
+            var pawnA = pawnsFactory.CreateFigure('A', new Position(0, 0));
+            this.figuresInPlay.Add(pawnA.Symbol, pawnA);
+
+            var pawnB = pawnsFactory.CreateFigure('B', new Position(0, 2));
+            this.figuresInPlay.Add(pawnB.Symbol, pawnB);
         }
 
         public void Start()
         {
             while (true)
             {
-                if (true /*!GameOver*/)
+                //PrintBoard();
+
+                bool isKingTurn = this.moveCounter % 2 == 0;
+                if (isKingTurn)
                 {
-                    Console.WriteLine("board"); //renderer.RenderBoard();
-
-                    // for exaple this is hardcore variable, represent the pawn is his turn
-                    var moveCounter = 3;
-                    bool isKingTurn = moveCounter % 2 == 0;
-                    if (isKingTurn)
+                    var kingPossibleMoves = GetKingPossibleMoves();
+                    bool kingHasLost = kingPossibleMoves.Count == 0;
+                    if (kingHasLost)
                     {
-                        //ProcessKingTurn();
+                        // write king lost message on console
+                        break;
                     }
-                    else
-                    {
-                        //ProcessPawnTurn(); // this method does exactly what is written bewol
-                        
-
-
-                        // TODO: In the future when renderer is implemented, the console will be replaced with the renderer
-                        // same for the king
-                        Console.WriteLine(MessageConstants.PawnTurnMessage);
-
-                        string input = Console.ReadLine();
-                        if (input == string.Empty)
-                        {
-                            Console.WriteLine(MessageConstants.EmptyStringMessage);
-                            continue;
-                        }
-
-                        bool isValidDirection = true;
-                        if (!isValidDirection)
-                        {
-                            Console.WriteLine(MessageConstants.InvalidCommandMessage);
-                            continue;
-                        }
-
-                        // I suppose it works in a way similar to KingDirection()
-                        char pawnName = input[0];
-                        char directionLeftRight = input[2];
-                        int pawnNumber = pawnName - 65;
-                        PawnDirection(pawnName, directionLeftRight, pawnNumber);
-                    }
+                    //ProcessKingTurn();
                 }
                 else
                 {
-                    Console.WriteLine(MessageConstants.FinishGameMessage);
-                    return;
+                    //ProcessPawnTurn();
                 }
             }
         }
 
-        // TODO: Delete later, when all is implemented
-        private void PawnDirection(char pawn, char direction, int pawnNumber)
+        private void ProcessKingTurn(IList<IPosition> validPositions)
         {
-            var oldCoordinates = PawnPositions[pawnNumber];
-
-            var coords = CheckNextPawnPosition();
-
-            if (coords != null)
+            bool shouldAskForInput = true;
+            while (shouldAskForInput)
             {
-                PawnPositions[pawnNumber] = coords;
+                // Renderer should do that
+                Console.WriteLine("Please enter command for King: UL, UR, DL, DR");
+
+                var input = this.GetInput();
+                if (input == string.Empty)
+                {
+                    // Renderer should do that
+                    Console.WriteLine("Illegal move!");
+                    continue; 
+                }
+
+                try
+                {
+                    var commandVector = ParseUserCommand(input);
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    continue;
+                }
             }
         }
 
-        // TODO: Delete later, when all is implemented
-        private IPosition CheckNextPawnPosition()
+
+        private IList<IPosition> GetKingPossibleMoves()
         {
-            return new Position();
+            var movementStrategy = this.figuresInPlay['K'].GetMovements();
+            var currentPostion = this.figuresInPlay['K'].Position;
+            var possibleMoves = new List<IPosition>();
+
+            foreach (var m in movementStrategy)
+            {
+                bool isOnBoard = this.IsOnBoard(currentPostion.Row + m.ByRow, currentPostion.Col + m.ByCol);
+                if (!isOnBoard)
+                {
+                    continue;
+                }
+
+                var possiblePosition = new Position(currentPostion.Row + m.ByRow, currentPostion.Col + m.ByCol);
+                bool isUnoccupied = this.board.PositionIsUnoccupied(possiblePosition);
+                if (isUnoccupied)
+                {
+                    possibleMoves.Add(possiblePosition);
+                }
+            }
+
+            return possibleMoves;
         }
 
-        // TODO: Delete later, when all is implemented
-        public bool shouldAskForInput { get; set; }
-
-        // TODO: Delete later, when all is implemented
-        protected IPosition[] PawnPositions = 
+        private bool IsOnBoard(int row, int col)
         {
-            new Position(2, 4), 
-            new Position(2, 8), 
-            new Position(2, 12), 
-            new Position(2, 16)
-        };
+            bool rowIsOnBoard = row >= 0 && row < this.board.TotalRows;
+            bool colIsOnBoard = col >= 0 && col < this.board.TotalCols;
+
+            return rowIsOnBoard && colIsOnBoard;
+        }
+
+        private string GetInput()
+        {
+            string result = string.Empty;
+
+            string input = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(input))
+            {
+                return result;
+            }
+            else
+            {
+                string inputTrimmed = input.Trim();
+                result = inputTrimmed.ToUpper();
+
+                return result;
+            }
+        }
+
+        private MovementVector ParseUserCommand(string userCommand)
+        {
+            switch (userCommand)
+            {
+                case "UL":
+                    return new MovementVector(-1, -1);
+                case "UR":
+                    return new MovementVector(-1, 1);
+                case "DL":
+                    return new MovementVector(1, -1);
+                case "DR":
+                    return new MovementVector(1, 1);
+                default:
+                    throw new ArgumentException("Invalid command!");
+            }
+        }
     }
 }

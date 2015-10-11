@@ -5,9 +5,9 @@
 
     public class KingFactory : FigureFactory
     {
-        public override IFigure CreateFigure(char symbol, Position position, IMovementStrategy movementStrategy)
+        public override IFigure CreateFigure(char symbol, IPosition position)
         {
-            return new King(symbol, position, movementStrategy);
+            return new King(symbol, position, new BasicKingMovementStrategy());
         }
     }
 }

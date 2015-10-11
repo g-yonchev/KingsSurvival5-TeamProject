@@ -1,5 +1,6 @@
 ﻿namespace KingSurvival.GameLogic.Commons
 {
+    using System;
     using System.Text.RegularExpressions;
 
     public class Validator
@@ -38,7 +39,7 @@
         {
             if (obj == null)
             {
-                throw new NullReferenceException(GlobalErrorMessages.NullFigureErrorMessage);
+                throw new NullReferenceException();
             }
         }
     }

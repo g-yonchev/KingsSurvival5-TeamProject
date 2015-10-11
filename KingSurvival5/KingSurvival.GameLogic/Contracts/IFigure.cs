@@ -2,6 +2,7 @@
 {
     using Commons;
     using MovementStrategies;
+    using System.Collections.Generic;
 
     /// <summary>
     ///  Interface defining figure characteristics.
@@ -13,5 +14,7 @@
         char Symbol { get; }
 
         IMovementStrategy MovementStrategy { get; }
+
+        IEnumerable<MovementVector> GetMovements();
     }
 }

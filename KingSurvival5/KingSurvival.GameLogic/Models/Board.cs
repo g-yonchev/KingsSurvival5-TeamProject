@@ -22,6 +22,12 @@
         
         public int TotalRows { get; private set; }
 
+        public bool PositionIsUnoccupied(IPosition position)
+        {
+            bool isUnoccupied = this.field[position.Row, position.Col] == ' ';
+            return isUnoccupied;
+        }
+
         private void GenerateField()
         {
             this.field = new char[this.TotalRows, this.TotalCols];

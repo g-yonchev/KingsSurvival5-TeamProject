@@ -6,6 +6,6 @@
     // Factory method or smth...
     public abstract class FigureFactory
     {
-        public abstract IFigure CreateFigure(char symbol, IPosition);
+        public abstract IFigure CreateFigure(char symbol, IPosition position);
     }
 }

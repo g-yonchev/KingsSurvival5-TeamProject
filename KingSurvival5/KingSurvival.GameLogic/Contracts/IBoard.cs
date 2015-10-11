@@ -8,6 +8,8 @@
 
         int TotalCols { get; }
 
+        bool PositionIsUnoccupied(IPosition position);
+
        // char[,] Field { get; }
     }
 }

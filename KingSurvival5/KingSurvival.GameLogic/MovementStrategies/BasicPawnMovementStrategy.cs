@@ -6,7 +6,7 @@
 
     public class BasicPawnMovementStrategy : IMovementStrategy
     {
-        public IEnumerable<MovementVector> GetMovements()
+        public IEnumerable<MovementVector> Get()
         {
             var movements = new List<MovementVector>()
             {
