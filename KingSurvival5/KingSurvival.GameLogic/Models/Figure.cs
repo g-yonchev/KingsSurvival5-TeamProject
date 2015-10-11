@@ -1,7 +1,6 @@
 ﻿namespace KingSurvival.GameLogic.Models
 {
     using System.Collections.Generic;
-
     using KingSurvival.GameLogic.Commons;
     using KingSurvival.GameLogic.Contracts;
     using MovementStrategies;

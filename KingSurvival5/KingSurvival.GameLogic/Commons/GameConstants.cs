@@ -28,8 +28,5 @@
 
         public const int KingInitialRow = 7;
         public const int KingInitialCol = 3;
-
-
-
     }
 }

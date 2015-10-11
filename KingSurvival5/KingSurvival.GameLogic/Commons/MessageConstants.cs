@@ -1,6 +1,6 @@
 ﻿namespace KingSurvival.GameLogic.Commons
 {
-    public static class MessageConstants
+    public class MessageConstants
     {
         public const string FinishGameMessage = "Game is finished!";
         public const string InvalidCommandMessage = "Invalid command name!";

@@ -1,6 +1,5 @@
 ﻿namespace KingSurvival.GameLogic.Models
 {
-    using Commons;
     using KingSurvival.GameLogic.Contracts;
     using MovementStrategies;
 

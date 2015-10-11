@@ -1,8 +1,8 @@
 ﻿namespace KingSurvival.GameLogic.Contracts
 {
+    using System.Collections.Generic;
     using Commons;
     using MovementStrategies;
-    using System.Collections.Generic;
 
     /// <summary>
     ///  Interface defining figure characteristics.

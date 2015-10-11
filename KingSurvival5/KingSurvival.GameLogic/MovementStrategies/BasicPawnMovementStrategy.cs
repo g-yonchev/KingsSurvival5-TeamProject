@@ -1,6 +1,5 @@
 ﻿namespace KingSurvival.GameLogic.MovementStrategies
 {
-    using System;
     using System.Collections.Generic;
     using KingSurvival.GameLogic.Commons;
 

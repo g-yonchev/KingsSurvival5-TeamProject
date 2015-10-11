@@ -1,15 +1,12 @@
-﻿using KingSurvival.GameLogic.Commons;
-using KingSurvival.GameLogic.Contracts;
-using KingSurvival.GameLogic.Models;
-using KingSurvival.GameLogic.Models.Factories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KingSurvival.GameLogic.Engine
+﻿namespace KingSurvival.GameLogic.Engine
 {
+    using System;
+    using System.Collections.Generic;
+    using KingSurvival.GameLogic.Commons;
+    using KingSurvival.GameLogic.Contracts;
+    using KingSurvival.GameLogic.Models;
+    using KingSurvival.GameLogic.Models.Factories;
+
     public class Engine
     {
         private IBoard board;
@@ -41,19 +38,18 @@ namespace KingSurvival.GameLogic.Engine
         {
             while (true)
             {
-                //PrintBoard();
-
+                // PrintBoard();
                 bool isKingTurn = this.moveCounter % 2 == 0;
                 if (isKingTurn)
                 {
-                    var kingPossibleMoves = GetKingPossibleMoves();
+                    var kingPossibleMoves = this.GetKingPossibleMoves();
                     bool kingHasLost = kingPossibleMoves.Count == 0;
                     if (kingHasLost)
                     {
                         // write king lost message on console
                         break;
                     }
-                    //ProcessKingTurn();
+                    //// ProcessKingTurn();
                 }
                 else
                 {
@@ -75,12 +71,12 @@ namespace KingSurvival.GameLogic.Engine
                 {
                     // Renderer should do that
                     Console.WriteLine("Illegal move!");
-                    continue; 
+                    continue;
                 }
 
                 try
                 {
-                    var commandVector = ParseUserCommand(input);
+                    var commandVector = this.ParseUserCommand(input);
                 }
                 catch (ArgumentException ex)
                 {
@@ -89,7 +85,6 @@ namespace KingSurvival.GameLogic.Engine
                 }
             }
         }
-
 
         private IList<IPosition> GetKingPossibleMoves()
         {
@@ -148,12 +143,16 @@ namespace KingSurvival.GameLogic.Engine
             {
                 case "UL":
                     return new MovementVector(-1, -1);
+
                 case "UR":
                     return new MovementVector(-1, 1);
+
                 case "DL":
                     return new MovementVector(1, -1);
+
                 case "DR":
                     return new MovementVector(1, 1);
+
                 default:
                     throw new ArgumentException("Invalid command!");
             }

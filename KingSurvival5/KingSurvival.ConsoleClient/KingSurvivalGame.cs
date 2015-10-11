@@ -1,12 +1,10 @@
 namespace KingSurvival.ConsoleClient
 {
-    using System;
-    
     using KingSurvival.GameLogic.Commons;
     using KingSurvival.GameLogic.Contracts;
     using KingSurvival.GameLogic.Models;
-    using KingSurvival.GameLogic.Engine;
-    
+    using System;
+
     public class KingSurvivalGame : BaseGame
     {
         ////private IPrinter printer;
@@ -207,18 +205,22 @@ namespace KingSurvival.ConsoleClient
                     PawnExistingMoves[0, 0] = true;
                     PawnExistingMoves[0, 1] = true;
                     break;
+
                 case 'B':
                     PawnExistingMoves[1, 0] = true;
                     PawnExistingMoves[1, 1] = true;
                     break;
+
                 case 'C':
                     PawnExistingMoves[2, 0] = true;
                     PawnExistingMoves[2, 1] = true;
                     break;
+
                 case 'D':
                     PawnExistingMoves[3, 0] = true;
                     PawnExistingMoves[3, 1] = true;
                     break;
+
                 default:
                     Console.WriteLine(MessageConstants.ErrorMessage);
                     break;
@@ -273,6 +275,7 @@ namespace KingSurvival.ConsoleClient
                          case 'B':
                              pawnExistingMoves[1, 0] = false;
                              break;
+
                          case 'C':
                              pawnExistingMoves[2, 0] = false;
                              break;
@@ -291,15 +294,19 @@ namespace KingSurvival.ConsoleClient
                         case 'A':
                             PawnExistingMoves[0, 0] = false;
                             break;
+
                         case 'B':
                             PawnExistingMoves[1, 0] = false;
                             break;
+
                         case 'C':
                             PawnExistingMoves[2, 0] = false;
                             break;
+
                         case 'D':
                             PawnExistingMoves[3, 0] = false;
                             break;
+
                         default:
                             Console.WriteLine(MessageConstants.ErrorMessage);
                             break;
@@ -347,6 +354,7 @@ namespace KingSurvival.ConsoleClient
                            case 'B':
                                pawnExistingMoves[1, 1] = false;
                                break;
+
                            case 'C':
                                pawnExistingMoves[2, 1] = false;
                                break;
@@ -365,15 +373,19 @@ namespace KingSurvival.ConsoleClient
                         case 'A':
                             PawnExistingMoves[0, 1] = false;
                             break;
+
                         case 'B':
                             PawnExistingMoves[1, 1] = false;
                             break;
+
                         case 'C':
                             PawnExistingMoves[2, 1] = false;
                             break;
+
                         case 'D':
                             PawnExistingMoves[3, 1] = false;
                             break;
+
                         default:
                             Console.WriteLine(MessageConstants.ErrorMessage);
                             break;
@@ -587,7 +599,7 @@ namespace KingSurvival.ConsoleClient
             //var engine = new Engine();
             //engine.Start();
 
-           // IPrinter printer = new Printer();
+            // IPrinter printer = new Printer();
             Start(Counter);
             Console.WriteLine(MessageConstants.GoodbyeMessage);
             Console.ReadLine();

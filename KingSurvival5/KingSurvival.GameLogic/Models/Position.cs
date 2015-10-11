@@ -1,7 +1,6 @@
 ﻿namespace KingSurvival.GameLogic.Models
 {
     using System;
-
     using KingSurvival.GameLogic.Contracts;
 
     public class Position : IPosition
@@ -29,6 +28,7 @@
             {
                 return this.row;
             }
+
             set
             {
                 if (value < 0)
@@ -46,6 +46,7 @@
             {
                 return this.col;
             }
+
             set
             {
                 if (value < 0)

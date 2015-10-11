@@ -1,8 +1,6 @@
 ﻿namespace KingSurvival.GameLogic.Models
 {
-    using KingSurvival.GameLogic.Commons;
     using Contracts;
-    using System;
 
     public class Board : IBoard
     {
@@ -16,10 +14,9 @@
             this.GenerateField();
         }
 
-       // public char[,] Field { get; private set; }
-        
+        // public char[,] Field { get; private set; }
         public int TotalCols { get; private set; }
-        
+
         public int TotalRows { get; private set; }
 
         public bool PositionIsUnoccupied(IPosition position)

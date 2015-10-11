@@ -1,7 +1,5 @@
 ﻿namespace KingSurvival.GameLogic.Commons
 {
-    using KingSurvival.GameLogic.Contracts;
-
     public struct MovementVector
     {
         public MovementVector(int rowMovement, int colMovement)
