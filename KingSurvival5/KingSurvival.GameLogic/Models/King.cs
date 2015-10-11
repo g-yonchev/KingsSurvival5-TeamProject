@@ -15,5 +15,14 @@
         }
 
         public int MovesCount { get; private set; }
+<<<<<<< HEAD
+=======
+
+
+        internal void Move(IPosition newPosition)
+        {
+            this.Position = newPosition;
+        }
+>>>>>>> origin/master
     }
 }

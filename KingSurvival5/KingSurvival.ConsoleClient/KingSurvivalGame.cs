@@ -5,6 +5,7 @@ namespace KingSurvival.ConsoleClient
     using KingSurvival.GameLogic.Commons;
     using KingSurvival.GameLogic.Contracts;
     using KingSurvival.GameLogic.Models;
+    using KingSurvival.GameLogic.Engine;
     
     public class KingSurvivalGame : BaseGame
     {
@@ -583,10 +584,13 @@ namespace KingSurvival.ConsoleClient
 
         public static void Main()
         {
+            var engine = new Engine();
+            engine.Start();
+
             //IPrinter printer = new Printer();
-            Start(Counter);
-            Console.WriteLine(MessageConstants.GoodbyeMessage);
-            Console.ReadLine();
+            //Start(Counter);
+            //Console.WriteLine(MessageConstants.GoodbyeMessage);
+            //Console.ReadLine();
         }
 
         // Checks if command is KDR, KUL, etc.

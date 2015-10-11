@@ -39,8 +39,22 @@
         {
             if (obj == null)
             {
+<<<<<<< HEAD
                 throw new NullReferenceException();
+=======
+                throw new NullReferenceException(MessageConstants.NullFigureErrorMessage);
+>>>>>>> origin/master
             }
+        }
+
+        public static bool IsValidCommand(string command)
+        {
+            return true;
+        }
+
+        internal static bool CanMove()
+        {
+            return true;
         }
     }
 }
