@@ -8,12 +8,12 @@
     {
         private const int InitialMovesCount = 0;
 
-        public King(string name, IPosition position)
-            : base(name, position)
+        public King(char symbol, IPosition position, IMovementStrategy movementStrategy)
+            : base(symbol, position, movementStrategy)
         {
+            this.MovesCount = InitialMovesCount;
         }
 
         public int MovesCount { get; private set; }
-
     }
 }

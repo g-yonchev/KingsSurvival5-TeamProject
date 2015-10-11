@@ -7,10 +7,9 @@
 
     public class Pawn : Figure, IFigure
     {
-        public Pawn(string name, IPosition position)
-            : base(name, position)
+        public Pawn(char symbol, IPosition position, IMovementStrategy movementStrategy)
+            : base(symbol, position, movementStrategy)
         {
-
         }
     }
 }
