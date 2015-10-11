@@ -7,11 +7,7 @@
     {
         public override IFigure CreateFigure(char symbol, IPosition position)
         {
-<<<<<<< HEAD
             return new King(symbol, position, new BasicKingMovementStrategy());
-=======
-            return new King("King", position);
->>>>>>> origin/master
         }
     }
 }

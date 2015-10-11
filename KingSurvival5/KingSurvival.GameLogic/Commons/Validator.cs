@@ -39,11 +39,7 @@
         {
             if (obj == null)
             {
-<<<<<<< HEAD
-                throw new NullReferenceException();
-=======
                 throw new NullReferenceException(MessageConstants.NullFigureErrorMessage);
->>>>>>> origin/master
             }
         }
 

@@ -584,13 +584,13 @@ namespace KingSurvival.ConsoleClient
 
         public static void Main()
         {
-            var engine = new Engine();
-            engine.Start();
+            //var engine = new Engine();
+            //engine.Start();
 
-            //IPrinter printer = new Printer();
-            //Start(Counter);
-            //Console.WriteLine(MessageConstants.GoodbyeMessage);
-            //Console.ReadLine();
+           // IPrinter printer = new Printer();
+            Start(Counter);
+            Console.WriteLine(MessageConstants.GoodbyeMessage);
+            Console.ReadLine();
         }
 
         // Checks if command is KDR, KUL, etc.

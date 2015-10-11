@@ -12,7 +12,6 @@ namespace KingSurvival.GameLogic.Engine
 {
     public class Engine
     {
-<<<<<<< HEAD
         private IBoard board;
 
         private Dictionary<char, IFigure> figuresInPlay = new Dictionary<char, IFigure>();
@@ -36,28 +35,12 @@ namespace KingSurvival.GameLogic.Engine
 
             var pawnB = pawnsFactory.CreateFigure('B', new Position(0, 2));
             this.figuresInPlay.Add(pawnB.Symbol, pawnB);
-=======
-        //private IRenderer renderer;
-        private Board board;
-        private King king = new King("King", new Position(1,1));
-
-
-        public Engine()
-        {
-            this.Initialize();
->>>>>>> origin/master
         }
 
-        public void Initialize()
-        {
-            board = new Board(8, 8);
-        }
-         
         public void Start()
         {
             while (true)
             {
-<<<<<<< HEAD
                 //PrintBoard();
 
                 bool isKingTurn = this.moveCounter % 2 == 0;
@@ -74,29 +57,11 @@ namespace KingSurvival.GameLogic.Engine
                 }
                 else
                 {
-                    //ProcessPawnTurn();
-=======
-                var command = Console.ReadLine();
-
-                // K, or A, b, c,....
-                var commandName = command.Substring(0,1);
-
-                // Which direction
-                var commandDirection = command.Substring(1,2);
-
-                IPosition newPosition = null;
-
-                if (!Validator.IsValidCommand(command))
-                {
-
-                    // commandName validate
-                    // Which direction validate
-
-                    throw new Exception();
->>>>>>> origin/master
+                    // ProcessPawnsTurn();
                 }
+            }
+        }
 
-<<<<<<< HEAD
         private void ProcessKingTurn(IList<IPosition> validPositions)
         {
             bool shouldAskForInput = true;
@@ -146,25 +111,10 @@ namespace KingSurvival.GameLogic.Engine
                 {
                     possibleMoves.Add(possiblePosition);
                 }
-=======
-                if (!Validator.CanMove())
-                {
-                    // first the command "UL" will be parse new ++ or -- position... blah blah...
-
-                    newPosition = new Position(2, 2);
-
-                    var isThisPlaceInOutOfTheBorders = board.Field[2, 2];
-                    var isThisPlaceInFree = board.Field[2, 2];
-                    throw new Exception();
-                }
-                newPosition = new Position(2, 2);
-                king.Move(newPosition);
->>>>>>> origin/master
             }
 
             return possibleMoves;
         }
-<<<<<<< HEAD
 
         private bool IsOnBoard(int row, int col)
         {
@@ -208,7 +158,5 @@ namespace KingSurvival.GameLogic.Engine
                     throw new ArgumentException("Invalid command!");
             }
         }
-=======
->>>>>>> origin/master
     }
 }
