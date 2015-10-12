@@ -132,11 +132,30 @@
             { 'D', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'D', 'R' },
         };
 
+        /// <summary>
+        /// Possible commands for the king.
+        /// </summary>
         public static readonly string[] KingPossibleDirections = { "KUL", "KUR", "KDL", "KDR" };
         public static readonly bool[] KingExistingMoves = { true, true, true, true };
+
+        /// <summary>
+        /// Possible commands for the Pawn A.
+        /// </summary>
         public static readonly string[] PawnAPossibleDirections = { "ADL", "ADR" };
+
+        /// <summary>
+        /// Possible commands for the Pawn B.
+        /// </summary>
         public static readonly string[] PawnBPossibleDirections = { "BDL", "BDR" };
+
+        /// <summary>
+        /// Possible commands for the Pawn C.
+        /// </summary>
         public static readonly string[] PawnCPossibleDirections = { "CDL", "CDR" };
+
+        /// <summary>
+        /// Possible commands for the Pawn D.
+        /// </summary>
         public readonly string[] PawnDPossibleDirections = { "DDL", "DDR" };
     }
 }

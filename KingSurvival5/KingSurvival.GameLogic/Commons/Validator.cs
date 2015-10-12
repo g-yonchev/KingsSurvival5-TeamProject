@@ -5,8 +5,16 @@
 
     using Contracts;
 
+    /// <summary>
+    /// A class validating figure's moves and basic commands.
+    /// </summary>
     public class Validator
     {
+        /// <summary>
+        /// Indicates if the pawn's move is valid.
+        /// </summary>
+        /// <param name="input">Inserted command for pawn's move.</param>
+        /// <returns>True if is valid, otherwise - false.</returns>
         public static bool IsValidPawnMove(string input)
         {
             string validInput = input.ToUpper();
@@ -22,6 +30,11 @@
             }
         }
 
+        /// <summary>
+        /// Indicates if the king's move is valid.
+        /// </summary>
+        /// <param name="input">Inserted command for king's move.</param>
+        /// <returns>True if is valid, otherwise - false.</returns>
         public static bool IsValidKingMove(string input)
         {
             string validInput = input.ToUpper();
@@ -37,7 +50,11 @@
             }
         }
 
-        public static void CheckIfObjectIsNull(object obj, string errorMessage = MessageConstants.EmptyString)
+        /// <summary>
+        /// Null object pattern. Provides throwing null refecence exception if the given object is null.
+        /// </summary>
+        /// <param name="obj">Object to be checked is null or not.</param>
+        public static void CheckIfObjectIsNull(object obj)
         {
             if (obj == null)
             {
@@ -45,11 +62,21 @@
             }
         }
 
+        /// <summary>
+        /// You don't say
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         public static bool IsValidCommand(string command)
         {
             return true;
         }
 
+        /// <summary>
+        /// Method validates if the given position exists on the board of the game.
+        /// </summary>
+        /// <param name="position">The position to be checked.</param>
+        /// <returns>Returns true when the position is on the board. Otherwise - false.</returns>
         public static bool IsPositionOnTheBoard(IPosition position)
         {
             bool leftBoundariesOfRow = position.Row >= GameConstants.BoardEdges[0].Row;
@@ -63,7 +90,11 @@
             bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
             return isPositionOnTheBoard;
         }
-
+        
+        /// <summary>
+        /// Feature: Implementation of the Decorator pattern for the figures and they can move or not. The method checks the given figure is moveable.
+        /// </summary>
+        /// <returns>True.</returns>
         internal static bool CanMove()
         {
             return true;
