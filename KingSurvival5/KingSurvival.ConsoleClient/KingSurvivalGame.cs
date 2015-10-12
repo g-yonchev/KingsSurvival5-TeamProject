@@ -28,7 +28,7 @@ namespace KingSurvival.ConsoleClient
                 for (int col = 0; col < GetField.GetLength(1); col++)
                 {
                     Position coordinates = new Position(row, col);
-                    bool isCellIn = IsPositionOnTheBoard(coordinates);
+                    bool isCellIn = Validator.IsPositionOnTheBoard(coordinates);
                     if (isCellIn)
                     {
                         if (row % 2 == 0)
@@ -101,24 +101,25 @@ namespace KingSurvival.ConsoleClient
 
         public static void PawnDirection(char pawn, char direction, int pawnNumber)
         {
-            var oldCoordinates = PawnPositions[pawnNumber];
 
+            var oldCoordinates = GameConstants.PawnPositions[pawnNumber];
+             
             var coords = CheckNextPawnPosition(oldCoordinates, direction, pawn);
 
             if (coords != null)
             {
-                PawnPositions[pawnNumber] = coords;
+                GameConstants.PawnPositions[pawnNumber] = coords;
             }
         }
 
         public static void KingDirection(char upDownDirection, char leftRightDirection)
         {
-            var oldCoordinates = new Position(KingPosition.Row, KingPosition.Col);
+            var oldCoordinates = new Position(kingPosition.Row, kingPosition.Col);
 
             var coords = CheckNextKingPosition(oldCoordinates, upDownDirection, leftRightDirection);
             if (coords != null)
             {
-                KingPosition = coords;
+                kingPosition = coords;
             }
         }
 
@@ -202,23 +203,23 @@ namespace KingSurvival.ConsoleClient
             switch (currentPawn)
             {
                 case 'A':
-                    PawnExistingMoves[0, 0] = true;
-                    PawnExistingMoves[0, 1] = true;
+                    GameConstants.PawnExistingMoves[0, 0] = true;
+                    GameConstants.PawnExistingMoves[0, 1] = true;
                     break;
 
                 case 'B':
-                    PawnExistingMoves[1, 0] = true;
-                    PawnExistingMoves[1, 1] = true;
+                    GameConstants.PawnExistingMoves[1, 0] = true;
+                    GameConstants.PawnExistingMoves[1, 1] = true;
                     break;
 
                 case 'C':
-                    PawnExistingMoves[2, 0] = true;
-                    PawnExistingMoves[2, 1] = true;
+                    GameConstants.PawnExistingMoves[2, 0] = true;
+                    GameConstants.PawnExistingMoves[2, 1] = true;
                     break;
 
                 case 'D':
-                    PawnExistingMoves[3, 0] = true;
-                    PawnExistingMoves[3, 1] = true;
+                    GameConstants.PawnExistingMoves[3, 0] = true;
+                    GameConstants.PawnExistingMoves[3, 1] = true;
                     break;
 
                 default:
@@ -233,7 +234,7 @@ namespace KingSurvival.ConsoleClient
             {
                 for (int j = 0; j < 2; j++)
                 {
-                    if (PawnExistingMoves[i, j])
+                    if (GameConstants.PawnExistingMoves[i, j])
                     {
                         return false;
                     }
@@ -254,7 +255,7 @@ namespace KingSurvival.ConsoleClient
                 newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
 
                 bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                if (Validator.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                 {
                     MoveFigure(currentCoordinates, newCoordinates);
 
@@ -292,19 +293,19 @@ namespace KingSurvival.ConsoleClient
                     switch (currentPawn)
                     {
                         case 'A':
-                            PawnExistingMoves[0, 0] = false;
+                            GameConstants.PawnExistingMoves[0, 0] = false;
                             break;
 
                         case 'B':
-                            PawnExistingMoves[1, 0] = false;
+                            GameConstants.PawnExistingMoves[1, 0] = false;
                             break;
 
                         case 'C':
-                            PawnExistingMoves[2, 0] = false;
+                            GameConstants.PawnExistingMoves[2, 0] = false;
                             break;
 
                         case 'D':
-                            PawnExistingMoves[3, 0] = false;
+                            GameConstants.PawnExistingMoves[3, 0] = false;
                             break;
 
                         default:
@@ -333,7 +334,7 @@ namespace KingSurvival.ConsoleClient
                 newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
 
                 bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                if (Validator.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                 {
                     MoveFigure(currentCoordinates, newCoordinates);
 
@@ -345,45 +346,24 @@ namespace KingSurvival.ConsoleClient
                 }
                 else
                 {
-                    /*   switch (currentPawn)
-                       {
-                           case 'A':
-                               pawnExistingMoves[0, 1] = false;
-                               break;
-
-                           case 'B':
-                               pawnExistingMoves[1, 1] = false;
-                               break;
-
-                           case 'C':
-                               pawnExistingMoves[2, 1] = false;
-                               break;
-
-                           case 'D':
-                               pawnExistingMoves[3, 1] = false;
-                               break;
-
-                           default:
-                               Console.WriteLine("ERROR!");
-                               break;
-                       }*/
+                   
                     bool allAreFalse = true;
                     switch (currentPawn)
                     {
                         case 'A':
-                            PawnExistingMoves[0, 1] = false;
+                            GameConstants.PawnExistingMoves[0, 1] = false;
                             break;
 
                         case 'B':
-                            PawnExistingMoves[1, 1] = false;
+                            GameConstants.PawnExistingMoves[1, 1] = false;
                             break;
 
                         case 'C':
-                            PawnExistingMoves[2, 1] = false;
+                            GameConstants.PawnExistingMoves[2, 1] = false;
                             break;
 
                         case 'D':
-                            PawnExistingMoves[3, 1] = false;
+                            GameConstants.PawnExistingMoves[3, 1] = false;
                             break;
 
                         default:
@@ -431,7 +411,7 @@ namespace KingSurvival.ConsoleClient
                     newCoordinates.Col = currentCoordinates.Col + displacementUpLeft[1];
 
                     bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    if (Validator.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
 
@@ -465,7 +445,7 @@ namespace KingSurvival.ConsoleClient
                     newCoordinates.Col = currentCoordinates.Col + displacementUpRight[1];
 
                     bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    if (Validator.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
 
@@ -502,7 +482,7 @@ namespace KingSurvival.ConsoleClient
                     newCoordinates.Col = currentCoordinates.Col + displacementDownLeft[1];
 
                     bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    if (Validator.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
 
@@ -536,7 +516,7 @@ namespace KingSurvival.ConsoleClient
                     newCoordinates.Col = currentCoordinates.Col + displacementDownRight[1];
 
                     bool isEmptyCurrentCell = GetField[newCoordinates.Row, newCoordinates.Col] == ' ';
-                    if (IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
+                    if (Validator.IsPositionOnTheBoard(newCoordinates) && isEmptyCurrentCell)
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
 

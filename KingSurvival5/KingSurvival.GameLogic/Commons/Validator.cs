@@ -1,5 +1,6 @@
 ﻿namespace KingSurvival.GameLogic.Commons
 {
+    using Contracts;
     using System;
     using System.Text.RegularExpressions;
 
@@ -52,5 +53,20 @@
         {
             return true;
         }
-    }
+
+        public static bool IsPositionOnTheBoard(IPosition position)
+        {
+        
+        bool leftBoundariesOfRow = position.Row >= GameConstants.boardEdges[0].Row;
+        bool rightBoundariesOfRow = position.Row <= GameConstants.boardEdges[3].Row;
+        bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
+
+        bool leftBoundariesOfCol = position.Col >= GameConstants.boardEdges[0].Col;
+        bool rightBoundariesOfCol = position.Col <= GameConstants.boardEdges[3].Col;
+        bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
+
+        bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
+            return isPositionOnTheBoard;
+        }
+}
 }

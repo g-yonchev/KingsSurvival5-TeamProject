@@ -1,4 +1,7 @@
-﻿namespace KingSurvival.GameLogic.Commons
+﻿using KingSurvival.GameLogic.Contracts;
+using KingSurvival.GameLogic.Models;
+
+namespace KingSurvival.GameLogic.Commons
 {
     public class GameConstants
     {
@@ -28,5 +31,23 @@
 
         public const int KingInitialRow = 7;
         public const int KingInitialCol = 3;
+
+        public static readonly bool[,] PawnExistingMoves =
+        {
+            { true, true }, { true, true }, { true, true }, { true, true }
+        };
+
+        public static IPosition[] boardEdges =
+       {
+            new Position(2, 4), new Position(2, 18), new Position(9, 4), new Position(9, 18)
+        };
+
+        public static IPosition[] PawnPositions =
+        {
+            new Position(2, 4), new Position(2, 8), new Position(2, 12), new Position(2, 16)
+        };
+
+
+
     }
 }
