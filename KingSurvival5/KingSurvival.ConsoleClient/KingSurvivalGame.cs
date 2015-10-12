@@ -4,6 +4,7 @@ namespace KingSurvival.ConsoleClient
     using KingSurvival.GameLogic.Contracts;
     using KingSurvival.GameLogic.Models;
     using System;
+    using System.Threading;
 
     public class KingSurvivalGame : BaseGame
     {
@@ -80,6 +81,7 @@ namespace KingSurvival.ConsoleClient
         {
             if (!GameOver)
             {
+                Console.Clear();
                 PrintBoard();
 
                 bool isKingTurn = moveCounter % 2 == 0;
@@ -95,6 +97,7 @@ namespace KingSurvival.ConsoleClient
             else
             {
                 Console.WriteLine(MessageConstants.FinishGameMessage);
+                Thread.Sleep(400);
                 return;
             }
         }
@@ -134,6 +137,7 @@ namespace KingSurvival.ConsoleClient
                 if (input == string.Empty)
                 {
                     Printer.PrintMessage(ConsoleColor.DarkRed, MessageConstants.EmptyStringMessage);
+                    Thread.Sleep(400);
                     continue;
                 }
 
@@ -141,6 +145,7 @@ namespace KingSurvival.ConsoleClient
                 if (!isValidDirection)
                 {
                     Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
+                    Thread.Sleep(400);
                     continue;
                 }
 
@@ -166,6 +171,7 @@ namespace KingSurvival.ConsoleClient
                 if (input == string.Empty)
                 {
                     Printer.PrintMessage(ConsoleColor.DarkRed, MessageConstants.EmptyStringMessage);
+                    Thread.Sleep(400);
                     continue;
                 }
 
@@ -173,6 +179,7 @@ namespace KingSurvival.ConsoleClient
                 if (!isValidDirection)
                 {
                     Printer.PrintMessage(ConsoleColor.Red, MessageConstants.InvalidCommandMessage);
+                    Thread.Sleep(400);
                     continue;
                 }
 
@@ -324,7 +331,7 @@ namespace KingSurvival.ConsoleClient
                     }
 
                     Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
+                    Thread.Sleep(400);
                     return null;
                 }
             }
@@ -382,6 +389,7 @@ namespace KingSurvival.ConsoleClient
                     }
 
                     Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
+                    Thread.Sleep(400);
 
                     return null;
                 }
@@ -431,11 +439,12 @@ namespace KingSurvival.ConsoleClient
                         {
                             GameOver = true;
                             CommandPrintKingLosing();
+
                             return null;
                         }
 
                         Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
+                        Thread.Sleep(400);
                         return null;
                     }
                 }
@@ -465,11 +474,12 @@ namespace KingSurvival.ConsoleClient
                         {
                             GameOver = true;
                             CommandPrintKingLosing();
+
                             return null;
                         }
 
                         Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
+                        Thread.Sleep(400);
                         return null;
                     }
                 }
@@ -502,11 +512,12 @@ namespace KingSurvival.ConsoleClient
                         {
                             GameOver = true;
                             CommandPrintKingLosing();
+
                             return null;
                         }
 
                         Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
+                        Thread.Sleep(400);
                         return null;
                     }
                 }
@@ -536,11 +547,12 @@ namespace KingSurvival.ConsoleClient
                         {
                             GameOver = true;
                             CommandPrintKingLosing();
+
                             return null;
                         }
 
                         Printer.PrintMessage(ConsoleColor.DarkYellow, MessageConstants.WrongDirectionMessage);
-
+                        Thread.Sleep(400);
                         return null;
                     }
                 }
