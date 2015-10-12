@@ -53,6 +53,10 @@
     <Compile Include="EngineTests\IsOnBoardTest.cs" />
     <Compile Include="EngineTests\ParseUserCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidatorTests\ObjectIsNullTests.cs" />
+    <Compile Include="ValidatorTests\PositionOnTheBoardTests.cs" />
+    <Compile Include="ValidatorTests\ValidKingMoveTests.cs" />
+    <Compile Include="ValidatorTests\ValidPawnMoveTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KingSurvival.GameLogic\KingSurvival.GameLogic.csproj">

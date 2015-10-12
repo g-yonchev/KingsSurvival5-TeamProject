@@ -11,7 +11,7 @@
         /// <summary>
         /// Possible commands for the king.
         /// </summary>
-        public const string RegexKingPattern = @"(K(U|D)(L|R)";
+        public const string RegexKingPattern = @"(K(U|D)(L|R))";
 
         /// <summary>
         /// Possible commands for the pawns.

@@ -1,10 +1,10 @@
 ﻿namespace KingSurvival.Tests.EngineTests
 {
     using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+    
     using KingSurvival.GameLogic.Commons;
     using KingSurvival.GameLogic.Engine;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class ParseUserCommandTest
