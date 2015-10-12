@@ -1,9 +1,10 @@
 ﻿namespace KingSurvival.GameLogic.Commons
 {
-    using Contracts;
     using System;
     using System.Text.RegularExpressions;
 
+    using Contracts;
+   
     public class Validator
     {
         public static bool IsValidPawnMove(string input)
@@ -49,24 +50,23 @@
             return true;
         }
 
-        internal static bool CanMove()
-        {
-            return true;
-        }
-
         public static bool IsPositionOnTheBoard(IPosition position)
         {
-        
-        bool leftBoundariesOfRow = position.Row >= GameConstants.boardEdges[0].Row;
-        bool rightBoundariesOfRow = position.Row <= GameConstants.boardEdges[3].Row;
-        bool isRowOnTheBoard = (leftBoundariesOfRow) && rightBoundariesOfRow;
+        bool leftBoundariesOfRow = position.Row >= GameConstants.BoardEdges[0].Row;
+        bool rightBoundariesOfRow = position.Row <= GameConstants.BoardEdges[3].Row;
+        bool isRowOnTheBoard = leftBoundariesOfRow && rightBoundariesOfRow;
 
-        bool leftBoundariesOfCol = position.Col >= GameConstants.boardEdges[0].Col;
-        bool rightBoundariesOfCol = position.Col <= GameConstants.boardEdges[3].Col;
+        bool leftBoundariesOfCol = position.Col >= GameConstants.BoardEdges[0].Col;
+        bool rightBoundariesOfCol = position.Col <= GameConstants.BoardEdges[3].Col;
         bool isColOnTheBoard = leftBoundariesOfCol && rightBoundariesOfCol;
 
         bool isPositionOnTheBoard = isRowOnTheBoard && isColOnTheBoard;
             return isPositionOnTheBoard;
         }
-}
+
+        internal static bool CanMove()
+        {
+            return true;
+        }
+    }
 }

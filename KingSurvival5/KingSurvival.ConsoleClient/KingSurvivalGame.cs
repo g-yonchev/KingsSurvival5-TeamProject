@@ -1,25 +1,14 @@
 namespace KingSurvival.ConsoleClient
 {
+    using System;
+    using System.Threading;
     using KingSurvival.GameLogic.Commons;
     using KingSurvival.GameLogic.Contracts;
     using KingSurvival.GameLogic.Models;
-    using System;
-    using System.Threading;
 
     public class KingSurvivalGame : BaseGame
     {
-        ////private IPrinter printer;
-
-        ////public KingSurvivalGame(IPrinter printer)
-        ////{
-        ////    this.printer = printer;
-        ////}
-
-        ////static void ColorBoard(ConsoleColor bgColor, ConsoleColor fgColor)
-        ////{
-        ////    Console.BackgroundColor = bgColor;
-        ////    Console.ForegroundColor = fgColor;
-        ////}
+        private static bool gameOver = false;  // to move someware else 
 
         public static void PrintBoard()
         {
@@ -36,37 +25,37 @@ namespace KingSurvival.ConsoleClient
                         {
                             if (col % 4 == 0)
                             {
-                                ConsoleColor bgColor = ConsoleColor.Green;
-                                SetConsoleColor(bgColor, row, col);
+                                ConsoleColor backgroundColor = ConsoleColor.Green;
+                                BaseGame.SetConsoleColor(backgroundColor, row, col);
                             }
                             else if (col % 2 == 0)
                             {
-                                ConsoleColor bgColor = ConsoleColor.Blue;
-                                SetConsoleColor(bgColor, row, col);
+                                ConsoleColor backgroundColor = ConsoleColor.Blue;
+                                BaseGame.SetConsoleColor(backgroundColor, row, col);
                             }
                             else if (col % 2 != 0)
                             {
-                                Console.Write(GetField[row, col]);
+                                Console.Write(BaseGame.GetField[row, col]);
                             }
                         }
                         else if (col % 4 == 0)
                         {
-                            ConsoleColor bgColor = ConsoleColor.Blue;
-                            SetConsoleColor(bgColor, row, col);
+                            ConsoleColor backgroundColor = ConsoleColor.Blue;
+                            BaseGame.SetConsoleColor(backgroundColor, row, col);
                         }
                         else if (col % 2 == 0)
                         {
-                            ConsoleColor bgColor = ConsoleColor.Green;
-                            SetConsoleColor(bgColor, row, col);
+                            ConsoleColor backgroundColor = ConsoleColor.Green;
+                            BaseGame.SetConsoleColor(backgroundColor, row, col);
                         }
                         else if (col % 2 != 0)
                         {
-                            Console.Write(GetField[row, col]);
+                            Console.Write(BaseGame.GetField[row, col]);
                         }
                     }
                     else
                     {
-                        Console.Write(GetField[row, col]);
+                        Console.Write(BaseGame.GetField[row, col]);
                     }
                 }
 
@@ -79,7 +68,7 @@ namespace KingSurvival.ConsoleClient
 
         public static void Start(int moveCounter)
         {
-            if (!GameOver)
+            if (!gameOver)
             {
                 Console.Clear();
                 PrintBoard();
@@ -104,25 +93,24 @@ namespace KingSurvival.ConsoleClient
 
         public static void PawnDirection(char pawn, char direction, int pawnNumber)
         {
+            var oldCoordinates = PawnPositions[pawnNumber];
 
-            var oldCoordinates = GameConstants.PawnPositions[pawnNumber];
-             
             var coords = CheckNextPawnPosition(oldCoordinates, direction, pawn);
 
             if (coords != null)
             {
-                GameConstants.PawnPositions[pawnNumber] = coords;
+                BaseGame.PawnPositions[pawnNumber] = coords;
             }
         }
 
-        public static void KingDirection(char upDownDirection, char leftRightDirection)
+        public static void KingDirection(char downUpDirection, char leftRightDirection)
         {
-            var oldCoordinates = new Position(kingPosition.Row, kingPosition.Col);
+            var oldCoordinates = new Position(KingPosition.Row, KingPosition.Col);
 
-            var coords = CheckNextKingPosition(oldCoordinates, upDownDirection, leftRightDirection);
+            var coords = CheckNextKingPosition(oldCoordinates, downUpDirection, leftRightDirection);
             if (coords != null)
             {
-                kingPosition = coords;
+                BaseGame.KingPosition = coords;
             }
         }
 
@@ -157,7 +145,7 @@ namespace KingSurvival.ConsoleClient
                 KingDirection(input[1], input[2]);
             }
 
-            Start(Counter);
+            Start(BaseGame.Counter);
         }
 
         public static void ProcessPawnTurn()
@@ -192,7 +180,7 @@ namespace KingSurvival.ConsoleClient
                 PawnDirection(pawnName, directionLeftRight, pawnNumber);
             }
 
-            Start(Counter);
+            Start(BaseGame.Counter);
         }
 
         public static void CheckForKingExit(int currentKingXAxe)
@@ -200,8 +188,8 @@ namespace KingSurvival.ConsoleClient
             if (currentKingXAxe == 2)
             {
                 Console.WriteLine("=========================");
-                Console.WriteLine(MessageConstants.KingVictoryMessage, Counter / 2);
-                GameOver = true;
+                Console.WriteLine(MessageConstants.KingVictoryMessage, BaseGame.Counter / 2);
+                gameOver = true;
             }
         }
 
@@ -266,7 +254,7 @@ namespace KingSurvival.ConsoleClient
                 {
                     MoveFigure(currentCoordinates, newCoordinates);
 
-                    Counter++;
+                    BaseGame.Counter++;
 
                     SwitchCurrentPawnExistingMoves(currentPawn);
 
@@ -274,28 +262,6 @@ namespace KingSurvival.ConsoleClient
                 }
                 else
                 {
-                    /* switch (currentPawn)
-                     {
-                         case 'A':
-                             pawnExistingMoves[0, 0] = false;
-                             break;
-
-                         case 'B':
-                             pawnExistingMoves[1, 0] = false;
-                             break;
-
-                         case 'C':
-                             pawnExistingMoves[2, 0] = false;
-                             break;
-
-                         case 'D':
-                             pawnExistingMoves[3, 0] = false;
-                             break;
-
-                         default:
-                             Console.WriteLine("ERROR!");
-                             break;
-                     }*/
                     bool allAreFalse = true;
                     switch (currentPawn)
                     {
@@ -324,9 +290,9 @@ namespace KingSurvival.ConsoleClient
 
                     if (allAreFalse)
                     {
-                        GameOver = true;
-                        Console.WriteLine(MessageConstants.KingVictoryMessage, Counter / 2);
-                        GameOver = true;
+                        gameOver = true;
+                        Console.WriteLine(MessageConstants.KingVictoryMessage, BaseGame.Counter / 2);
+                        gameOver = true;
                         return null;
                     }
 
@@ -345,7 +311,7 @@ namespace KingSurvival.ConsoleClient
                 {
                     MoveFigure(currentCoordinates, newCoordinates);
 
-                    Counter++;
+                    BaseGame.Counter++;
 
                     SwitchCurrentPawnExistingMoves(currentPawn);
 
@@ -353,7 +319,6 @@ namespace KingSurvival.ConsoleClient
                 }
                 else
                 {
-                   
                     bool allAreFalse = true;
                     switch (currentPawn)
                     {
@@ -382,9 +347,9 @@ namespace KingSurvival.ConsoleClient
 
                     if (allAreFalse)
                     {
-                        GameOver = true;
-                        Console.WriteLine(MessageConstants.KingVictoryMessage, Counter / 2);
-                        GameOver = true;
+                        gameOver = true;
+                        Console.WriteLine(MessageConstants.KingVictoryMessage, BaseGame.Counter / 2);
+                        gameOver = true;
                         return null;
                     }
 
@@ -399,8 +364,8 @@ namespace KingSurvival.ConsoleClient
         public static void MoveFigure(IPosition currentCoordinates, IPosition newCoordinates)
         {
             char currentPos = GetField[currentCoordinates.Row, currentCoordinates.Col];
-            GetField[currentCoordinates.Row, currentCoordinates.Col] = ' ';
-            GetField[newCoordinates.Row, newCoordinates.Col] = currentPos;
+            BaseGame.GetField[currentCoordinates.Row, currentCoordinates.Col] = ' ';
+            BaseGame.GetField[newCoordinates.Row, newCoordinates.Col] = currentPos;
         }
 
         public static IPosition CheckNextKingPosition(IPosition currentCoordinates, char firstDirection, char secondDirection)
@@ -423,10 +388,10 @@ namespace KingSurvival.ConsoleClient
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
 
-                        Counter++;
+                        BaseGame.Counter++;
                         for (int i = 0; i < 4; i++)
                         {
-                            KingExistingMoves[i] = true;
+                            GameConstants.KingExistingMoves[i] = true;
                         }
 
                         CheckForKingExit(newCoordinates.Row);
@@ -437,7 +402,7 @@ namespace KingSurvival.ConsoleClient
                         bool allAreFalse = KingExistingMovesMethod(0);
                         if (allAreFalse)
                         {
-                            GameOver = true;
+                            gameOver = true;
                             CommandPrintKingLosing();
 
                             return null;
@@ -458,10 +423,10 @@ namespace KingSurvival.ConsoleClient
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
 
-                        Counter++;
+                        BaseGame.Counter++;
                         for (int i = 0; i < 4; i++)
                         {
-                            KingExistingMoves[i] = true;
+                            GameConstants.KingExistingMoves[i] = true;
                         }
 
                         CheckForKingExit(newCoordinates.Row);
@@ -472,7 +437,7 @@ namespace KingSurvival.ConsoleClient
                         bool allAreFalse = KingExistingMovesMethod(1);
                         if (allAreFalse)
                         {
-                            GameOver = true;
+                            gameOver = true;
                             CommandPrintKingLosing();
 
                             return null;
@@ -496,10 +461,10 @@ namespace KingSurvival.ConsoleClient
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
 
-                        Counter++;
+                        BaseGame.Counter++;
                         for (int i = 0; i < 4; i++)
                         {
-                            KingExistingMoves[i] = true;
+                            GameConstants.KingExistingMoves[i] = true;
                         }
 
                         CheckForKingExit(newCoordinates.Row);
@@ -510,7 +475,7 @@ namespace KingSurvival.ConsoleClient
                         bool allAreFalse = KingExistingMovesMethod(2);
                         if (allAreFalse)
                         {
-                            GameOver = true;
+                            gameOver = true;
                             CommandPrintKingLosing();
 
                             return null;
@@ -531,10 +496,10 @@ namespace KingSurvival.ConsoleClient
                     {
                         MoveFigure(currentCoordinates, newCoordinates);
 
-                        Counter++;
+                        BaseGame.Counter++;
                         for (int i = 0; i < 4; i++)
                         {
-                            KingExistingMoves[i] = true;
+                            GameConstants.KingExistingMoves[i] = true;
                         }
 
                         CheckForKingExit(newCoordinates.Row);
@@ -545,7 +510,7 @@ namespace KingSurvival.ConsoleClient
                         bool allAreFalse = KingExistingMovesMethod(3);
                         if (allAreFalse)
                         {
-                            GameOver = true;
+                            gameOver = true;
                             CommandPrintKingLosing();
 
                             return null;
@@ -559,13 +524,25 @@ namespace KingSurvival.ConsoleClient
             }
         }
 
+        public static void CommandPrintKingLosing()
+        {
+            Console.WriteLine(MessageConstants.KingLostMessage, BaseGame.Counter / 2);
+        }
+
+        public static void Main()
+        {
+            Start(BaseGame.Counter);
+            Console.WriteLine(MessageConstants.GoodbyeMessage);
+            Console.ReadLine();
+        }
+
         private static bool KingExistingMovesMethod(int someMagicNumber)
         {
-            KingExistingMoves[someMagicNumber] = false;
+            GameConstants.KingExistingMoves[someMagicNumber] = false;
             bool allAreFalse = true;
             for (int i = 0; i < 4; i++)
             {
-                if (KingExistingMoves[i])
+                if (GameConstants.KingExistingMoves[i])
                 {
                     allAreFalse = false;
                 }
@@ -574,35 +551,12 @@ namespace KingSurvival.ConsoleClient
             return allAreFalse;
         }
 
-        ////static void CommandPrintWrongDirection()
-        ////{
-        ////    Console.BackgroundColor = ConsoleColor.DarkYellow;
-        ////    Console.WriteLine(Constants.WRONG_DIRECTION_MESSAGE);
-        ////    Console.ResetColor();
-        ////}
-
-        public static void CommandPrintKingLosing()
-        {
-            Console.WriteLine(MessageConstants.KingLostMessage, Counter / 2);
-        }
-
-        public static void Main()
-        {
-            //var engine = new Engine();
-            //engine.Start();
-
-            // IPrinter printer = new Printer();
-            Start(Counter);
-            Console.WriteLine(MessageConstants.GoodbyeMessage);
-            Console.ReadLine();
-        }
-
         // Checks if command is KDR, KUL, etc.
         private static bool CheckIfValidKingDirection(string direction)
         {
             bool isValidDirection = false;
 
-            foreach (var possibleDirection in KingPossibleDirections)
+            foreach (var possibleDirection in GameConstants.KingPossibleDirections)
             {
                 if (direction == possibleDirection)
                 {

@@ -4,28 +4,28 @@
 
     public static class Renderer
     {
-        public static void PrintBoard(char[,] Field)  
+        public static void PrintBoard(char[,] field)  
         {
             Console.WriteLine("   KING SURVIVAL GAME");
             Console.WriteLine("UL  0 1 2 3 4 5 6 7  UR");
             Console.WriteLine("   -----------------");
             int startRow = 3;
 
-            FillBoard(Field);
+            FillBoard(field);
 
-            for (int row = 0; row < Field.GetLength(0); row++)
+            for (int row = 0; row < field.GetLength(0); row++)
             {
                 Console.SetCursorPosition(0, startRow + row);
                 Console.Write(row + " | ");
-                for (int col = 0; col < Field.GetLength(1); col++)
+                for (int col = 0; col < field.GetLength(1); col++)
                 {
-                    if (Field[row, col] == 'G')
+                    if (field[row, col] == 'G')
                     {
-                        SetConsoleColor(Field, row, col, ConsoleColor.Green);
+                        SetConsoleColor(field, row, col, ConsoleColor.Green);
                     }
                     else
                     {
-                        SetConsoleColor(Field, row, col, ConsoleColor.Blue);
+                        SetConsoleColor(field, row, col, ConsoleColor.Blue);
                     }
                 }
 
