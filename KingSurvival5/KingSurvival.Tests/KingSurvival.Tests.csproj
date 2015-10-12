@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="EngineTests\IsOnBoardTest.cs" />
+    <Compile Include="EngineTests\ParseUserCommandTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

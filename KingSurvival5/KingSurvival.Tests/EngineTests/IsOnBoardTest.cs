@@ -1,4 +1,4 @@
-﻿namespace KingSurvival.Tests.Enginetests
+﻿namespace KingSurvival.Tests.EngineTests
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
