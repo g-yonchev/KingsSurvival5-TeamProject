@@ -58,7 +58,7 @@
             }
         }
 
-        private void ProcessKingTurn(IList<IPosition> validPositions)
+        public void ProcessKingTurn(IList<IPosition> validPositions)
         {
             bool shouldAskForInput = true;
             while (shouldAskForInput)
@@ -86,7 +86,7 @@
             }
         }
 
-        private IList<IPosition> GetKingPossibleMoves()
+        public IList<IPosition> GetKingPossibleMoves()
         {
             var movementStrategy = this.figuresInPlay['K'].GetMovements();
             var currentPostion = this.figuresInPlay['K'].Position;
@@ -111,7 +111,7 @@
             return possibleMoves;
         }
 
-        private bool IsOnBoard(int row, int col)
+        public bool IsOnBoard(int row, int col)
         {
             bool rowIsOnBoard = row >= 0 && row < this.board.TotalRows;
             bool colIsOnBoard = col >= 0 && col < this.board.TotalCols;
@@ -119,7 +119,7 @@
             return rowIsOnBoard && colIsOnBoard;
         }
 
-        private string GetInput()
+        public string GetInput()
         {
             string result = string.Empty;
 
@@ -137,7 +137,7 @@
             }
         }
 
-        private MovementVector ParseUserCommand(string userCommand)
+        public MovementVector ParseUserCommand(string userCommand)
         {
             switch (userCommand)
             {

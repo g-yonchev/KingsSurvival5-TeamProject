@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.ConsoleClient", "KingSurvival.ConsoleClient\KingSurvival.ConsoleClient.csproj", "{842DAF0E-7B19-48CE-8066-4639CC1F6FB0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.GameLogic", "KingSurvival.GameLogic\KingSurvival.GameLogic.csproj", "{FE7BDF61-3C4E-4E7A-9A2D-DB6E188AFDAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KingSurvival.Tests", "KingSurvival.Tests\KingSurvival.Tests.csproj", "{11F7AAD2-9AF1-44E0-9821-02D8599A2A1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{FE7BDF61-3C4E-4E7A-9A2D-DB6E188AFDAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE7BDF61-3C4E-4E7A-9A2D-DB6E188AFDAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE7BDF61-3C4E-4E7A-9A2D-DB6E188AFDAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11F7AAD2-9AF1-44E0-9821-02D8599A2A1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11F7AAD2-9AF1-44E0-9821-02D8599A2A1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11F7AAD2-9AF1-44E0-9821-02D8599A2A1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11F7AAD2-9AF1-44E0-9821-02D8599A2A1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
