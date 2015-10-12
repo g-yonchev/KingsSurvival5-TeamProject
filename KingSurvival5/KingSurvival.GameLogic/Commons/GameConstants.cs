@@ -3,33 +3,104 @@
     using KingSurvival.GameLogic.Contracts;
     using KingSurvival.GameLogic.Models;
 
+    /// <summary>
+    /// A class containing the global constants for the game.
+    /// </summary>
     public class GameConstants
     {
+        /// <summary>
+        /// Possible commands for the king.
+        /// </summary>
         public const string RegexKingPattern = @"(K(U|D)(L|R)";
+
+        /// <summary>
+        /// Possible commands for the pawns.
+        /// </summary>
         public const string RegexPawnPattern = @"^(A|B|C|D)D(L|R)$";
 
+        /// <summary>
+        /// Maximum number of rows for the game.
+        /// </summary>
         public const int MaxNumberOfRows = 8;
+
+        /// <summary>
+        /// Maximum number of columns for the game.
+        /// </summary>
         public const int MaxNumberOfCols = 17;
+
+        /// <summary>
+        /// Minimum number of rows for the game.
+        /// </summary>
         public const int MinNumberOfRows = 0;
+
+        /// <summary>
+        /// Minimum number of rows for the game.
+        /// </summary>
         public const int MinNumberOfCols = 0;
 
+        /// <summary>
+        /// Initial row for the board.
+        /// </summary>
         public const int BoardRows = 8;
+
+        /// <summary>
+        /// Initial columns for the board.
+        /// </summary>
         public const int BoardCols = 8;
+
+        /// <summary>
+        /// The cell symbol.
+        /// </summary>
         public const string Cell = " ";
 
+        /// <summary>
+        /// Initial position X for pawn A.
+        /// </summary>
         public const int FirstPawnInitialRow = 0;
+
+        /// <summary>
+        /// Initial position Y for pawn A.
+        /// </summary>
         public const int FirstPawnInitialCol = 0;
 
+        /// <summary>
+        /// Initial position X for pawn B.
+        /// </summary>
         public const int SecondPawnInitialRow = 0;
+
+        /// <summary>
+        /// Initial position Y for pawn B.
+        /// </summary>
         public const int SecondPawnInitialCol = 2;
 
+        /// <summary>
+        /// Initial position X for pawn C.
+        /// </summary>
         public const int ThirdPawnInitialRow = 0;
+        
+        /// <summary>
+        /// Initial position Y for pawn C.
+        /// </summary>
         public const int ThirdPawnInitialCol = 4;
 
+        /// <summary>
+        /// Initial position X for pawn D.
+        /// </summary>
         public const int FourthPawnInitialRow = 0;
+        
+        /// <summary>
+        /// Initial position Y for pawn D.
+        /// </summary>
         public const int FourthPawnInitialCol = 6;
 
+        /// <summary>
+        /// Initial position X for the king.
+        /// </summary>
         public const int KingInitialRow = 7;
+        
+        /// <summary>
+        /// Initial position Y for the king.
+        /// </summary>
         public const int KingInitialCol = 3;
 
         public static readonly bool[,] PawnExistingMoves =
@@ -42,6 +113,9 @@
             new Position(2, 4), new Position(2, 18), new Position(9, 4), new Position(9, 18)
         };
 
+        /// <summary>
+        /// Field on the board.
+        /// </summary>
         public static readonly char[,] Field =
         {
             { 'U', 'L', ' ', ' ', '0', ' ', '1', ' ', '2', ' ', '3', ' ', '4', ' ', '5', ' ', '6', ' ', '7', ' ', ' ', 'U', 'R' },

@@ -12,7 +12,7 @@
             new Position(2, 4), new Position(2, 8), new Position(2, 12), new Position(2, 16)
         };
 
-        internal static IPosition KingPosition = new Position(9, 10);  // TODO
+        public static IPosition KingPosition = new Position(9, 10);
 
         public static char[,] GetField
         {
